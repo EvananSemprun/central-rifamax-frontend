@@ -5168,6 +5168,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chromatic@npm:^11.7.0":
+  version: 11.7.0
+  resolution: "chromatic@npm:11.7.0"
+  peerDependencies:
+    "@chromatic-com/cypress": ^0.*.* || ^1.0.0
+    "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+  peerDependenciesMeta:
+    "@chromatic-com/cypress":
+      optional: true
+    "@chromatic-com/playwright":
+      optional: true
+  bin:
+    chroma: dist/bin.js
+    chromatic: dist/bin.js
+    chromatic-cli: dist/bin.js
+  checksum: 10c0/f9164191f0ca4412ebdd2756428c02d5365d5b7e9cc70f509aeda870dfa569ff96654e3b4f6540e2c0f5ec8e49640bccc22dedafc7329fa2a922ac27cbd3b9ce
+  languageName: node
+  linkType: hard
+
 "ci-info@npm:^3.2.0":
   version: 3.9.0
   resolution: "ci-info@npm:3.9.0"
@@ -9878,6 +9897,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.15.0"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
     axios: "npm:^1.7.2"
+    chromatic: "npm:^11.7.0"
     dayjs: "npm:^1.11.12"
     embla-carousel-react: "npm:^8.1.7"
     eslint: "npm:^8.57.0"

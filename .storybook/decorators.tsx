@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ModalsProvider } from '@mantine/modals';
 import { ThemeProvider } from '../src/config/ThemeProvider';
 import { Notifications } from '@mantine/notifications';
-import { ProfileProvider } from '../src/config/ProfileProvider';
 import { MantineProvider } from '@mantine/core';
 
 const queryClient = new QueryClient();
@@ -16,14 +15,12 @@ export const withProviders = (Story) => (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ThemeProvider>
-          <ProfileProvider retry={1}>
-            <ModalsProvider>
-              <Notifications />
-              <MantineProvider forceColorScheme='dark'>
-                <Story />
-              </MantineProvider>
-            </ModalsProvider>
-          </ProfileProvider>
+          <ModalsProvider>
+            <Notifications />
+            <MantineProvider forceColorScheme='dark'>
+              <Story />
+            </MantineProvider>
+          </ModalsProvider>
         </ThemeProvider>
       </BrowserRouter>
     </QueryClientProvider>
