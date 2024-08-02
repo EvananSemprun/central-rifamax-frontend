@@ -1,0 +1,47 @@
+.lists {
+  margin: 5px 0 20px 0;
+  padding: 0;
+}
+
+.navList {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  width: 100%;
+  border-radius: var(--mantine-radius-sm);
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.titleLink {
+  font-weight: 1000;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.current {
+  background-color: light-dark(var(--mantine-color-blue-2), var(--mantine-color-blue-8));
+}
+
+.navIcon {
+  margin-top: 5px;
+}
+
+.navList:hover {
+  background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-8));
+  transition-duration: 0.5s;
+}
+
+.current:hover {
+  background-color: light-dark(var(--mantine-color-blue-1), var(--mantine-color-blue-6));
+  transition-duration: 0.5s;
+}
+
+.navRedirect {
+  text-decoration: none;
+  user-select: none;
+  pointer-events: none;
+  font-weight: var(--mantine-heading-font-weight);
+  font-size: var(--mantine-h3-font-size);
+}

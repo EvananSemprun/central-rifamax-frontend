@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::selection {
+  background-color: var(--mantine-color-blue-8);
+}
+
+*::-moz-selection {
+  background-color: var(--mantine-color-blue-8);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}

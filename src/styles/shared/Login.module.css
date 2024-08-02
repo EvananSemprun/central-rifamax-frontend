@@ -1,0 +1,24 @@
+.loginSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: var(--mantine-spacing-md);
+}
+
+.logo {
+  user-select: none;
+  pointer-events: none;
+}
+
+.loginCard {
+  background-color: var(--mantine-color-dark-6);
+  padding: var(--mantine-spacing-lg) 20px;
+  border-radius: var(--mantine-radius-sm);
+}
+
+.imageWrapper {
+  width: 100%;
+  padding: var(--mantine-spacing-xl);
+}
