@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
 import {
   setUser,
   clearUser,
   setToken,
 } from "../config/store/reducers/user.slice";
-import { RootState } from "@/config/store/index";
+import { RootState } from "@config/store/index";
 import { IUser } from "@interfaces/models.interfaces";
+import { useDispatch, useSelector } from "react-redux";
 
 function useUser() {
   const dispatch = useDispatch();

@@ -25,6 +25,14 @@ export interface INotifications {
   label: string;
 }
 
+/**
+ * @interface IAuthRoute
+ * @description This is the interface for the AuthRoute component
+ */
+export interface IAuthRoute {
+  roles: string[]
+}
+
 
 /**
  * @interface ILoaderBlur
