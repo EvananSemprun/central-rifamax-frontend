@@ -1,67 +1,59 @@
-import { IconChevronDown } from '@tabler/icons-react';
-import classes from './index.module.css'
-import { Accordion, Divider } from '@mantine/core'
+import classes from './index.module.css';
 import { useState } from 'react';
+import { IRafflesAccordion } from '@interfaces/index';
+import { Accordion, Divider, Group } from '@mantine/core';
+import { AccordionStepOne } from '../RafflesAccordion/AccordionStepOne';
+import { AccordionStepTwo } from '../RafflesAccordion/AccordionStepTwo';
+import { InfoRafflesAccordion } from '../RafflesAccordion/InfoRafflesAccordion';
+import { TitlesRafflesAccordion } from '../RafflesAccordion/TitlesRafflesAccordion';
 
-const groceries = [
-  {
-    value: 'Apples',
-    emoji: '🍎',
-    description: 'An apple a day keeps the doctor away!',
-  },
-  {
-    value: 'Bananas',
-    emoji: '🍌',
-    description: 'A banana is a great snack!',
-  },
-  {
-    value: 'Carrots',
-    emoji: '🥕',
-    description: 'Carrots are good for your eyes!',
-  },
-];
-
-function index() {
+function Index({ step, data }: IRafflesAccordion) {
   const [selected, setSelected] = useState<string | null>(null);
 
   const handleSelect = (key: string) => {
     setSelected(selected === key ? null : key);
   }
 
-  const items = groceries.map((item, key: number) => (
+  const raffles = data.raffles.map((raffle, key: number) => (
     <>
-      <Accordion.Item 
-        key={item.value} 
+      <Accordion.Item
+        key={raffle.value}
         className={selected === String(key) ? classes.itemActive : classes.item}
         value={String(key)}
       >
-        <Accordion.Control 
-          icon={item.emoji}
+        <Accordion.Control
           onClick={() => handleSelect(String(key))}
         >
-          {item.value}
+          <Group justify="space-between" >
+            <Group>
+              <TitlesRafflesAccordion />
+              <InfoRafflesAccordion />
+            </Group>
+            <Group>
+              {step === 1 ? <AccordionStepOne /> : <AccordionStepTwo />}
+            </Group>
+          </Group>
         </Accordion.Control>
-        <Accordion.Panel>{item.description}</Accordion.Panel>
+        <Accordion.Panel>{raffle.title}</Accordion.Panel>
       </Accordion.Item>
       <Divider variant='dashed' my={5} />
     </>
   ));
 
-
   return (
-    <Accordion 
+    <Accordion
       w="100%"
       mt={10}
-      classNames={{ 
+      classNames={{
         root: classes.root,
         content: classes.content,
       }}
       variant="filled"
-      chevron={<IconChevronDown className={classes.icon} />}
+      chevron={false}
     >
-      {items}
+      {raffles}
     </Accordion>
   );
 }
 
-export default index;
+export default Index;
