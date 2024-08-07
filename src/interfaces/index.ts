@@ -1,6 +1,6 @@
 // General interfaces
 
-import { IUser } from "./models.interfaces";
+import { IRaffle, IUser } from "./models.interfaces";
 import { IRafflesResponse } from "./requests.interfaces";
 
 export interface ILoginBody {
@@ -44,6 +44,23 @@ export interface IRafflesAccordion {
 }
 
 /**
+ * @interface IAddRaffleForm
+ * @description AddRaffleForm component props interface
+ */
+export interface IAddRaffleForm {
+  onNext?: () => void;
+  onBack?: () => void;
+}
+
+/**
+ * @interface ICardRaffle
+ * @description CardRaffle component props interface
+ */
+export interface ICardRaffle {
+  raffle: IRaffle;
+}
+
+/**
  * @interface ILoaderBlur
  * @description This is the interface for the LoaderBlur component
  */
@@ -60,6 +77,16 @@ export interface IInfoRafflesAccordion {
   init_date: string;
   seller: string;
 }
+
+/**
+ * @interface IStacksRaffle
+ * @description IStacksRaffle component props interface
+ */
+export interface IStacksRaffle {
+  color: string;
+  number: number;
+  title: string;
+} 
 
 /**
  * @interface ITitlesRafflesAccordion
