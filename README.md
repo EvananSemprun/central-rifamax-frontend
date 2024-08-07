@@ -1,30 +1,60 @@
-# React + TypeScript + Vite
+# Central Rifamax
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Central Rifamax repository! This unified Software as a Service (SaaS) system is designed to integrate all products of Rifamax, including Rifamax Zodiacal, Rifamax Triples, Rifamax Admin, and Rifamax Influencer. Our goal is to provide a seamless experience across various Rifamax services by leveraging the power of modern web technologies.
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**: A JavaScript library for building user interfaces
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript
+- **Mantine**: A fully featured React component library
+- **Redux**: A predictable state container for JavaScript apps
+- **RxJs**: A library for reactive programming using observables
+- **React Query**: Hooks for fetching, caching, and updating asynchronous data in React
+- **Vite**: A modern frontend build tool
+- **Yarn**: Package manager for code
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To get started with Central Rifamax, you'll need to have Node.js and Yarn installed on your machine.
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/central-rifamax.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd central-rifamax
+   ```
+3. Install dependencies:
+   ```sh
+   yarn install
+   ```
+4. Start the development server:
+   ```sh
+   yarn dev
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Contributing
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+We welcome contributions to Central Rifamax! If you have suggestions or improvements, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/AmazingFeature`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+5. Push to the branch (`git push origin feature/AmazingFeature`).
+6. Open a pull request.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+
+Rifamax Team - [email](mailto:contact@rifamax.com)
+
+Project Link: [https://github.com/your-username/central-rifamax](https://github.com/your-username/central-rifamax)
+
+---
+
+Thank you for visiting the Central Rifamax repository. We hope this README helps you get started with our system. For more information, please refer to the documentation or contact us directly.
