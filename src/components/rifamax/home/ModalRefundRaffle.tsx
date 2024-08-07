@@ -1,10 +1,10 @@
-import WoodTitle from "@/components/shared/WoodTitle";
+import WoodTitle from "@components/shared/WoodTitle";
 import { modals } from "@mantine/modals";
 import { IconMailForward } from "@tabler/icons-react";
 import { TextInput, Text, Title, Button } from "@mantine/core";
 
-function ReturnRaffleModal() {
-  const openRepeatModal = () => modals.open({
+function ModalRefundRaffle() {
+  const openRefundRaffleModal = () => modals.open({
     title: <Title order={3}>Devolver rifa</Title>,
     centered: true,
     children: (
@@ -24,10 +24,10 @@ function ReturnRaffleModal() {
 
   return (
      
-    <Button variant="light" leftSection={<IconMailForward />} onClick={openRepeatModal}>
-      Devolver rifa
+    <Button variant="light" leftSection={<IconMailForward />} onClick={openRefundRaffleModal}>
+      Devolver
     </Button>
   );
 }
 
-export default ReturnRaffleModal
+export default ModalRefundRaffle

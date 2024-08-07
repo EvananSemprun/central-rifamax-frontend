@@ -1,16 +1,16 @@
 import { IWoodTitle } from "@interfaces/index";
-import { Divider, Group, Title } from "@mantine/core";
+import { Divider, Group, Text } from "@mantine/core";
 
 function WoodTitle({ title, variant }: IWoodTitle) {
   return (
     <>
-      <Divider variant={variant} size="md" />    
+      <Divider variant={variant} size="sm" />    
       <Group justify='center' w="100%">
-        <Title mt={30} mb={30} order={2} >
+        <Text mt={30} mb={30} fz={25} fw={400} >
           {title}
-        </Title>
+        </Text>
       </Group>
-      <Divider variant={variant} mb={15} size="md" />
+      <Divider variant={variant} mb={15} size="sm" />
     </>
   )
 }

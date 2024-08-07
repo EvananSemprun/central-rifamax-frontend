@@ -1,10 +1,10 @@
-import WoodTitle from "@/components/shared/WoodTitle";
+import WoodTitle from "@components/shared/WoodTitle";
 import { modals } from "@mantine/modals";
-import { IconMailX, IconSkull } from "@tabler/icons-react";
 import { Text, Title, Button } from "@mantine/core";
+import { IconMailX, IconSkull } from "@tabler/icons-react";
 
-function NoPayRaffleModal() {
-  const openRepeatModal = () => modals.open({
+function ModalUnpayRaffle() {
+  const openUnpayRaffleModal = () => modals.open({
     title: <Title order={3}>Rechazar rifa</Title>,
     centered: true,
     children: (
@@ -21,10 +21,10 @@ function NoPayRaffleModal() {
   })
 
   return (
-    <Button variant="light" color="red" leftSection={<IconMailX />} onClick={openRepeatModal}>
-      Rifa no pagada
+    <Button variant="light" color="red" leftSection={<IconMailX />} onClick={openUnpayRaffleModal}>
+      No pagada
     </Button>
   );
 }
 
-export default NoPayRaffleModal
+export default ModalUnpayRaffle

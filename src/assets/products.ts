@@ -18,7 +18,7 @@ export const products = [
   {
     id: 3,
     name: "Rifamax Admin",
-    image: "/images/logo.png",
+    image: "/images/admin-lobby-logo.png",
     color: "#2E2E2E",
     to: "/admin/dashboard",
     roles: ["Admin", "Desarrollador"]

@@ -9,7 +9,7 @@ function Login() {
         <div className={classes.imageWrapper}>
           <Image 
             className={classes.logo}
-            src="/images/logo.png" 
+            src="/images/rifamax-logo.png" 
             alt="Rifamax Logo" 
             maw='22rem' 
           />

@@ -1,11 +1,11 @@
-import WoodTitle from "@/components/shared/WoodTitle";
+import WoodTitle from "@components/shared/WoodTitle";
 import { modals } from "@mantine/modals";
 import { DatePickerInput } from "@mantine/dates"
 import { IconCash, IconNumber, IconReload } from "@tabler/icons-react";
 import { Center, Chip, Group, NumberInput, TextInput, Title, Button } from "@mantine/core";
 
-function RepeatRaffleModal() {
-  const openRepeatModal = () => modals.open({
+function ModalRepeatRaffle() {
+  const openRepeatRaffleModal = () => modals.open({
     title: <Title order={3}>Repetir rifa</Title>,
     centered: true,
     children: (
@@ -42,12 +42,12 @@ function RepeatRaffleModal() {
   })
 
   return (
-    <Chip variant="light" size='md' checked={false} color="gray" onClick={openRepeatModal}>
+    <Chip variant="outline" size='sm' checked={false} color="gray" onClick={openRepeatRaffleModal}>
       <Center>
-        <IconReload stroke={1.5} size='1.3rem' />
+        <IconReload stroke={1.5} size='1rem' />
       </Center>
     </Chip>
   );
 }
 
-export default RepeatRaffleModal
+export default ModalRepeatRaffle
