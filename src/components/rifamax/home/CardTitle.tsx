@@ -5,7 +5,7 @@ type Props = {
   title: string;
 };
 
-function Cardtittle({ data, title }: Props) {
+function CardTitle({ data, title }: Props) {
   return (
     <>
       <Group justify='space-between'>
@@ -20,4 +20,4 @@ function Cardtittle({ data, title }: Props) {
   );
 }
 
-export default Cardtittle;
+export default CardTitle;
