@@ -105,6 +105,15 @@ export interface IStacksRaffle {
 } 
 
 /**
+ * @interface ICardTitle
+ * @description CardTitle component props interface
+ */
+export interface ICardTitle {
+  content: string | number;
+  title: string;
+};
+
+/**
  * @interface ITitlesRafflesAccordion
  * @description TitlesRafflesAccordion component props interface
  */

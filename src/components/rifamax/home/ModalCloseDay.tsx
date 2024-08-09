@@ -1,4 +1,3 @@
-import classes from '../home/RafflesAccordion/AccordionStepTwo.module.css';
 import { day } from '@utils/time';
 import { modals } from '@mantine/modals';
 import { IconX } from '@tabler/icons-react';
@@ -26,16 +25,14 @@ function CloseDayModal() {
   });
 
   return (
-    <div className={classes.centerButtons}>
-      <Button
-        variant='light'
-        color='red'
-        leftSection={<IconX />}
-        onClick={openCloseDayModal}
-      >
-        Cerrar día
-      </Button>
-    </div>
+    <Button
+      variant='light'
+      color='red'
+      leftSection={<IconX />}
+      onClick={openCloseDayModal}
+    >
+      Cerrar día
+    </Button>
   );
 }
 

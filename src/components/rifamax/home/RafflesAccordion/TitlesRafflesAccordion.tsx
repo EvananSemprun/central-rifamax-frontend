@@ -1,5 +1,5 @@
-import RepeatRaffleModal from '../ModalRepeatRaffle';
 import { Text, Group, Chip } from '@mantine/core';
+import RepeatRaffleModal from '../ModalRepeatRaffle';
 import { ITitlesRafflesAccordion } from '@interfaces/index';
 
 export function TitlesRafflesAccordion({ id, numbers }: ITitlesRafflesAccordion) {

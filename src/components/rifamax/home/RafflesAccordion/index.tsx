@@ -1,3 +1,4 @@
+import CardRaffle from '../CardRaffle';
 import classes from './index.module.css';
 import { useState } from 'react';
 import { IRafflesAccordion } from '@interfaces/index';
@@ -6,7 +7,6 @@ import { AccordionStepOne } from '../RafflesAccordion/AccordionStepOne';
 import { AccordionStepTwo } from '../RafflesAccordion/AccordionStepTwo';
 import { InfoRafflesAccordion } from '../RafflesAccordion/InfoRafflesAccordion';
 import { TitlesRafflesAccordion } from '../RafflesAccordion/TitlesRafflesAccordion';
-import CardRaffle from '../CardRaffle';
 
 function Index({ step, data }: IRafflesAccordion) {
   const [selected, setSelected] = useState<string | null>(null);

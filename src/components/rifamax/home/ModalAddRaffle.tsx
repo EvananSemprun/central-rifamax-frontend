@@ -15,29 +15,22 @@ function AddRaffleModal() {
       </>
     ),
     size: 'xl',
-    // centered: true,
+    centered: true,
     closeOnClickOutside: false,
     children: (
-      <>
-        <StepperRaffle/>
-      </>
+      <StepperRaffle/> 
     ),
   })
 
   return (
-    <>
-    <div className="flex justify-center md:justify-start">
-  <Button 
-    variant='light'
-    color='blue'
-    leftSection={<IconPlus />}
-    onClick={openAddRaffleModal}
-  >
-    Añadir rifa
-  </Button>
-</div>
-
-    </>
+    <Button 
+      variant='light'
+      color='blue'
+      leftSection={<IconPlus />}
+      onClick={openAddRaffleModal}
+    >
+      Añadir rifa
+    </Button>
   )
 }
 

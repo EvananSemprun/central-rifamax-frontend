@@ -6,8 +6,8 @@ function StacksRaffle({ color, number, title }: IStacksRaffle) {
     <Card 
       py={10} 
       px={12} 
-      mt={15} 
-      mb={10} 
+      mt={10} 
+      mb={5}
       shadow="0 0 7px #5f5f5f3d"
       radius='sm' 
       w='100%' 
