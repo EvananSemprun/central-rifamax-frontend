@@ -1,6 +1,6 @@
 // General interfaces
 
-import { IRaffle, IUser } from "./models.interfaces";
+import { IPrize, IRaffle, IUser } from "./models.interfaces";
 import { IRafflesResponse } from "./requests.interfaces";
 
 export interface ILoginBody {
@@ -50,6 +50,22 @@ export interface IRafflesAccordion {
 export interface IAddRaffleForm {
   onNext?: () => void;
   onBack?: () => void;
+}
+
+/**
+ * @interface IRaffleForm
+ * @description interface of RaffleForm data of hook
+ */
+export interface IRaffleForm {
+  title: string;
+  init_date: Date;
+  price: number;
+  numbers: number;
+  currency: string;
+  lotery: string;
+  user_id: number;
+  seller_id: number;
+  prizes: IPrize[];
 }
 
 /**

@@ -1,6 +1,6 @@
 // API responses interfaces
 
-import { IPrize, IRaffle, IUser } from "./models.interfaces";
+import { IRaffle, IUser } from "./models.interfaces";
 
 /**
  * @interface IRenewTokenResponse

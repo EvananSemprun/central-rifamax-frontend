@@ -26,7 +26,7 @@ export interface IPrize {
   award: string;
   plate: string | null;
   is_money: boolean;
-  sign: boolean;
+  wildcard: boolean;
 }
 
 /**
@@ -43,7 +43,7 @@ export interface IRaffle {
   numbers: number;
   price: number;
   prizes: IPrize[];
-  sell_status: string;
+  sell_status: 'active' | 'sent' | 'sold';
   title: string;
   uniq_identifier_serial: string;
   user: IUser["user"];
