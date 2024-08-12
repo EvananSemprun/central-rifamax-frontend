@@ -8,42 +8,44 @@ import RafflesAccordion from '@components/rifamax/home/RafflesAccordion';
 import { useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { useMediaQuery } from '@mantine/hooks';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getRaffles } from '@api/rifamax/Raffles.request';
 import { IRafflesResponse } from '@interfaces/requests.interfaces';
-import { Pagination, ScrollArea, Group, Stack, Flex } from '@mantine/core';
+import { IconApps, IconClock, IconShare } from '@tabler/icons-react';
+import { Pagination, ScrollArea, Group, Stack, Flex, Tabs, rem } from '@mantine/core';
 
 interface IWrapper {
   children?: React.ReactNode;
 }
 
 function Index() {
-  const items = 7;
+  const items = 1;
   const isSmallScreen = useMediaQuery('(max-width: 800px)');
+  const iconStyle = { width: rem(16), height: rem(16) };
   
   const [page, setPage] = useState<number>(1);
-  const [queryType, setQueryType] = useState<'newest' | 'initialized'>('newest');
+  const [queryType, setQueryType] = useState<string | null>('newest');
   
   const { token } = useAuth();
-  
-  const { data: rafflesData, isLoading, isError, refetch } = useQuery<AxiosResponse<IRafflesResponse>>({
-    queryKey: ['raffles', token],
-    queryFn: () => getRaffles({ token, queryType, page, items }),
+
+  const fetchRaffles = (page: number, queryType: string | null) => getRaffles({ token, queryType, page, items });
+
+  const { data: rafflesData, isLoading, isError, isPlaceholderData } = useQuery<AxiosResponse<IRafflesResponse>>({
+    queryKey: ['raffles', token, page, queryType],
+    queryFn: () => fetchRaffles(page, queryType),
     retry: 2,
+    placeholderData: keepPreviousData,
   });
 
   const ResponsiveSection = ({ children }: IWrapper) => (
     isSmallScreen ? (
       <Stack align='center'>
         {children}
-        <Pagination
+        <Pagination // This line has problems with the Pagination component
           total={rafflesData?.data.metadata.pages || 0}
           mt={0}
           siblings={0}
-          onChange={(value: number) => {
-            setPage(value);
-            refetch();
-          }}
+          onChange={setPage}
         />
       </Stack>
     ) : (
@@ -70,6 +72,19 @@ function Index() {
     <>
       <Stacks />
       <section className={classes.home}>
+        <Tabs value={queryType} onChange={setQueryType} variant="pills" defaultValue="newest" pt={10}>
+          <Tabs.List>
+            <Tabs.Tab value="newest" leftSection={<IconApps style={iconStyle} />}>
+              Inciadas
+            </Tabs.Tab>
+            <Tabs.Tab value="initialized" leftSection={<IconShare style={iconStyle} />}>
+              Enviadas
+            </Tabs.Tab>
+            <Tabs.Tab value="to-close" leftSection={<IconClock style={iconStyle} />}>
+              Sin cerrar
+            </Tabs.Tab>
+          </Tabs.List>
+        </Tabs>
         <ResponsiveSection>
           <Titles
             title='Dashboard de Rifas'
@@ -82,10 +97,12 @@ function Index() {
           <Pagination
             total={rafflesData?.data.metadata.pages || 0}
             mt={10}
+            pb={10}
             siblings={0}
             onChange={(value: number) => {
-              setPage(value);
-              refetch();
+              if (!isPlaceholderData) {
+                setPage(value)
+              }
             }}
           />
         )}
@@ -104,7 +121,7 @@ function Index() {
 
   return (
     <Wrapper>
-      <ScrollArea.Autosize h='calc(100vh - 275px)' type='never' scrollbars="y">
+      <ScrollArea.Autosize h='calc(100vh - 375px)' type='never' scrollbars="y">
         <RafflesAccordion step={2} data={rafflesData?.data.raffles || []} />
       </ScrollArea.Autosize>
     </Wrapper>

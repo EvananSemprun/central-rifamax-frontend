@@ -24,13 +24,13 @@ function CardRaffle({ raffle }: ICardRaffle) {
 
       <Center>
         <Text fw={700} size="xl">
-          Precio: {raffle.price} {raffle.currency}
+          PRECIO: {raffle.price} {raffle.currency}
         </Text>
       </Center>
 
       <Divider my={10} color='white' size="xs" />
-      <CardTitle title='Premio' content={raffle.prizes[0]?.award || 'No disponible'} />
-      <CardTitle title='Premio sin signo' content={raffle.prizes[1]?.award || 'No disponible'} />
+      <CardTitle title='PREMIO' content={raffle.prizes[0]?.award || 'No disponible'} />
+      <CardTitle title='PREMIO SIN SIGNO' content={raffle.prizes[1]?.award || 'No disponible'} />
       <Divider mt={10} mb={10} color='white' size="xs" />
       
       <CardTitle title='SERIE NUMERO:' content={raffle.id} />

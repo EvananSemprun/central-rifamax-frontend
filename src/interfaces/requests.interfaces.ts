@@ -43,7 +43,7 @@ export interface IRafflesResponse {
  */
 export interface IGetRaffles {
   token: string;
-  queryType?: 'newest' | 'initialized';
+  queryType?: 'newest' | 'initialized' | 'to-close' | string | null;
   page: number;
   items: number; 
 }

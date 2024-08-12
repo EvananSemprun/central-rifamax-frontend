@@ -77,6 +77,26 @@ export interface ICardRaffle {
 }
 
 /**
+ * @interface ITicketRaffle
+ * @description TicketRaffle dup of CardRaffle for verify step component props interface
+ */
+export interface ITicketRaffle {
+  raffle: {
+    title: string;
+    init_date: string;
+    numbers: number;
+    price: number;
+    currency: 'USD' | 'VES' | 'COP';
+    expired_date: string;
+    prizes: IPrize[];
+    lotery: string;
+    seller_id: number;
+    user: IUser["user"];
+  };
+}
+
+
+/**
  * @interface ILoaderBlur
  * @description This is the interface for the LoaderBlur component
  */
@@ -130,7 +150,6 @@ export interface IWoodTitle {
   title: string;
   variant: 'dashed' | 'dotted' | 'default'
 }
-
 /**
  * @type HttpMethod
  * @description This is the type for the HTTP methods

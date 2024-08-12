@@ -7,6 +7,7 @@ import { AccordionStepOne } from '../RafflesAccordion/AccordionStepOne';
 import { AccordionStepTwo } from '../RafflesAccordion/AccordionStepTwo';
 import { InfoRafflesAccordion } from '../RafflesAccordion/InfoRafflesAccordion';
 import { TitlesRafflesAccordion } from '../RafflesAccordion/TitlesRafflesAccordion';
+import RafflesEmpty from './RafflesEmpty';
 
 function Index({ step, data }: IRafflesAccordion) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -46,18 +47,11 @@ function Index({ step, data }: IRafflesAccordion) {
   ));
 
   return (
-    <Accordion
-      w="100%"
-      mt={10}
-      classNames={{
-        root: classes.root,
-        content: classes.content,
-      }}
-      variant="filled"
-      chevron={false}
-    >
-      {raffles}
-    </Accordion>
+    data.length > 0 ? (
+      <Accordion>
+        {raffles}
+      </Accordion>
+    ) : <RafflesEmpty />
   );
 }
 
