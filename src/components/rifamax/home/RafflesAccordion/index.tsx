@@ -48,7 +48,7 @@ function Index({ step, data }: IRafflesAccordion) {
 
   return (
     data.length > 0 ? (
-      <Accordion>
+      <Accordion variant='filled'>
         {raffles}
       </Accordion>
     ) : <RafflesEmpty />

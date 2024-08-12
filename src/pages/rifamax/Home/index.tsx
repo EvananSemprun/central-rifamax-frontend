@@ -6,6 +6,7 @@ import StacksRaffle from '@/components/rifamax/home/StacksRaffle';
 import ActionButtons from '@components/rifamax/home/ActionButtons';
 import RafflesAccordion from '@components/rifamax/home/RafflesAccordion';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { AxiosResponse } from 'axios';
 import { useMediaQuery } from '@mantine/hooks';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
@@ -19,13 +20,13 @@ interface IWrapper {
 }
 
 function Index() {
-  const items = 1;
+  const items = 2;
   const isSmallScreen = useMediaQuery('(max-width: 800px)');
   const iconStyle = { width: rem(16), height: rem(16) };
-  
+
   const [page, setPage] = useState<number>(1);
   const [queryType, setQueryType] = useState<string | null>('newest');
-  
+
   const { token } = useAuth();
 
   const fetchRaffles = (page: number, queryType: string | null) => getRaffles({ token, queryType, page, items });
@@ -36,12 +37,16 @@ function Index() {
     retry: 2,
     placeholderData: keepPreviousData,
   });
-
+  useEffect(() => {
+    if (rafflesData && page > rafflesData.data.metadata.pages) {
+      setPage(1);
+    }
+  }, [rafflesData]);
   const ResponsiveSection = ({ children }: IWrapper) => (
     isSmallScreen ? (
       <Stack align='center'>
         {children}
-        <Pagination // This line has problems with the Pagination component
+        <Pagination
           total={rafflesData?.data.metadata.pages || 0}
           mt={0}
           siblings={0}
@@ -72,10 +77,10 @@ function Index() {
     <>
       <Stacks />
       <section className={classes.home}>
-        <Tabs value={queryType} onChange={setQueryType} variant="pills" defaultValue="newest" pt={10}>
+        <Tabs value={queryType} onChange={(value) => { setQueryType(value); setPage(1); }} variant="pills" defaultValue="newest" pt={10}>
           <Tabs.List>
             <Tabs.Tab value="newest" leftSection={<IconApps style={iconStyle} />}>
-              Inciadas
+              Iniciadas
             </Tabs.Tab>
             <Tabs.Tab value="initialized" leftSection={<IconShare style={iconStyle} />}>
               Enviadas
@@ -85,6 +90,7 @@ function Index() {
             </Tabs.Tab>
           </Tabs.List>
         </Tabs>
+
         <ResponsiveSection>
           <Titles
             title='Dashboard de Rifas'
@@ -96,15 +102,16 @@ function Index() {
         {!isSmallScreen && (
           <Pagination
             total={rafflesData?.data.metadata.pages || 0}
-            mt={10}
-            pb={10}
+            mt={0}
             siblings={0}
+            value={page}
             onChange={(value: number) => {
               if (!isPlaceholderData) {
-                setPage(value)
+                setPage(value);
               }
             }}
           />
+
         )}
         {children}
       </section>
