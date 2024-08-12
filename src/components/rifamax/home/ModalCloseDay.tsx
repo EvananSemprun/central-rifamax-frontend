@@ -1,7 +1,9 @@
+import TableRaffle from './TableRaffle';
+import DebtRaffles from './DebtRaffles';
 import { day } from '@utils/time';
 import { modals } from '@mantine/modals';
 import { IconX } from '@tabler/icons-react';
-import { Button, Text, Title } from '@mantine/core';
+import { Button, Card, Divider, Group, Text, Title, Grid } from '@mantine/core';
 
 function CloseDayModal() {
   const openCloseDayModal = () => modals.open({
@@ -17,10 +19,25 @@ function CloseDayModal() {
     centered: true,
     closeOnClickOutside: false,
     children: (
-      // TODO: close day table COMPONENT goes here
-      <Text size='sm'>
-        cerrar dia
-      </Text>
+      <>
+        <Divider label="Cuadre de hoy" variant='dashed' size="md" labelPosition="center" />
+        <TableRaffle />
+        <Divider label="Total" variant='dashed' size="md" labelPosition="center" />
+        <DebtRaffles/>
+
+        <Grid mt={15}>
+          <Grid.Col span={6}>
+            <Button fullWidth variant="light"size="md" radius="md">
+              Descargar
+              </Button>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Button fullWidth variant="light"  color="teal" size="md" radius="md">
+              Imprimir
+              </Button>
+          </Grid.Col>
+        </Grid>
+      </>
     ),
   });
 

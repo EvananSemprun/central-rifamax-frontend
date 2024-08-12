@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useUser from '@hooks/useUser';
-import { Stepper } from '@mantine/core';
+import { Center, Stepper } from '@mantine/core';
 import TicketRaffle from './TicketRaffle';
 import { ITicketRaffle } from '@interfaces/index';
 import AddRaffleForm from '@form/rifamax/Home/AddRaffle.form';
@@ -34,7 +34,9 @@ function StepperRaffle() {
         <AddRaffleForm onNext={nextStep} onBack={prevStep} />
       </Stepper.Step>
       <Stepper.Step label="Verificación" description="Verificación que los datos de la rifa sean correctos">
-        <TicketRaffle raffle={raffle} />
+        <Center mt={10}>
+          <TicketRaffle raffle={raffle} />
+        </Center>
       </Stepper.Step>
       <Stepper.Completed>
         Completed, click back button to get to previous step

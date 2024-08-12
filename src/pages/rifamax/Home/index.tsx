@@ -20,12 +20,19 @@ interface IWrapper {
 }
 
 function Index() {
-  const items = 2;
+  const items = 7;
   const isSmallScreen = useMediaQuery('(max-width: 800px)');
   const iconStyle = { width: rem(16), height: rem(16) };
 
   const [page, setPage] = useState<number>(1);
+  const [step, setStep] = useState<1 | 2>(1);
   const [queryType, setQueryType] = useState<string | null>('newest');
+
+  const changeByTab = () => {
+    queryType === 'newest' ?
+      setStep(1)
+        : setStep(2)
+  }
 
   const { token } = useAuth();
 
@@ -37,11 +44,13 @@ function Index() {
     retry: 2,
     placeholderData: keepPreviousData,
   });
+
   useEffect(() => {
     if (rafflesData && page > rafflesData.data.metadata.pages) {
       setPage(1);
     }
   }, [rafflesData]);
+
   const ResponsiveSection = ({ children }: IWrapper) => (
     isSmallScreen ? (
       <Stack align='center'>
@@ -77,7 +86,17 @@ function Index() {
     <>
       <Stacks />
       <section className={classes.home}>
-        <Tabs value={queryType} onChange={(value) => { setQueryType(value); setPage(1); }} variant="pills" defaultValue="newest" pt={10}>
+        <Tabs 
+          value={queryType} 
+          onChange={(value) => { 
+            setQueryType(value)
+            changeByTab()
+            setPage(1)
+          }} 
+          variant="pills" 
+          defaultValue="newest" 
+          pt={10}
+        >
           <Tabs.List>
             <Tabs.Tab value="newest" leftSection={<IconApps style={iconStyle} />}>
               Iniciadas
@@ -85,7 +104,7 @@ function Index() {
             <Tabs.Tab value="initialized" leftSection={<IconShare style={iconStyle} />}>
               Enviadas
             </Tabs.Tab>
-            <Tabs.Tab value="to-close" leftSection={<IconClock style={iconStyle} />}>
+            <Tabs.Tab value="to_close" leftSection={<IconClock style={iconStyle} />}>
               Sin cerrar
             </Tabs.Tab>
           </Tabs.List>
@@ -129,7 +148,7 @@ function Index() {
   return (
     <Wrapper>
       <ScrollArea.Autosize h='calc(100vh - 375px)' type='never' scrollbars="y">
-        <RafflesAccordion step={2} data={rafflesData?.data.raffles || []} />
+        <RafflesAccordion step={step} data={rafflesData?.data.raffles || []} />
       </ScrollArea.Autosize>
     </Wrapper>
   );
