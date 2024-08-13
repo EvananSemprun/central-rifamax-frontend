@@ -11,7 +11,7 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
 
   const form = useForm<IRaffleForm>({
     name: 'add-raffle-form',
-    mode: 'uncontrolled',
+    mode: 'controlled',
     initialValues: {
       title: '',
       init_date: getDate(0),
@@ -19,7 +19,6 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
       currency: 'USD',
       numbers: 0,
       lotery: 'Zulia 7A',
-      user_id: 0,
       seller_id: 0,
       prizes: [
         {
@@ -141,7 +140,7 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
   )
 
   const handleSubmit = (values: IRaffleForm) => {
-    onNext
+    onNext && onNext(values)
     console.log(values)
   };
 

@@ -48,7 +48,7 @@ export interface IRafflesAccordion {
  * @description AddRaffleForm component props interface
  */
 export interface IAddRaffleForm {
-  onNext?: () => void;
+  onNext?: (raffle: IRaffleForm) => void;
   onBack?: () => void;
 }
 
@@ -63,7 +63,6 @@ export interface IRaffleForm {
   numbers: number;
   currency: string;
   lotery: string;
-  user_id: number;
   seller_id: number;
   prizes: IPrize[];
 }
@@ -81,18 +80,7 @@ export interface ICardRaffle {
  * @description TicketRaffle dup of CardRaffle for verify step component props interface
  */
 export interface ITicketRaffle {
-  raffle: {
-    title: string;
-    init_date: string;
-    numbers: number;
-    price: number;
-    currency: 'USD' | 'VES' | 'COP';
-    expired_date: string;
-    prizes: IPrize[];
-    lotery: string;
-    seller_id: number;
-    user: IUser["user"];
-  };
+  raffle: IRaffleForm | null
 }
 
 
