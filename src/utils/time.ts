@@ -19,7 +19,7 @@ export const getDay = (day: number): string => {
   return moment(getDate(day)).format('DD/MM/YYYY');
 }
 
-export const addDay = (inp?: moment.MomentInput, days: number): string => {
+export const addDay = (inp?: moment.MomentInput, days?: number): string => {
   if (!inp) return '';
   return moment(inp).add(days, 'days').format('DD/MM/YYYY');
 }

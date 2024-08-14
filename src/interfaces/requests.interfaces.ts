@@ -1,5 +1,6 @@
 // API responses interfaces
 
+import { IRaffleForm } from ".";
 import { IRaffle, IUser } from "./models.interfaces";
 
 /**
@@ -46,4 +47,13 @@ export interface IGetRaffles {
   queryType?: 'newest' | 'initialized' | 'to-close' | string | null;
   page: number;
   items: number; 
+}
+
+/**
+ * @interface IAddRaffles
+ * @description Interface of addRaffles request function
+ */
+export interface IAddRaffles {
+  token: string;
+  data: IRaffleForm;
 }
