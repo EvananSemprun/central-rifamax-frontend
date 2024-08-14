@@ -23,7 +23,7 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
       prizes: [
         {
           award: '',
-          plate: null,
+          plate: '',
           year: null,
           is_money: false,
           wildcard: true
@@ -31,6 +31,12 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
       ]
     },
     validate: {
+      title: (value: string) => value.trim().length > 0 ? null : 'El título es obligatorio',
+      init_date: (value: Date) => {
+        const today = getDate(0);
+        const maxDate = getDate(21);
+        return (value >= today && value <= maxDate) ? null : `La fecha debe estar entre ${today.toLocaleDateString()} y ${maxDate.toLocaleDateString()}`;
+      },
       numbers: (value: number) => (
         value > 0
           ? value <= 999
@@ -40,8 +46,22 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
       ),
       price: (value: number) => (value > 0 ? null : 'El precio debe ser mayor a 0'),
       seller_id: (value: number) => (value > 0 ? null : 'Debe seleccionar un rifero'),
+      currency: (value: string) => value ? null : 'Debe seleccionar una moneda',
+      lotery: (value: string) => value ? null : 'Debe seleccionar una lotería',
+      prizes: {
+        award: (value: string) => value ? null : 'Debe escoger un premio',
+        plate: (value: string | null, values) => {
+          const prize = values.prizes.find(p => p.plate === value);
+          return (prize?.is_money || value) ? null : 'Debe ingresar una placa';
+        },
+        year: (value: number | null, values) => {
+          const prize = values.prizes.find(p => p.year === value);
+          return (prize?.is_money || value) ? null : 'Debe ingresar un año';
+        }
+      }
     }
   });
+
 
   const CURRENCIES = [
     { value: 'USD', label: 'Dólares Américanos' },
@@ -71,11 +91,11 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
         withAsterisk
         size={FIELDS_SIZE}
         rightSection={<IconAward />}
-        key={form.key(`prizes.${index}.award`)}
-        label={`Premio ${index === 0 ? 'con signo' : 'sin signo'}`}
-        placeholder={`Premio ${index === 0 ? 'con signo' : 'sin signo'}`}
-        {...form.getInputProps(`prizes[${index}].award`)}
+        label={index === 0 ? "Premio" : "Premio con signo"}
+        placeholder={index === 0 ? "Premio" : "Premio con signo"}
+        {...form.getInputProps(`prizes.${index}.award`)}
       />
+
       <NumberInput
         w='100%'
         label="Modelo"
@@ -83,10 +103,9 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
         size={FIELDS_SIZE}
         mt={-10}
         rightSection={<IconClock />}
-        key={form.key(`prizes.${index}.year`)}
         disabled={form.getValues().prizes[index]?.is_money}
         withAsterisk={!form.getValues().prizes[index]?.is_money}
-        {...form.getInputProps(`prizes[${index}].year`)}
+        {...form.getInputProps(`prizes.${index}.year`)}
       />
       <TextInput
         mt={-10}
@@ -94,26 +113,25 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
         size={FIELDS_SIZE}
         placeholder="Placa"
         rightSection={<IconCar />}
-        key={form.key(`prizes.${index}.plate`)}
-        w={`calc(100% - ${width > 800 ? '130px' : '1px'})`}
+        w={`calc(100% - ${width > 800 ? '130px' : '0px'})`}
         disabled={form.getValues().prizes[index]?.is_money}
         withAsterisk={!form.getValues().prizes[index]?.is_money}
-        {...form.getInputProps(`prizes[${index}].plate`)}
+        {...form.getInputProps(`prizes.${index}.plate`)}
       />
       <Switch
         label="Dinero"
         size={FIELDS_SIZE}
         mt={width > 800 ? 10 : 0}
-        key={form.key(`prizes.${index}.is_money`)}
         checked={form.getValues().prizes[index]?.is_money}
         onChange={(e) => {
-          form.setFieldValue(`prizes.${index}.is_money`, e.currentTarget.checked)
-          e.currentTarget.checked ? form.setFieldValue(`prizes.${index}.plate`, null) : form.setFieldValue(`prizes.${index}.plate`, '')
-          e.currentTarget.checked ? form.setFieldValue(`prizes.${index}.year`, null) : form.setFieldValue(`prizes.${index}.year`, '')
+          const isMoney = e.currentTarget.checked;
+          form.setFieldValue(`prizes.${index}.is_money`, isMoney);
+          form.setFieldValue(`prizes.${index}.plate`, isMoney ? null : '');
+          form.setFieldValue(`prizes.${index}.year`, isMoney ? null : '');
         }}
       />
     </Group>
-  ))
+  ));
 
   const PrizesManager = () => (
     <Group justify="center" mt="md">

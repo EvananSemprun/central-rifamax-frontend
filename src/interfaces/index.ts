@@ -9,6 +9,21 @@ export interface ILoginBody {
 }
 
 /**
+ * @type BetType
+ * @description This type includes all existent types of Bets/Raffles.
+ */
+export type BetType = 'Triple' | 'Terminal' | 'Infinito' | 'Raffle';
+
+/**
+ * @interface IToBet
+ * @description This interface is for the util tool toBet, it is used to change the value to its respective bet/raffle type.
+ */
+export interface IToBet {
+  value: number;
+  betType: BetType;
+}
+
+/**
  * @interface ILinksList
  * @description This is the interface for the LinksList component of navbar
  */
@@ -60,8 +75,8 @@ export interface IRaffleForm {
   title: string;
   init_date: Date;
   price: number;
-  numbers: number;
   currency: string;
+  numbers: number;
   lotery: string;
   seller_id: number;
   prizes: IPrize[];

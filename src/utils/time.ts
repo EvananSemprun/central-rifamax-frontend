@@ -1,11 +1,11 @@
-import moment from 'moment'
+import moment from 'moment';
 
 export const day = (inp?: moment.MomentInput): string => {
-  return moment(inp).format('DD/MM/YYYY')
+  return moment(inp).format('DD/MM/YYYY');
 }
 
 export const datetime = (inp?: moment.MomentInput): string => {
-  return moment(inp).format('DD/MM/YYYY - HH:mm')
+  return moment(inp).format('DD/MM/YYYY - HH:mm');
 }
 
 export const getDate = (day: number): Date => {
@@ -16,9 +16,10 @@ export const getDate = (day: number): Date => {
 }
 
 export const getDay = (day: number): string => {
-  return moment(getDate(day)).format('DD/MM/YYYY')
+  return moment(getDate(day)).format('DD/MM/YYYY');
 }
 
 export const addDay = (inp?: moment.MomentInput, days: number): string => {
-  return moment(inp).add(days).format('DD/MM/YYYY')
+  if (!inp) return '';
+  return moment(inp).add(days, 'days').format('DD/MM/YYYY');
 }
