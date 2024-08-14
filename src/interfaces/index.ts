@@ -68,6 +68,14 @@ export interface IAddRaffleForm {
 }
 
 /**
+ * @interface IAccordionSteps
+ * @description interface of AccordionSteps (StepOne and StepTwo)
+ */
+export interface IAccordionSteps {
+  raffle_id: number;
+}
+
+/**
  * @interface IRaffleForm
  * @description interface of RaffleForm data of hook
  */

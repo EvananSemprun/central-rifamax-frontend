@@ -1,10 +1,11 @@
 import ModalSendToApp from '../ModalSendToApp';
+import { IAccordionSteps } from '@interfaces/index';
 import ModalPrintTickets from '../ModalPrintTickets';
 
-export function AccordionStepOne() {
+export function AccordionStepOne({ raffle_id }: IAccordionSteps) {
   return (
     <>
-      <ModalSendToApp />
+      <ModalSendToApp raffle_id={raffle_id} />
       <ModalPrintTickets />
     </>
   );

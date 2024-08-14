@@ -50,6 +50,16 @@ export interface IGetRaffles {
 }
 
 /**
+ * @interface ISendToApp
+ * @description Interface of sendToApp request function
+ */
+export interface ISendToApp {
+  token: string;
+  raffle_id: number;
+}
+
+
+/**
  * @interface IAddRaffles
  * @description Interface of addRaffles request function
  */

@@ -33,9 +33,15 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
     validate: {
       title: (value: string) => value.trim().length > 0 ? null : 'El título es obligatorio',
       init_date: (value: Date) => {
-        const today = getDate(0);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);   
+        
         const maxDate = getDate(21);
-        return (value >= today && value <= maxDate) ? null : `La fecha debe estar entre ${today.toLocaleDateString()} y ${maxDate.toLocaleDateString()}`;
+        maxDate.setHours(23, 59, 59, 999); 
+        
+        return (value >= today && value <= maxDate) 
+          ? null 
+          : `La fecha debe estar entre ${today.toLocaleDateString()} y ${maxDate.toLocaleDateString()}`;
       },
       numbers: (value: number) => (
         value > 0
@@ -239,7 +245,6 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
           />
         </Grid.Col>
       </Grid>
-
       <Select
         mt={5}
         withAsterisk

@@ -1,12 +1,14 @@
 import ModalPayRaffle from '../ModalPayRaffle';
 import ModalUnpayRaffle from '../ModalUnpayRaffle';
 import ModalRefundRaffle from '../ModalRefundRaffle';
-export function AccordionStepTwo() {
+import { IAccordionSteps } from '@interfaces/index';
+
+export function AccordionStepTwo({ raffle_id }: IAccordionSteps) {
   return (
     <>
-      <ModalPayRaffle/>
-      <ModalUnpayRaffle/>
-      <ModalRefundRaffle/>
+      <ModalPayRaffle raffle_id={raffle_id} />
+      <ModalUnpayRaffle raffle_id={raffle_id} />
+      <ModalRefundRaffle raffle_id={raffle_id} />
     </>
   );
 }

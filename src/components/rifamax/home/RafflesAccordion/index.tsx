@@ -1,13 +1,13 @@
-import CardRaffle from '../CardRaffle';
 import classes from './index.module.css';
+import CardRaffle from '../CardRaffle';
+import RafflesEmpty from './RafflesEmpty';
 import { useState } from 'react';
 import { IRafflesAccordion } from '@interfaces/index';
 import { Accordion, Divider, Group } from '@mantine/core';
-import { AccordionStepOne } from '../RafflesAccordion/AccordionStepOne';
 import { AccordionStepTwo } from '../RafflesAccordion/AccordionStepTwo';
+import { AccordionStepOne } from '../RafflesAccordion/AccordionStepOne';
 import { InfoRafflesAccordion } from '../RafflesAccordion/InfoRafflesAccordion';
 import { TitlesRafflesAccordion } from '../RafflesAccordion/TitlesRafflesAccordion';
-import RafflesEmpty from './RafflesEmpty';
 
 function Index({ step, data }: IRafflesAccordion) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -32,7 +32,7 @@ function Index({ step, data }: IRafflesAccordion) {
               <InfoRafflesAccordion title={raffle.title} init_date={raffle.init_date} seller={raffle.seller.name} />
             </Group>
             <Group>
-              {step === 1 ? <AccordionStepOne /> : <AccordionStepTwo />}
+              {step === 1 ? <AccordionStepOne raffle_id={raffle.id} /> : <AccordionStepTwo raffle_id={raffle.id} />}
             </Group>
           </Group>
         </Accordion.Control>

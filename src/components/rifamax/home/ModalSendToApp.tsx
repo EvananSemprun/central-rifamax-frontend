@@ -1,24 +1,84 @@
+import useAuth from "@/hooks/useAuth";
 import WoodTitle from "@components/shared/WoodTitle";
 import { modals } from "@mantine/modals";
-import { Title, Button } from "@mantine/core";
+import { useMutation } from '@tanstack/react-query';
+import { IAccordionSteps } from "@interfaces/index";
+import { sendToApp } from "@api/rifamax/Raffles.request";
+import { Title, Button, Grid ,Text} from "@mantine/core";
 import { IconDeviceMobileMessage } from "@tabler/icons-react";
+import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
-function ModalSendToApp() {
+function ModalSendToApp({ raffle_id }: IAccordionSteps) {
+  const { token } = useAuth()
+
+  const mutation = useMutation({
+    mutationFn: sendToApp,
+    onSuccess: () => (
+      SuccessNotification({ 
+        position: 'top', 
+        title: 'Rifa enviada con exito.', 
+        label: 'Su rifa ha sido enviada exitosamente, revise la App de Rifamax.' 
+      })
+    ),
+    onError: () => (
+      ErrorNotification({ 
+        position: 'top', 
+        title: 'Ha ocurrido un error.', 
+        label: 'Ha ocurrido un error a enviar la rifa a la app.' 
+      })
+    )
+  });
+
   const openSentToAppModal = () => modals.open({
     title: <Title order={3}>Enviar a APP</Title>,
     centered: true,
     children: (
       <>
-        <WoodTitle title="Enviando..." variant="dashed" />
+        <WoodTitle title="¿Seguro de enviar al APP?" variant="dashed" />
+        <Grid mt={15}>
+          <Grid.Col span={6}>
+            <Button
+              fullWidth
+              variant="light"
+              color="red"
+              size="sm"
+              onClick={() => modals.closeAll()}
+            >
+              Cancelar
+            </Button>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Button
+              fullWidth
+              variant="light"
+              color="teal"
+              size="sm"
+              onClick={() => {
+                mutation.mutate({ token, raffle_id });
+                modals.closeAll();
+              }}
+            >
+              Enviar
+            </Button>
+          </Grid.Col>
+        </Grid>
+        <Text mt={10} ta='center' c="dimmed">Esta acción es irreversible</Text>
+
       </>
     )
-  })
+  });
 
   return (
-    <Button variant="light" color="blue" size="xs" leftSection={<IconDeviceMobileMessage size="1.2rem" />} onClick={openSentToAppModal}>
+    <Button
+      variant="light"
+      color="blue"
+      size="xs"
+      leftSection={<IconDeviceMobileMessage size="1.2rem" />}
+      onClick={openSentToAppModal}
+    >
       Enviar a APP
     </Button>
   );
 }
 
-export default ModalSendToApp
+export default ModalSendToApp;

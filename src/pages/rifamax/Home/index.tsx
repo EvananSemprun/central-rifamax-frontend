@@ -1,17 +1,16 @@
-import Titles from '@components/shared/Titles';
 import useAuth from '@hooks/useAuth';
 import classes from './index.module.css';
+import Titles from '@components/shared/Titles';
 import LoaderBlur from '@/components/shared/Loaders/LoaderBlur';
 import StacksRaffle from '@/components/rifamax/home/StacksRaffle';
 import ActionButtons from '@components/rifamax/home/ActionButtons';
 import RafflesAccordion from '@components/rifamax/home/RafflesAccordion';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { AxiosResponse } from 'axios';
+import { useState, useEffect } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getRaffles } from '@api/rifamax/Raffles.request';
 import { IRafflesResponse } from '@interfaces/requests.interfaces';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { IconApps, IconClock, IconShare } from '@tabler/icons-react';
 import { Pagination, ScrollArea, Group, Stack, Flex, Tabs, rem } from '@mantine/core';
 
@@ -28,17 +27,20 @@ function Index() {
   const [step, setStep] = useState<1 | 2>(1);
   const [queryType, setQueryType] = useState<string | null>('newest');
 
-  const changeByTab = () => {
-    queryType === 'newest' ?
-      setStep(1)
-        : setStep(2)
-  }
+  useEffect(() => {
+    if (queryType === 'newest') {
+      setStep(1);
+    }
+  }, [queryType]);
 
   const { token } = useAuth();
 
-  const fetchRaffles = (page: number, queryType: string | null) => getRaffles({ token, queryType, page, items });
+  const fetchRaffles = (page: number, queryType: string | null) =>
+    getRaffles({ token, queryType, page, items });
 
-  const { data: rafflesData, isLoading, isError, isPlaceholderData } = useQuery<AxiosResponse<IRafflesResponse>>({
+  const { data: rafflesData, isLoading, isError, isPlaceholderData } = useQuery<
+    AxiosResponse<IRafflesResponse>
+  >({
     queryKey: ['raffles', token, page, queryType],
     queryFn: () => fetchRaffles(page, queryType),
     retry: 2,
@@ -51,7 +53,7 @@ function Index() {
     }
   }, [rafflesData]);
 
-  const ResponsiveSection = ({ children }: IWrapper) => (
+  const ResponsiveSection = ({ children }: IWrapper) =>
     isSmallScreen ? (
       <Stack align='center'>
         {children}
@@ -63,48 +65,44 @@ function Index() {
         />
       </Stack>
     ) : (
-      <Group justify="space-between">
-        {children}
-      </Group>
-    )
-  )
+      <Group justify="space-between">{children}</Group>
+    );
 
   const Stacks = () => (
     <Flex
       mx={10}
       rowGap={0}
-      columnGap="sm"
+      columnGap='sm'
       wrap={isSmallScreen ? 'wrap' : 'nowrap'}
     >
       <StacksRaffle color={'blue'} number={130} title={'Total de Rifas'} />
       <StacksRaffle color={'green'} number={75} title={'Rifas activas'} />
       <StacksRaffle color={'red'} number={45} title={'Rifas expiradas'} />
     </Flex>
-  )
+  );
 
   const Wrapper = ({ children }: IWrapper) => (
     <>
       <Stacks />
       <section className={classes.home}>
-        <Tabs 
-          value={queryType} 
-          onChange={(value) => { 
-            setQueryType(value)
-            changeByTab()
-            setPage(1)
-          }} 
-          variant="pills" 
-          defaultValue="newest" 
+        <Tabs
+          value={queryType}
+          onChange={(value) => {
+            setQueryType(value);
+            setPage(1);
+          }}
+          variant='pills'
+          defaultValue='newest'
           pt={10}
         >
           <Tabs.List>
-            <Tabs.Tab value="newest" leftSection={<IconApps style={iconStyle} />}>
+            <Tabs.Tab value='newest' leftSection={<IconApps style={iconStyle} />}>
               Iniciadas
             </Tabs.Tab>
-            <Tabs.Tab value="initialized" leftSection={<IconShare style={iconStyle} />}>
+            <Tabs.Tab value='initialized' leftSection={<IconShare style={iconStyle} />}>
               Enviadas
             </Tabs.Tab>
-            <Tabs.Tab value="to_close" leftSection={<IconClock style={iconStyle} />}>
+            <Tabs.Tab value='to_close' leftSection={<IconClock style={iconStyle} />}>
               Sin cerrar
             </Tabs.Tab>
           </Tabs.List>
@@ -130,7 +128,6 @@ function Index() {
               }
             }}
           />
-
         )}
         {children}
       </section>
@@ -147,7 +144,7 @@ function Index() {
 
   return (
     <Wrapper>
-      <ScrollArea.Autosize h='calc(100vh - 375px)' type='never' scrollbars="y">
+      <ScrollArea.Autosize h='calc(100vh - 375px)' type='never' scrollbars='y'>
         <RafflesAccordion step={step} data={rafflesData?.data.raffles || []} />
       </ScrollArea.Autosize>
     </Wrapper>
