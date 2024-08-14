@@ -38,7 +38,7 @@
     "@tiptap/extension-link": "^2.5.4",
     "@tiptap/react": "^2.5.4",
     "@tiptap/starter-kit": "^2.5.4",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "dayjs": "^1.11.12",
     "embla-carousel-react": "^8.1.7",
     "framer-motion": "^11.3.19",
