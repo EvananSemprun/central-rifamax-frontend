@@ -1,10 +1,13 @@
 import StepperRaffle from './StepperRaffle';
+import useConfetti from '@hooks/useConfetti';
 import { day } from '@utils/time'
 import { modals } from '@mantine/modals'
 import { IconPlus } from '@tabler/icons-react'
 import { Button, Text, Title } from '@mantine/core'
 
 function AddRaffleModal() {
+  const { stop } = useConfetti();
+
   const openAddRaffleModal = () => modals.open({
     title: (
       <>
@@ -17,6 +20,7 @@ function AddRaffleModal() {
     size: 'xl',
     centered: true,
     closeOnClickOutside: false,
+    onClose: stop,
     children: (
       <StepperRaffle/> 
     ),

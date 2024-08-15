@@ -13,12 +13,13 @@ import {
 } from '@tanstack/react-query';
 import { Provider } from 'react-redux';
 import { store } from '@config/store/index';
+import { DatesProvider } from '@mantine/dates';
 import { BrowserRouter } from 'react-router-dom';
 import { ModalsProvider } from '@mantine/modals';
 import { ThemeProvider } from '@config/ThemeProvider'
 import { Notifications } from '@mantine/notifications';
 import { ProfileProvider } from '@config/ProfileProvider'
-import { DatesProvider } from '@mantine/dates';
+import { ConfettiProvider } from '@config/ConfettiProvider/index.tsx';
 
 const queryClient = new QueryClient();
 
@@ -27,16 +28,18 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <ThemeProvider>
-            <ProfileProvider retry={1}>
-              <DatesProvider settings={{ locale: 'es', firstDayOfWeek: 0, weekendDays: [0], timezone: 'America/Caracas' }}>
-                <ModalsProvider>
-                  <Notifications />
-                  <App />
-                </ModalsProvider>
-              </DatesProvider>
-            </ProfileProvider>
-          </ThemeProvider>
+          <ConfettiProvider>
+            <ThemeProvider>
+              <ProfileProvider retry={1}>
+                <DatesProvider settings={{ locale: 'es', firstDayOfWeek: 0, weekendDays: [0], timezone: 'America/Caracas' }}>
+                  <ModalsProvider>
+                    <Notifications />
+                    <App />
+                  </ModalsProvider>
+                </DatesProvider>
+              </ProfileProvider>
+            </ThemeProvider>
+          </ConfettiProvider>
         </BrowserRouter>
       </QueryClientProvider>
     </Provider>

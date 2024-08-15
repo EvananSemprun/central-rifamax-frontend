@@ -1,25 +1,27 @@
 import useAuth from '@hooks/useAuth';
-import Confetti from 'react-confetti';
 import TicketRaffle from './TicketRaffle';
 import AddRaffleForm from '@form/rifamax/Home/AddRaffle.form';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ITicketRaffle } from '@interfaces/index';
 import { useMutation } from '@tanstack/react-query';
 import { addRaffles } from '@api/rifamax/Raffles.request';
 import { ErrorNotification } from '@/components/shared/Notifications';
 import { Center, Stepper, Button, Group, Title } from '@mantine/core';
+import useConfetti from '@hooks/useConfetti';
 
 function StepperRaffle() {
   const [active, setActive] = useState(0);
   const [raffleForm, setRaffleForm] = useState<ITicketRaffle['raffle'] | null>(null);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+ 
   const { token } = useAuth();
+  const { start } = useConfetti();
 
   const addRaffleMutation = useMutation({
     mutationKey: ['raffles', 'add'],
     mutationFn: addRaffles,
     onError: () => {
       setActive(2);
+      start();
     },
     onSuccess: () => ErrorNotification({
       position: 'top',
@@ -27,20 +29,6 @@ function StepperRaffle() {
       label: 'No se pudo agregar la rifa'
     })
   });
-
-  useEffect(() => {
-    const updateWindowSize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    updateWindowSize();
-    window.addEventListener('resize', updateWindowSize);
-
-    return () => window.removeEventListener('resize', updateWindowSize);
-  }, []);
 
   const nextStep = () => {
     active !== 1
@@ -72,13 +60,6 @@ function StepperRaffle() {
         </Group>
       </Stepper.Step>
       <Stepper.Completed>
-        <Confetti
-          width={windowSize.width}
-          height={windowSize.height}
-          numberOfPieces={1000000}
-          gravity={9.8}
-          wind={0.01}
-        />
         <Center mt={20}>
           <Title>
             Rifa Creada

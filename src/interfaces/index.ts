@@ -59,6 +59,14 @@ export interface IRafflesAccordion {
 }
 
 /**
+ * @interface IConfettiProvider
+ * @description This is the interface for the ConfettiProvider component
+ */
+export interface IConfettiProvider {
+  children: React.ReactNode;
+}
+
+/**
  * @interface IAddRaffleForm
  * @description AddRaffleForm component props interface
  */
@@ -168,6 +176,14 @@ export interface IWoodTitle {
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 // Redux interfaces
+
+/**
+ * @interface ConfettiState
+ * @description This is the interface for the state of the ConfettiState
+ */
+export interface ConfettiState {
+  isRunning: boolean;
+}
 
 /**
  * @interface TokenState
