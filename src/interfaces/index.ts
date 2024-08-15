@@ -85,7 +85,7 @@ export interface IAccordionSteps {
 
 /**
  * @interface IRaffleForm
- * @description interface of RaffleForm data of hook
+ * @description interface of RaffleForm data of form
  */
 export interface IRaffleForm {
   title: string;
@@ -96,6 +96,16 @@ export interface IRaffleForm {
   lotery: string;
   seller_id: number;
   prizes: IPrize[];
+}
+
+/**
+ * @interface IRepeatRaffleForm
+ * @description interface of RepeatRaffleForm data of form
+ */
+export interface IRepeatRaffleForm {
+  lotery: string;
+  init_date: Date | string | null;
+  numbers: number;
 }
 
 /**

@@ -58,6 +58,20 @@ export interface ISendToApp {
   raffle_id: number;
 }
 
+/**
+ * @interface IRepeatToApp
+ * @description Interface of sendToApp request function
+ */
+export interface IRepeatToApp {
+  token: string;
+  raffle_id: number;
+  data: {
+    init_date: Date | null | string;
+    numbers: number;
+    lotery: string;
+  }
+}
+
 
 /**
  * @interface IAddRaffles
