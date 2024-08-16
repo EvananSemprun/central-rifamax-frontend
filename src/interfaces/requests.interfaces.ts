@@ -72,12 +72,45 @@ export interface IRepeatToApp {
   }
 }
 
+/**
+ * @interface IPayRaffle
+ * @description Interface of sendToApp request function
+ */
+export interface IPayRaffle {
+  token: string;
+  raffle_id: number;
+  data: {
+    price: number;
+    current: string;
+  }
+}
+
 
 /**
  * @interface IAddRaffles
  * @description Interface of addRaffles request function
  */
 export interface IAddRaffles {
+  raffle_id: number;
   token: string;
   data: IRaffleForm;
+}
+
+/**
+ * @interface IUnpayRaffle
+ * @description Interface of addRaffles request function
+ */
+export interface IUnpayRaffle {
+  token: string;
+  raffle_id: number;
+}
+
+
+/**
+ * @interface IRefundRaffle
+ * @description Interface of addRaffles request function
+ */
+export interface IRefundRaffle {
+  token: string;
+  raffle_id: number;
 }

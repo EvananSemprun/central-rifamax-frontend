@@ -1,5 +1,13 @@
 import axios from 'axios'
-import { IAddRaffles, IGetRaffles, IRepeatToApp, ISendToApp } from '@interfaces/requests.interfaces'
+import { 
+	ISendToApp, 
+	IPayRaffle, 
+	IGetRaffles, 
+	IAddRaffles, 
+	IRepeatToApp, 
+	IUnpayRaffle,
+	IRefundRaffle 
+} from '@interfaces/requests.interfaces'
 
 // GET /rifamax/raffles
 export const getRaffles = ({ token, queryType, page, items }: IGetRaffles) => {
@@ -41,4 +49,39 @@ export const repeatToApp = ({ token, raffle_id, data}: IRepeatToApp) => {
       Authorization: `Bearer ${token}`
     }
   })
+}
+
+// PUT /rifamax/raffles/1/pay
+export const payRaffle = ({ token, raffle_id, data }: IPayRaffle) => {
+  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/pay/${raffle_id}`, {
+    raffle_id: raffle_id,
+    data: data
+  }, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+}
+
+// PUT /rifamax/raffles/1/unpay
+export const unPayRaffle = ({ token, raffle_id }: IUnpayRaffle) => {
+  return axios.put(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/unpay`, {
+    raffle_id: raffle_id
+  }, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+}
+// PUT /rifamax/raffles/1/unpay
+export const refundRaffle = ({ token, raffle_id }: IRefundRaffle) => {
+  return axios.put(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/refund`, {
+    raffle_id: raffle_id
+  }, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
 }

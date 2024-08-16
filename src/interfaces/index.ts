@@ -81,6 +81,7 @@ export interface IAddRaffleForm {
  */
 export interface IAccordionSteps {
   raffle_id: number;
+  wildcard?: string
 }
 
 /**

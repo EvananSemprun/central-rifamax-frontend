@@ -1,5 +1,6 @@
 
 import CardTitle from './CardTitle';
+import ModalTicketRaffle from './ModalTicketRaffle';
 import { ICardRaffle } from '@interfaces/index';
 import { Button, Text, Divider, Card, Image, Center } from '@mantine/core'
 
@@ -43,9 +44,7 @@ function CardRaffle({ raffle }: ICardRaffle) {
       <Text ta='center' mt={15} mb={15} c='grey' size="lg">
         Esto es una representación de como lucirán los tickets.
       </Text>
-      <Button variant="light" size="lg" radius="xs">
-        Ver Ticket
-      </Button>
+      <ModalTicketRaffle/>
     </Card>
   );
 }

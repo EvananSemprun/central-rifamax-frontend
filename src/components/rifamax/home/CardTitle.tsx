@@ -3,7 +3,7 @@ import { ICardTitle } from '@interfaces/index';
 
 function CardTitle({ content, title }: ICardTitle) {
   return (
-    <Group justify='space-between'>
+    <Group mb={10} justify='space-between'>
       <Text fw={700} size='md' >
         {title}
       </Text>

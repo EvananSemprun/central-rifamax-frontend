@@ -20,7 +20,7 @@ interface IWrapper {
 
 function Index() {
   const items = 7;
-  const isSmallScreen = useMediaQuery('(max-width: 800px)');
+  const isSmallScreen = useMediaQuery('(max-width: 940px)');
   const iconStyle = { width: rem(16), height: rem(16) };
 
   const [page, setPage] = useState<number>(1);

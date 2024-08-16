@@ -44,6 +44,7 @@ export interface IRaffle {
   numbers: number;
   price: number;
   prizes: IPrize[];
+  security: string;
   sell_status: 'active' | 'sent' | 'sold';
   title: string;
   uniq_identifier_serial: string;
