@@ -4,11 +4,11 @@ import { useForm } from '@mantine/form';
 import { modals } from "@mantine/modals";
 import { DatePickerInput } from "@mantine/dates";
 import { useMutation } from '@tanstack/react-query';
-import { IAccordionSteps, IRepeatRaffleForm } from "@interfaces/index";
 import { repeatToApp } from "@api/rifamax/Raffles.request";
 import { IconCash, IconNumber, IconReload } from "@tabler/icons-react";
-import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
+import { IAccordionSteps, IRepeatRaffleForm } from "@interfaces/index";
 import { Center, Chip, Group, NumberInput, Title, Button, Select } from "@mantine/core";
+import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
 function ModalRepeatRaffle({ raffle_id }: IAccordionSteps) {
   const { token } = useAuth();
@@ -33,7 +33,7 @@ function ModalRepeatRaffle({ raffle_id }: IAccordionSteps) {
 
   const form = useForm<IRepeatRaffleForm>({
     initialValues: {
-      numbers: 0,
+      numbers: 1,
       lotery: 'zulia 7a',
       init_date: null,
     },
