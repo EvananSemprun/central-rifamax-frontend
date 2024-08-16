@@ -3,7 +3,7 @@ import DebtRaffles from './DebtRaffles';
 import { day } from '@utils/time';
 import { modals } from '@mantine/modals';
 import { IconX } from '@tabler/icons-react';
-import { Button, Card, Divider, Group, Text, Title, Grid } from '@mantine/core';
+import { Button, Divider, Text, Title, Grid } from '@mantine/core';
 
 function CloseDayModal() {
   const openCloseDayModal = () => modals.open({
