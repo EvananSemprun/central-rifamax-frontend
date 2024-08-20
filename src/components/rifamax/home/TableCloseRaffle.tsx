@@ -1,22 +1,31 @@
+import { sellStatus, adminStatus } from '@utils/parse';
 import { Table, Badge, ScrollArea } from '@mantine/core';
+import { getClosedRaffles } from '@api/rifamax/Raffles.request';
 
-function TableRaffle() {
+function TableCloseRaffle() {
   const elements = [
-    { serie: 'A123', enviado: 'Enviado APP', verificacion: 'Verificado', monto: 100.0, rifero: 'JAVIER', fecha: '2024-08-12' },
-    { serie: 'B456', enviado: 'Enviado APP', verificacion: 'Pendiente', monto: 50.0, rifero: 'evanan', fecha: '2024-08-11' },
+    { 
+			id: 1,
+			title: "Moto Bera SBR",
+			sell_status: 'sold', 
+			admin_status: 'pending', 
+			price: 100.0, 
+			security: "Beisbol",
+			seller: "Javier Diaz",
+			created_at: '19/08/2024 - 10:01 pm' 
+		},
   ];
 
   const rows = elements.map((element) => (
-    <Table.Tr ta='center' key={element.serie}>
-      <Table.Td>{element.serie}</Table.Td>
-      <Table.Td>{element.enviado}</Table.Td>
+    <Table.Tr ta='center' key={element.id}>
+      <Table.Td>{element.id}</Table.Td>
+      <Table.Td>{sellStatus(element.sell_status)}</Table.Td>
       <Table.Td>
-        <Badge variant="light" color="blue" size="lg">{element.verificacion}</Badge>
-
+        <Badge variant="light" color="red" size="lg">{adminStatus(element.admin_status)}</Badge>
       </Table.Td>
-      <Table.Td >{element.monto} $</Table.Td>
-      <Table.Td>{element.rifero}</Table.Td>
-      <Table.Td>{element.fecha}</Table.Td>
+      <Table.Td >{element.price} $</Table.Td>
+      <Table.Td>{element.seller}</Table.Td>
+      <Table.Td>{element.created_at}</Table.Td>
     </Table.Tr>
   ));
 
@@ -39,4 +48,4 @@ function TableRaffle() {
   );
 }
 
-export default TableRaffle;
+export default TableCloseRaffle;

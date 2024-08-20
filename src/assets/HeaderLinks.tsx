@@ -8,7 +8,8 @@ import {
   IconBug,
   IconBook,
   IconTerminal2,
-  IconServer2
+  IconServer2,
+  IconUsers
 } from '@tabler/icons-react';
 import { ADMIN, ALL } from '@utils/roles';
 
@@ -18,10 +19,12 @@ export const HeaderLinks: { [key: string]: { title: string; to: string, role: st
   ],
   admin: [
     { title: 'Inicio', to: '/admin/dashboard', role: ADMIN, icon: <IconHome size='1.8rem' stroke={1.6} /> },
+    { title: 'Riferos', to: '/admin/sellers', role: ADMIN, icon: <IconUsers size='1.8rem' stroke={1.6} /> },
     { title: 'Usuarios', to: '/admin/users', role: ADMIN, icon: <IconUsersGroup size='1.8rem' stroke={1.6} /> },
   ],
   rifamax: [
     { title: 'Inicio', to: '/rifamax/dashboard', role: ALL, icon: <IconHome size='1.8rem' stroke={1.6} /> },
+    { title: 'Riferos', to: '/rifamax/sellers', role: ADMIN, icon: <IconUsers size='1.8rem' stroke={1.6} /> },
   ],
   x100: [
     { title: 'Lobby', to: '/x100/lobby', role: ALL, icon: <IconBrandAppleArcade size='1.8rem' stroke={1.6} /> },

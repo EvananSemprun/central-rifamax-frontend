@@ -50,6 +50,16 @@ export interface IGetRaffles {
 }
 
 /**
+ * @interface IGetClosedRaffles
+ * @description Interface of getClosedRaffles request function
+ */
+export interface IGetClosedRaffles {
+  token: string;
+  page: number;
+  items: number;
+}
+
+/**
  * @interface ISendToApp
  * @description Interface of sendToApp request function
  */

@@ -1,5 +1,6 @@
 import TableRaffle from './TableRaffle';
 import DebtRaffles from './DebtRaffles';
+import TableCloseRaffle from './TableCloseRaffle';
 import { day } from '@utils/time';
 import { modals } from '@mantine/modals';
 import { IconX } from '@tabler/icons-react';
@@ -22,6 +23,8 @@ function CloseDayModal() {
       <>
         <Divider label="Cuadre de hoy" variant='dashed' size="md" labelPosition="center" />
         <TableRaffle />
+        <Divider label="Rifas Cerradas" variant='dashed' size="md" labelPosition="center" />
+        <TableCloseRaffle/>
         <Divider label="Total" variant='dashed' size="md" labelPosition="center" />
         <DebtRaffles/>
 
@@ -29,12 +32,12 @@ function CloseDayModal() {
           <Grid.Col span={6}>
             <Button fullWidth variant="light"size="md" radius="md">
               Descargar
-              </Button>
+            </Button>
           </Grid.Col>
           <Grid.Col span={6}>
-            <Button fullWidth variant="light"  color="teal" size="md" radius="md">
-              Imprimir
-              </Button>
+            <Button fullWidth variant="light" color="teal" size="md" radius="md">
+            	Imprimir
+            </Button>
           </Grid.Col>
         </Grid>
       </>

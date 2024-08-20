@@ -6,12 +6,22 @@ import {
 	IAddRaffles, 
 	IRepeatToApp, 
 	IUnpayRaffle,
-	IRefundRaffle 
+	IRefundRaffle, 
+  IGetClosedRaffles
 } from '@interfaces/requests.interfaces'
 
 // GET /rifamax/raffles
 export const getRaffles = ({ token, queryType, page, items }: IGetRaffles) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/${queryType}?page=${page}&items=${items}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+}
+
+// GET /rifamax/ClosedRaffles
+export const getClosedRaffles = ({ token, page, items }: IGetClosedRaffles) => {
+  return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/closed?page=${page}&items=${items}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }

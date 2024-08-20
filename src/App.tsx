@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 const Lobby = lazy(() => import('@pages/shared/Lobby'))
 const Login = lazy(() => import('@pages/shared/Login'))
 const Home = lazy(() => import('@pages/rifamax/Home'))
+const Seller = lazy(() => import('@pages/rifamax/Seller'))
 const FeatureFlags = lazy(() => import('@pages/dev/FeatureFlags'))
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path='login' element={<Login />} />
         <Route path='rifamax' element={<AuthRoute roles={ALL} />}>
           <Route path='dashboard' element={<Home />} />
+          <Route path='sellers' element={<Seller />} />
         </Route>
         <Route path='dev' element={<AuthRoute roles={ADMIN} />}>
           <Route path='featureFlags' element={<FeatureFlags />} />
