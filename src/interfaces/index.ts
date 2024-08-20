@@ -180,6 +180,21 @@ export interface IWoodTitle {
   title: string;
   variant: 'dashed' | 'dotted' | 'default'
 }
+
+/**
+ * @interface IAddSellerForm
+ * @description SellerForm component props interface
+ */
+export interface IAddSellerForm {
+  name: string;
+  lastname: string;
+  dni: string;
+  phone: string;
+  email: string;
+  password: string;
+  confirm_password: string;
+}
+
 /**
  * @type HttpMethod
  * @description This is the type for the HTTP methods
