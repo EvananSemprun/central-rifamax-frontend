@@ -2,40 +2,39 @@ import { Table, Badge, ScrollArea } from '@mantine/core';
 
 function TableRaffle() {
   const elements = [
-    { serie: 'A123', enviado: 'Enviado APP', verificacion: 'Verificado', monto: 100.0, rifero: 'JAVIER', fecha: '2024-08-12' },
-    { serie: 'B456', enviado: 'Enviado APP', verificacion: 'Pendiente', monto: 50.0, rifero: 'evanan', fecha: '2024-08-11' },
+    { id: 1, sell_status: 'sold', admin_status: 'payed', price: 100.0, seller: 'Javier', created_at: '20/08/2024 - 10:01 pm' },
+    { id: 2, sell_status: 'send', admin_status: 'pending', price: 50.0, seller: 'Evanan', created_at: '20/08/2024 - 10:01 pm' },
   ];
 
   const rows = elements.map((element) => (
-    <Table.Tr ta='center' key={element.serie}>
-      <Table.Td>{element.serie}</Table.Td>
-      <Table.Td>{element.enviado}</Table.Td>
+    <Table.Tr ta='center' key={element.id}>
+      <Table.Td>{element.id}</Table.Td>
+      <Table.Td>{sellStatus(element.sell_status).charAt(0).toUpperCase() + str.slice(1)}</Table.Td>
       <Table.Td>
-        <Badge variant="light" color="blue" size="lg">{element.verificacion}</Badge>
-
+        <Badge variant="light" color="blue" size="md">{adminStatus(element.admin_status)}</Badge>
       </Table.Td>
-      <Table.Td >{element.monto} $</Table.Td>
-      <Table.Td>{element.rifero}</Table.Td>
-      <Table.Td>{element.fecha}</Table.Td>
+      <Table.Td >{element.price} $</Table.Td>
+      <Table.Td>{element.seller}</Table.Td>
+      <Table.Td>{element.created_at}</Table.Td>
     </Table.Tr>
   ));
 
   return (
-    <Table mt={20} mb={20} striped highlightOnHover withTableBorder>
-      <ScrollArea type='never' h={250}>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th ta='center'>Serie</Table.Th>
-            <Table.Th ta='center'>Estado</Table.Th>
-            <Table.Th ta='center'>Verificación</Table.Th>
-            <Table.Th ta='center'>Monto</Table.Th>
-            <Table.Th ta='center'>Rifero</Table.Th>
-            <Table.Th ta='center'>Fecha</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>{rows}</Table.Tbody>
-      </ScrollArea>
-    </Table>
+    <ScrollArea type="auto" w="100%" style={{ maxWidth: '100%', overflowX: 'auto' }}>
+	    <Table mt={20} mb={20} striped highlightOnHover withTableBorder>
+				<Table.Thead>
+					<Table.Tr>
+						<Table.Th ta='center'>Serie</Table.Th>
+						<Table.Th ta='center'>Estado</Table.Th>
+						<Table.Th ta='center'>Verificación</Table.Th>
+						<Table.Th ta='center'>Monto</Table.Th>
+						<Table.Th ta='center'>Rifero</Table.Th>
+						<Table.Th ta='center'>Fecha</Table.Th>
+					</Table.Tr>
+				</Table.Thead>
+	      <Table.Tbody>{rows}</Table.Tbody>
+	    </Table>
+    </ScrollArea>
   );
 }
 

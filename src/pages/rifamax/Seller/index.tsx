@@ -3,7 +3,7 @@ import SellerTable from '@components/rifamax/Seller/sellerTable'
 import ModalCreateSeller from '@components/rifamax/Seller/ModalCreateSeller'
 import { ReactNode } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
-import { Card, Group, ScrollArea, Title, Stack } from '@mantine/core'
+import { Card, Group, ScrollArea, Title, Stack, Text } from '@mantine/core'
 
 function index() {
   const isSmallScreen = useMediaQuery('(max-width: 940px)');
@@ -24,15 +24,13 @@ function index() {
           <Title order={2}>
             Riferos
           </Title>
-          <Title order={4}>
+          <Text fz={16} fw={300}>
             Lista de los riferos registrados en la plataforma
-          </Title>
+          </Text>
         </div>
         <ModalCreateSeller />
       </ResponsiveSection>
-      <ScrollArea mt={15} type="never" h={700}>
-        <SellerTable />
-      </ScrollArea>
+      <SellerTable />
     </Card>
   )
 }

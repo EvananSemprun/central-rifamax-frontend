@@ -10,7 +10,7 @@ import {
   IGetClosedRaffles
 } from '@interfaces/requests.interfaces'
 
-// GET /rifamax/raffles
+// GET /rifamax/raffles/{queryType}?page={page}&items={items}
 export const getRaffles = ({ token, queryType, page, items }: IGetRaffles) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/${queryType}?page=${page}&items=${items}`, {
     headers: {
@@ -19,7 +19,7 @@ export const getRaffles = ({ token, queryType, page, items }: IGetRaffles) => {
   })
 }
 
-// GET /rifamax/ClosedRaffles
+// GET /rifamax/raffles/closed?page={page}&items={items}
 export const getClosedRaffles = ({ token, page, items }: IGetClosedRaffles) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/closed?page=${page}&items=${items}`, {
     headers: {
@@ -39,17 +39,18 @@ export const addRaffles = ({ token, data }: IAddRaffles) => {
   })
 }
 
-// PUT /rifamax/raffles/1/send
+// POST /rifamax/raffles/send
 export const sendToApp = ({ token, raffle_id }: ISendToApp) => {
-  return axios.put(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/send`, {
+  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/send`, {
     raffle_id: raffle_id
   }, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
+}
 
-}// PUT /rifamax/raffles/1/reload
+// POST /rifamax/raffles/repeat
 export const repeatToApp = ({ token, raffle_id, data}: IRepeatToApp) => {
   return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/repeat`, {
     raffle_id: raffle_id,
@@ -61,9 +62,9 @@ export const repeatToApp = ({ token, raffle_id, data}: IRepeatToApp) => {
   })
 }
 
-// PUT /rifamax/raffles/1/pay
+// POST /rifamax/raffles/pay
 export const payRaffle = ({ token, raffle_id, data }: IPayRaffle) => {
-  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/pay/${raffle_id}`, {
+  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/pay`, {
     raffle_id: raffle_id,
     data: data
   }, {
@@ -73,25 +74,24 @@ export const payRaffle = ({ token, raffle_id, data }: IPayRaffle) => {
   });
 }
 
-// PUT /rifamax/raffles/1/unpay
+// POST /rifamax/raffles/unpay
 export const unPayRaffle = ({ token, raffle_id }: IUnpayRaffle) => {
-  return axios.put(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/unpay`, {
+  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/unpay`, {
     raffle_id: raffle_id
   }, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
-
 }
-// PUT /rifamax/raffles/1/unpay
+
+// POST /rifamax/raffles/refund
 export const refundRaffle = ({ token, raffle_id }: IRefundRaffle) => {
-  return axios.put(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/refund`, {
+  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/refund`, {
     raffle_id: raffle_id
   }, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   })
-
 }
