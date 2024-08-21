@@ -97,8 +97,8 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
         withAsterisk
         size={FIELDS_SIZE}
         rightSection={<IconAward />}
-        label={index === 0 ? "Premio" : "Premio con signo"}
-        placeholder={index === 0 ? "Premio" : "Premio con signo"}
+        label={index === 0 ? "Premio con signo" : "Premio sin signo"}
+        placeholder={index === 0 ? "Premio con signo" : "Premio sin signo"}
         {...form.getInputProps(`prizes.${index}.award`)}
       />
 

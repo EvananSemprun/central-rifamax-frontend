@@ -13,8 +13,8 @@ const SellerTable = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const elements = [
-    { name: 'Evanan Semprun', dni: 'V-25488961', email: 'evanancrack@gmail.com', phone: '+58 (414) 636-1786', is_active: 'INACTIVO', role: 'Rifero', created_at: '2024-08-12' },
-    { name: 'Javier Diaz', dni: 'V-25488961', email: 'rifamaxjavier@gmail.com', phone: '+58 (412) 168-8466', is_active: 'ACTIVO', role: 'Rifero', created_at: '2024-08-12' },
+    { name: 'Evanan Semprun', dni: 'V-25488961', email: 'evanancrack@gmail.com', phone: '+58 (414) 636-1786', is_active: false, role: 'Rifero', created_at: '20/08/2024 - 10:00pm' },
+    { name: 'Javier Diaz', dni: 'V-25488961', email: 'rifamaxjavier@gmail.com', phone: '+58 (412) 168-8466', is_active: true, role: 'Rifero', created_at: '20/08/2024 - 10:00pm' },
   ];
 
   const filteredElements = elements.filter((element) =>
@@ -34,7 +34,7 @@ const SellerTable = () => {
           color={element.is_active ? 'green' : 'red'}
           size="lg"
         >
-          {element.is_active ? 'ACTIVO' : 'INACTIVO'}
+          {element.is_active ? 'Activo' : 'Inactivo'}
         </Badge>
       </Table.Td>
       <Table.Td fz={18}>{element.role}</Table.Td>
@@ -58,24 +58,35 @@ const SellerTable = () => {
 
   return (
     <>
-      <Group justify={width < 940 ? 'center' : 'space-between'} mt={15} w="100%">
-        <Group justify={width < 940 ? 'center' : 'space-between'} mt={15}>
-          <Group gap={0}>
-            <TextInput
-              size="lg"
-              leftSection={<IconUserSearch />}
-              radius="sm"
-              w={300}
-              placeholder="Buscar por Nombre o Cédula"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.currentTarget.value)}
-            />
-            <ActionIcon h={50} ml={-15} size="lg" aria-label="Search" onClick={handleSearch}>
-              <IconSearch style={{ width: '70%', height: '90%' }} stroke={1.5} />
-            </ActionIcon>
-          </Group>
+      <Group 
+        justify={width < 940 ? 'center' : 'space-between'} 
+        mt={15}
+        gap={10}
+      >
+        <Group 
+          gap={0} 
+          w={width < 940 ? '100%' : 'calc(50% - 10px)'}
+        >
+          <TextInput
+            size="lg"
+            leftSection={<IconUserSearch />}
+            radius="5px 0 0 5px"
+            w={width < 940 ? 'calc(100% - 35px)' : 300}
+            placeholder="Buscar por Nombre o Cédula"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.currentTarget.value)}
+          />
+          <ActionIcon 
+            h={50} 
+            style={{ borderRadius: '0 5px 5px 0' }}
+            size="lg" 
+            aria-label="Search" 
+            onClick={handleSearch}
+            >
+            <IconSearch stroke={1.5} />
+          </ActionIcon>
         </Group>
-        <Pagination total={10} size="md" />
+        <Pagination total={10} size="lg" />
       </Group>
 
       <ScrollArea type="auto" w="100%" style={{ maxWidth: '100%', overflowX: 'auto' }}>

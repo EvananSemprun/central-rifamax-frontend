@@ -1,3 +1,5 @@
+import { capitalize } from '@utils/string';
+import { adminStatus, sellStatus } from '@utils/parse';
 import { Table, Badge, ScrollArea } from '@mantine/core';
 
 function TableRaffle() {
@@ -9,7 +11,7 @@ function TableRaffle() {
   const rows = elements.map((element) => (
     <Table.Tr ta='center' key={element.id}>
       <Table.Td>{element.id}</Table.Td>
-      <Table.Td>{sellStatus(element.sell_status).charAt(0).toUpperCase() + str.slice(1)}</Table.Td>
+      <Table.Td>{capitalize(sellStatus(element.sell_status))}</Table.Td>
       <Table.Td>
         <Badge variant="light" color="blue" size="md">{adminStatus(element.admin_status)}</Badge>
       </Table.Td>

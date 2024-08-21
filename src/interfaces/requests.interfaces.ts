@@ -95,13 +95,11 @@ export interface IPayRaffle {
   }
 }
 
-
 /**
  * @interface IAddRaffles
  * @description Interface of addRaffles request function
  */
 export interface IAddRaffles {
-  raffle_id: number;
   token: string;
   data: IRaffleForm;
 }
@@ -123,4 +121,13 @@ export interface IUnpayRaffle {
 export interface IRefundRaffle {
   token: string;
   raffle_id: number;
+}
+
+/**
+ * @interface IFilterSeller
+ * @description Interface of filterSller request function
+ */
+export interface IFilterSeller {
+  token: string;
+  query: string;
 }
