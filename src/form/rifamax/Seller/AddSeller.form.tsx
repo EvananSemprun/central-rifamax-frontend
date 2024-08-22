@@ -1,15 +1,11 @@
 import { useState } from 'react';
 import { DNIs } from '@assets/DNIs';
 import { useForm } from '@mantine/form';
-import { IAddSellerForm } from '@interfaces/index';
+import { IAddSeller, IAddSellerForm } from '@interfaces/index';
 import { IconAt, IconLock, IconPhone, IconSearch, IconUser } from '@tabler/icons-react';
-import { TextInput, PasswordInput, Grid, Group, Select, Button, Center } from '@mantine/core';
+import { TextInput, PasswordInput, Grid, Group, Select, Button } from '@mantine/core';
 
-interface AddSellerProps {
-  onSubmit: (data: IAddSellerForm) => void; // TODO: Add to interfaces folder
-}
-
-const AddSeller = ({ onSubmit }: AddSellerProps) => {
+const AddSeller = ({ onSubmit }: IAddSeller) => {
   const [nacionality, setNacionality] = useState<string | null>('V-');
   const dniDetails = DNIs.venezuela;
 
@@ -130,11 +126,14 @@ const AddSeller = ({ onSubmit }: AddSellerProps) => {
         </Grid.Col>
       </Grid>
 
-      <Center>
-        <Button variant="light" type="submit" mt="xl">
+      <Group justify='center' mt="xl">
+        <Button variant="light" disabled>
+          Anterior
+        </Button>
+        <Button variant="light" type="submit">
           Siguiente
         </Button>
-      </Center>
+      </Group>
     </form>
   );
 };

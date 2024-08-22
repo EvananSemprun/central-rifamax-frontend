@@ -1,9 +1,5 @@
+import { IConfirmSeller } from '@/interfaces';
 import { Card, Avatar, Center, Title } from '@mantine/core';
-import { ISellerData } from '@interfaces/requests.interfaces';
-
-interface IConfirmSeller {
-  data: ISellerData | null; // TODO: Should be stay on @interfaces/index.ts
-}
 
 function ConfirmSeller({ data }: IConfirmSeller) {
   if (!data) {

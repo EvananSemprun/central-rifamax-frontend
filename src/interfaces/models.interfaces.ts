@@ -1,4 +1,10 @@
 /**
+ * @type IRole
+ * @description This is a general type for the user roles
+ */
+export type Role = "Admin" | "Taquilla" | "Desarrollador" | "Influencer" | 'Rifero';
+
+/**
  * @interface IUser
  * @description This is a general interface for the user object
  */
@@ -12,7 +18,7 @@ export interface IUser {
     influencer_id: number | null;
     is_active: boolean;
     phone: string;
-    role: "Admin" | "Taquilla" | "Desarrollador" | "Influencer" | 'Rifero';
+    role: Role;
     content_code: string | null;
     is_first_entry: boolean;
   }
@@ -39,7 +45,7 @@ export interface IRaffle {
   admin_status: string;
   currency: string;
   expired_date: string;
-  init_date: string;
+  init_date: Date | string;
   lotery: string;
   numbers: number;
   price: number;
@@ -50,4 +56,16 @@ export interface IRaffle {
   uniq_identifier_serial: string;
   user: IUser["user"];
   seller: IUser["user"];
+}
+
+/**
+ * @interface ISeller
+ * @description This is a general interface for sellers on rifamax module
+ */
+export interface ISeller {
+  name: string;
+  lastname: string;
+  dni: string;
+  phone: string;
+  email: string;
 }

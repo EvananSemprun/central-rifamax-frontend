@@ -1,6 +1,6 @@
 // General interfaces
 
-import { IPrize, IRaffle, IUser } from "./models.interfaces";
+import { IRaffle, ISeller, IUser, Role } from "./models.interfaces";
 import { IRafflesResponse } from "./requests.interfaces";
 
 export interface ILoginBody {
@@ -46,7 +46,7 @@ export interface INotifications {
  * @description This is the interface for the AuthRoute component
  */
 export interface IAuthRoute {
-  roles: string[]
+  roles: Role[];
 }
 
 /**
@@ -88,15 +88,18 @@ export interface IAccordionSteps {
  * @interface IRaffleForm
  * @description interface of RaffleForm data of form
  */
-export interface IRaffleForm {
-  title: string;
+export interface IRaffleForm 
+extends Pick<
+  IRaffle, 
+  'title'    | 
+  'price'    | 
+  'currency' | 
+  'numbers'  | 
+  'lotery'   | 
+  'prizes'
+> {
   init_date: Date;
-  price: number;
-  currency: string;
-  numbers: number;
-  lotery: string;
   seller_id: number;
-  prizes: IPrize[];
 }
 
 /**
@@ -163,6 +166,7 @@ export interface ICardTitle {
   title: string;
 };
 
+
 /**
  * @interface ITitlesRafflesAccordion
  * @description TitlesRafflesAccordion component props interface
@@ -182,17 +186,29 @@ export interface IWoodTitle {
 }
 
 /**
+ * @interface IAddSeller
+ * @description AddSeller component props interface
+ */
+export interface IAddSeller {
+  onSubmit: (data: IAddSellerForm) => void;
+}
+
+
+/**
  * @interface IAddSellerForm
  * @description SellerForm component props interface
  */
-export interface IAddSellerForm {
-  name: string;
-  lastname: string;
-  dni: string;
-  phone: string;
-  email: string;
+export interface IAddSellerForm extends ISeller {
   password: string;
   confirm_password: string;
+}
+
+/**
+ * @interface IConfirmSeller
+ * @description ConfirmSeller component props interface
+ */
+export interface IConfirmSeller {
+  data: ISeller | null;
 }
 
 /**
