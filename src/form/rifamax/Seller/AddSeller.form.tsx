@@ -2,12 +2,16 @@ import { useState } from 'react';
 import { DNIs } from '@assets/DNIs';
 import { useForm } from '@mantine/form';
 import { IAddSellerForm } from '@interfaces/index';
-import { TextInput, PasswordInput, Grid, Group, Select } from '@mantine/core';
 import { IconAt, IconLock, IconPhone, IconSearch, IconUser } from '@tabler/icons-react';
+import { TextInput, PasswordInput, Grid, Group, Select, Button, Center } from '@mantine/core';
 
-const AddSeller = () => {
-  const [nacionality, setNacionality] = useState<string | null>('V-')
-  const dniDetails = DNIs.venezuela
+interface AddSellerProps {
+  onSubmit: (data: IAddSellerForm) => void; // TODO: Add to interfaces folder
+}
+
+const AddSeller = ({ onSubmit }: AddSellerProps) => {
+  const [nacionality, setNacionality] = useState<string | null>('V-');
+  const dniDetails = DNIs.venezuela;
 
   const form = useForm<IAddSellerForm>({
     mode: 'uncontrolled',
@@ -22,21 +26,33 @@ const AddSeller = () => {
     },
 
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      password: (value) => (value.length >= 6 ? null : 'Password must be at least 6 characters long'),
-      confirm_password: (value, values) => value === values.password ? null : 'Passwords do not match',
-      dni: (value) => (dniDetails.regex.test(nacionality + value) ? null : 'Cédula debe ser válida'),
-      phone: (value) => (/^\d+$/.test(value) ? null : 'Número telefónico invalido'),
+      name: (value) =>
+        value.trim().length < 2 ? 'El nombre debe tener al menos 2 caracteres' : null,
+      lastname: (value) =>
+        value.trim().length < 2 ? 'El apellido debe tener al menos 2 caracteres' : null,
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Correo electrónico inválido'),
+      password: (value) =>
+        value.length >= 6 ? null : 'La contraseña debe tener al menos 6 caracteres',
+      confirm_password: (value, values) =>
+        value === values.password ? null : 'Las contraseñas no coinciden',
+      dni: (value) =>
+        dniDetails.regex.test(nacionality + value) ? null : 'La cédula debe ser válida',
+      phone: (value) => (/^\d+$/.test(value) ? null : 'Número telefónico inválido'),
     },
   });
 
   return (
-    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <form
+      onSubmit={form.onSubmit((values) => {
+        const completeValues = { ...values, dni: nacionality + values.dni };
+        onSubmit(completeValues);
+      })}
+    >
       <Grid>
         <Grid.Col span={6}>
           <TextInput
             leftSection={<IconUser />}
-            size='md'
+            size="md"
             withAsterisk
             label="Nombre"
             placeholder="Nombre"
@@ -46,7 +62,7 @@ const AddSeller = () => {
         <Grid.Col span={6}>
           <TextInput
             leftSection={<IconUser />}
-            size='md'
+            size="md"
             withAsterisk
             label="Apellido"
             placeholder="Apellido"
@@ -58,23 +74,23 @@ const AddSeller = () => {
         withAsterisk
         leftSection={<IconAt />}
         mt={15}
-        size='md'
+        size="md"
         label="Correo electrónico"
         placeholder="rifero@rifamax.com"
         {...form.getInputProps('email')}
       />
       <Group grow>
-        <Select 
+        <Select
           data={DNIs.venezuela.parseAbreviatures}
           label="Nacionalidad"
           value={nacionality}
           onChange={setNacionality}
           mt={15}
-          size='md'
+          size="md"
         />
         <TextInput
           leftSection={<IconSearch />}
-          size='md'
+          size="md"
           mt={15}
           withAsterisk
           label="Cédula"
@@ -86,7 +102,7 @@ const AddSeller = () => {
         leftSection={<IconPhone />}
         mt={15}
         withAsterisk
-        size='md'
+        size="md"
         label="Teléfono"
         placeholder="Tu teléfono"
         {...form.getInputProps('phone')}
@@ -95,7 +111,7 @@ const AddSeller = () => {
         <Grid.Col span={6}>
           <PasswordInput
             withAsterisk
-            size='md'
+            size="md"
             leftSection={<IconLock />}
             label="Contraseña"
             placeholder="Tu contraseña"
@@ -107,12 +123,18 @@ const AddSeller = () => {
             leftSection={<IconLock />}
             withAsterisk
             label="Repetir contraseña"
-            size='md'
+            size="md"
             placeholder="Confirma tu contraseña"
             {...form.getInputProps('confirm_password')}
           />
         </Grid.Col>
       </Grid>
+
+      <Center>
+        <Button variant="light" type="submit" mt="xl">
+          Siguiente
+        </Button>
+      </Center>
     </form>
   );
 };

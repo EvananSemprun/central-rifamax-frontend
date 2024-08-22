@@ -131,3 +131,15 @@ export interface IFilterSeller {
   token: string;
   query: string;
 }
+
+/**
+ * @interface ISellerData
+ * @description Interface for seller data used in the application
+ */
+export interface ISellerData {
+  name: string;
+  lastname: string;
+  dni: string;
+  phone: string;
+  email: string;
+}
