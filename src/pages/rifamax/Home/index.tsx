@@ -1,12 +1,12 @@
 import useAuth from '@hooks/useAuth';
 import classes from './index.module.css';
 import Titles from '@components/shared/Titles';
-import LoaderBlur from '@/components/shared/Loaders/LoaderBlur';
-import StacksRaffle from '@/components/rifamax/home/StacksRaffle';
+import LoaderBlur from '@components/shared/Loaders/LoaderBlur';
+import StacksRaffle from '@components/rifamax/home/StacksRaffle';
 import ActionButtons from '@components/rifamax/home/ActionButtons';
 import RafflesAccordion from '@components/rifamax/home/RafflesAccordion';
+import { useState } from 'react';
 import { AxiosResponse } from 'axios';
-import { useState, useEffect } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
 import { getRaffles } from '@api/rifamax/Raffles.request';
 import { IRafflesResponse } from '@interfaces/requests.interfaces';
@@ -27,12 +27,6 @@ function Index() {
   const [step, setStep] = useState<1 | 2>(1);
   const [queryType, setQueryType] = useState<string | null>('newest');
 
-  useEffect(() => {
-    if (queryType === 'newest') {
-      setStep(1);
-    }
-  }, [queryType]);
-
   const { token } = useAuth();
 
   const fetchRaffles = (page: number, queryType: string | null) =>
@@ -47,11 +41,19 @@ function Index() {
     placeholderData: keepPreviousData,
   });
 
-  useEffect(() => {
-    if (rafflesData && page > rafflesData.data.metadata.pages) {
-      setPage(1);
+  const changeQueryType = (value: string | null) => {
+    if (value === 'newest') {
+      setStep(1);
     }
-  }, [rafflesData]);
+    setQueryType(value);
+    setPage(1);
+  }
+
+  const handlePage = (value: number) => {
+    if (!isPlaceholderData) {
+      setPage(value);
+    }
+  }
 
   const ResponsiveSection = ({ children }: IWrapper) =>
     isSmallScreen ? (
@@ -87,10 +89,7 @@ function Index() {
       <section className={classes.home}>
         <Tabs
           value={queryType}
-          onChange={(value) => {
-            setQueryType(value);
-            setPage(1);
-          }}
+          onChange={changeQueryType}
           variant='pills'
           defaultValue='newest'
           pt={10}
@@ -119,14 +118,10 @@ function Index() {
         {!isSmallScreen && (
           <Pagination
             total={rafflesData?.data.metadata.pages || 0}
-            mt={0}
+            mb={10}
             siblings={0}
             value={page}
-            onChange={(value: number) => {
-              if (!isPlaceholderData) {
-                setPage(value);
-              }
-            }}
+            onChange={handlePage}
           />
         )}
         {children}
@@ -144,7 +139,7 @@ function Index() {
 
   return (
     <Wrapper>
-      <ScrollArea.Autosize h='calc(100vh - 375px)' type='never' scrollbars='y'>
+      <ScrollArea.Autosize h={isSmallScreen ? 'calc(100vh - 500px)' : 'calc(100vh - 240px)'} type='never' scrollbars='y'>
         <RafflesAccordion step={step} data={rafflesData?.data.raffles || []} />
       </ScrollArea.Autosize>
     </Wrapper>

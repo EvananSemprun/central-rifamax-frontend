@@ -1,12 +1,11 @@
 import useAuth from '@hooks/useAuth'
 import LoaderScreen from '../Loaders/LoaderScreen'
 import Header from '@components/shared/Header/Header'
-import { useEffect } from 'react'
 import { AxiosResponse } from 'axios'
 import { IAuthRoute } from '@interfaces/index'
 import { Outlet, Navigate } from 'react-router-dom'
 import { InfoNotification } from '../Notifications'
-import { useMutation } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { notifications } from '@mantine/notifications'
 import { refreshTokenRequest } from '@api/shared/AuthRoute.request'
 import { IRenewTokenResponse } from '@interfaces/requests.interfaces'
@@ -14,19 +13,15 @@ import { IRenewTokenResponse } from '@interfaces/requests.interfaces'
 function index({ roles }: IAuthRoute) {
   const { logout, token } = useAuth()
 
-  const authRequest = useMutation<AxiosResponse<IRenewTokenResponse>, unknown, string>({
-    mutationKey: ['auth', 'route'],
+  const { data: request, isLoading, error, isSuccess } = useQuery<AxiosResponse<IRenewTokenResponse, string>>({
+    queryKey: ['auth', 'route'],
     retry: 1,
-    mutationFn: (token: string) => refreshTokenRequest(token),
+    queryFn: () => refreshTokenRequest(token),
   })
 
-  useEffect(() => {
-    authRequest.mutate(token)
-  }, [])
+  if (isLoading) return <LoaderScreen label='Verificando acceso...' />
 
-  if (authRequest.isPending) return <LoaderScreen label='Verificando acceso...' />
-
-  if (authRequest.error) {
+  if (error) {
     logout()
     notifications.clean()
     InfoNotification({
@@ -37,8 +32,8 @@ function index({ roles }: IAuthRoute) {
     return <Navigate to='/login' />
   }
 
-  if (authRequest.isSuccess) {
-    if (!roles.includes(authRequest.data.data.user.role)) {
+  if (isSuccess) {
+    if (!roles.includes(request.data.user.role)) {
       return <Navigate to='/' />
     }
   }
