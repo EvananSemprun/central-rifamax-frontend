@@ -1,6 +1,5 @@
 import useAuth from '@hooks/useAuth'
 import useUser from '@hooks/useUser'
-import React, { useEffect } from 'react'
 import LoaderScreen from '@components/shared/Loaders/LoaderScreen'
 import { AxiosResponse } from 'axios'
 import { useLocation } from 'react-router-dom'
@@ -17,26 +16,28 @@ interface IProfileProvider {
 export const ProfileProvider = ({ retry, children }: IProfileProvider) => {
   const { token, logout } = useAuth()
   const { updateNoToken } = useUser()
+  
   const location = useLocation()
 
-  const query = useQuery<AxiosResponse<IUser['user']>>({
+  const { data: query, isSuccess, error, isLoading} = useQuery<AxiosResponse<IUser['user']>>({
     queryKey: ['user', 'profile'],
     queryFn: () => getUserProfile(token),
     retry: retry,
     enabled: !publicRoutes.includes(location.pathname) && !!token,
   })
 
-  useEffect(() => {
-    if (query.isError) {
-      logout()
-    } else if (query.isSuccess) {
-      updateNoToken({ user: query.data.data })
-    }
-  }, [query.isError, query.isSuccess])
+  if (error) {
+    logout()
+    return null
+  }
+
+  if (isSuccess) {
+    updateNoToken({ user: query.data })
+  }
 
   if (publicRoutes.includes(location.pathname)) return children
 
-  if (query.isLoading) {
+  if (isLoading) {
     return <LoaderScreen label='Cargando usuario...' />
   }
 
