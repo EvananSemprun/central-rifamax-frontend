@@ -24,21 +24,21 @@ const SellerTable = () => {
 
   const rows = filteredElements.map((element) => (
     <Table.Tr ta="center" key={element.name}>
-      <Table.Td fz={18}>{element.name}</Table.Td>
-      <Table.Td fz={18}>{element.dni}</Table.Td>
-      <Table.Td fz={18}>{element.email}</Table.Td>
-      <Table.Td fz={18}>{element.phone}</Table.Td>
-      <Table.Td fz={18}>
+      <Table.Td >{element.name}</Table.Td>
+      <Table.Td >{element.dni}</Table.Td>
+      <Table.Td >{element.email}</Table.Td>
+      <Table.Td >{element.phone}</Table.Td>
+      <Table.Td >
         <Badge
           variant="light"
           color={element.is_active ? 'green' : 'red'}
-          size="lg"
+          size="md"
         >
           {element.is_active ? 'Activo' : 'Inactivo'}
         </Badge>
       </Table.Td>
-      <Table.Td fz={18}>{element.role}</Table.Td>
-      <Table.Td fz={18}>{element.created_at}</Table.Td>
+      <Table.Td >{element.role}</Table.Td>
+      <Table.Td >{element.created_at}</Table.Td>
     </Table.Tr>
   ));
 
@@ -93,25 +93,25 @@ const SellerTable = () => {
         <Table mt={10} highlightOnHover withTableBorder withColumnBorders>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th ta="center">
+              <Table.Th fz={16} ta="center">
                 Nombre
               </Table.Th>
-              <Table.Th ta="center">
+              <Table.Th fz={16} ta="center">
                 Cédula
               </Table.Th>
-              <Table.Th ta="center">
+              <Table.Th fz={16} ta="center">
                 Email
               </Table.Th>
-              <Table.Th ta="center">
+              <Table.Th fz={16} ta="center">
                 Telefono
               </Table.Th>
-              <Table.Th ta="center">
+              <Table.Th fz={16} ta="center">
                 Estado
               </Table.Th>
-              <Table.Th ta="center">
+              <Table.Th fz={16} ta="center">
                 Rol
               </Table.Th>
-              <Table.Th ta="center">
+              <Table.Th fz={16} ta="center">
                 Fecha
               </Table.Th>
             </Table.Tr>

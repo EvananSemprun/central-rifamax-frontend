@@ -16,7 +16,7 @@ const SellersSteppers = () => {
 
   return (
     <>
-      <Stepper active={active} onStepClick={setActive}>
+      <Stepper active={active} onStepClick={setActive} allowNextStepsSelect={false}>
         <Stepper.Step label="Datos del rifero" description="Llene los datos del rifero">
           <AddSeller onSubmit={handleSellerData} />
         </Stepper.Step>

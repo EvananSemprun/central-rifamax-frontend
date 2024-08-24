@@ -9,9 +9,10 @@ const FormEditUser = () => {
   const { user } = useUser();
   const [files, setFiles] = useState<FileWithPath[]>([]);
   const avatarUrl = files.length > 0 && files[0] ? URL.createObjectURL(files[0]) : user?.avatar;
+
   const form = useForm({
     initialValues: {
-      old_Password: '',
+      old_password: '',
       password: '',
       password_confirmation: '',
     },
@@ -19,10 +20,10 @@ const FormEditUser = () => {
       old_password: (value) => (value.length > 0 ? null : 'Debes ingresar tu contraseña actual'),
       password: (value, values) =>
         value.length >= 8 ? 
-					value !== values.old_password ? 
-						null : 
-							'La contraseña debe ser diferente a la antigua' : 
-								'La nueva contraseña debe tener al menos 8 caracteres',
+          value !== values.old_password ? 
+            null : 
+              'La contraseña debe ser diferente a la antigua' : 
+                'La nueva contraseña debe tener al menos 8 caracteres',
       password_confirmation: (value, values) =>
         value === values.password ? null : 'Las contraseñas no coinciden',
     },
@@ -30,21 +31,28 @@ const FormEditUser = () => {
 
   return (
     <>
-      <Card py={20} mt={20} radius='md'>
+      <Card py={20} radius='md'>
         <Center>
           <Avatar
             size="xl"
-            radius="xs"
+            radius="5px 5px 0 0"
             w={150}
             h={150}
             src={avatarUrl}
           />
         </Center>
 
-        <Center>
+        <Center mb={10}>
           <Dropzone
-            w={150} bg="blue" accept={IMAGE_MIME_TYPE} onDrop={setFiles}>
-            <Button ta='center' variant="filled">Actiualizar foto</Button>
+            w={150} accept={IMAGE_MIME_TYPE} onDrop={setFiles}>
+            <Button 
+              ta='center' 
+              fullWidth 
+              variant="filled"
+              radius='0px 0px 5px 5px'
+            >
+              Actualizar foto
+            </Button>
           </Dropzone>
         </Center>
 
@@ -56,7 +64,7 @@ const FormEditUser = () => {
             withAsterisk
             label="Contraseña actual"
             placeholder="Ingresa tu contraseña actual"
-            {...form.getInputProps('old_password')}
+            {...form.getInputProps('old_password')} 
           />
           <PasswordInput
             withAsterisk
@@ -93,4 +101,5 @@ const FormEditUser = () => {
     </>
   );
 }
+
 export default FormEditUser;

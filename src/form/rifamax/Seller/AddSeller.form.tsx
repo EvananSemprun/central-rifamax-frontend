@@ -1,13 +1,16 @@
-import { useState } from 'react';
 import { DNIs } from '@assets/DNIs';
+import { phone } from '@assets/phone';
 import { useForm } from '@mantine/form';
+import { useState } from 'react';
 import { IAddSeller, IAddSellerForm } from '@interfaces/index';
 import { IconAt, IconLock, IconPhone, IconSearch, IconUser } from '@tabler/icons-react';
-import { TextInput, PasswordInput, Grid, Group, Select, Button } from '@mantine/core';
+import { TextInput, PasswordInput, Grid, Group, Select, Button, NumberInput } from '@mantine/core';
 
 const AddSeller = ({ onSubmit }: IAddSeller) => {
   const [nacionality, setNacionality] = useState<string | null>('V-');
+
   const dniDetails = DNIs.venezuela;
+  const phoneDetails = phone.venezuela;
 
   const form = useForm<IAddSellerForm>({
     mode: 'uncontrolled',
@@ -19,6 +22,7 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
       email: '',
       password: '',
       confirm_password: '',
+      phonePrefix: '+58',
     },
 
     validate: {
@@ -33,14 +37,16 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
         value === values.password ? null : 'Las contraseñas no coinciden',
       dni: (value) =>
         dniDetails.regex.test(nacionality + value) ? null : 'La cédula debe ser válida',
-      phone: (value) => (/^\d+$/.test(value) ? null : 'Número telefónico inválido'),
+      phone: (value) =>
+        /^\d{10}$/.test(value) ? null : 'Número telefónico debe tener exactamente 10 dígitos',
     },
   });
 
   return (
     <form
       onSubmit={form.onSubmit((values) => {
-        const completeValues = { ...values, dni: nacionality + values.dni };
+        const completePhone = `${values.phonePrefix} ${values.phone}`;
+        const completeValues = { ...values, dni: nacionality + values.dni, phone: completePhone };
         onSubmit(completeValues);
       })}
     >
@@ -75,6 +81,7 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
         placeholder="rifero@rifamax.com"
         {...form.getInputProps('email')}
       />
+
       <Group grow>
         <Select
           data={DNIs.venezuela.parseAbreviatures}
@@ -94,15 +101,31 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
           {...form.getInputProps('dni')}
         />
       </Group>
-      <TextInput
-        leftSection={<IconPhone />}
-        mt={15}
-        withAsterisk
-        size="md"
-        label="Teléfono"
-        placeholder="Tu teléfono"
-        {...form.getInputProps('phone')}
-      />
+
+      <Grid mt={15}>
+        <Grid.Col span={3}>
+          <Select
+            data={phone.global.systemCountries}
+            label="Prefijo"
+            defaultValue={'+58'}
+            size="md"
+            {...form.getInputProps('phonePrefix')}
+          />
+        </Grid.Col>
+
+        <Grid.Col span={9}>
+          <NumberInput
+            leftSection={<IconPhone />}
+            hideControls
+            withAsterisk
+            size="md"
+            label="Teléfono"
+            placeholder="numero"
+            {...form.getInputProps('phone')}
+          />
+        </Grid.Col>
+      </Grid>
+
       <Grid mt={15}>
         <Grid.Col span={6}>
           <PasswordInput
@@ -126,7 +149,7 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
         </Grid.Col>
       </Grid>
 
-      <Group justify='center' mt="xl">
+      <Group justify="center" mt="xl">
         <Button variant="light" disabled>
           Anterior
         </Button>
