@@ -2,7 +2,7 @@
  * @type IRole
  * @description This is a general type for the user roles
  */
-export type Role = "Admin" | "Taquilla" | "Desarrollador" | "Influencer" | 'Rifero';
+export type Role = "Admin" | "Taquilla" | "Desarrollador" | "Influencer" | 'Rifero' | string;
 
 /**
  * @interface IUser
