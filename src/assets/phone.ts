@@ -26,7 +26,8 @@ export const phone = {
   },
   global: { 
     regex: /^\+\d{1,3}\ \(\d{3,3}\) \d{3,3}-\d{4,4}$/, // +58 (412) 123-1234
-    phoneRegex: /^\(\d{3,3}\) \d{3,3}-\d{4,4}$/, // (412) 123-1234
+    phoneRegex: /^\(\d{1,3}\) \d{3,3}-\d{4,4}$/, // (412) 123-1234
+    countries: ['+58', '+57', '+1'],
     systemCountries: [
       {
         value: '+58',

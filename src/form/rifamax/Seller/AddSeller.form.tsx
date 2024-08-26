@@ -4,13 +4,19 @@ import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { IAddSeller, IAddSellerForm } from '@interfaces/index';
 import { IconAt, IconLock, IconPhone, IconSearch, IconUser } from '@tabler/icons-react';
-import { TextInput, PasswordInput, Grid, Group, Select, Button, NumberInput } from '@mantine/core';
+import { TextInput, PasswordInput, Grid, Group, Select, Button } from '@mantine/core';
+import { formatPhone } from '@/utils/parse';
 
-const AddSeller = ({ onSubmit }: IAddSeller) => {
+function AddSellerForm({ onSubmit }: IAddSeller) {
   const [nacionality, setNacionality] = useState<string | null>('V-');
+  const [prefix, setPrefix] = useState<string | null>('+58');
 
   const dniDetails = DNIs.venezuela;
-  const phoneDetails = phone.venezuela;
+  const phoneRegex = phone.global.regex;
+
+  const handleSubmit = () => {
+    console.log(form.values);
+  };
 
   const form = useForm<IAddSellerForm>({
     mode: 'uncontrolled',
@@ -21,35 +27,35 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
       phone: '',
       email: '',
       password: '',
-      confirm_password: '',
-      phonePrefix: '+58',
+      password_confirmation: '',
     },
 
     validate: {
       name: (value) =>
-        value.trim().length < 2 ? 'El nombre debe tener al menos 2 caracteres' : null,
+        value.length < 2 ? 'El nombre debe tener al menos 2 caracteres' : null,
       lastname: (value) =>
-        value.trim().length < 2 ? 'El apellido debe tener al menos 2 caracteres' : null,
+        value.length < 2 ? 'El apellido debe tener al menos 2 caracteres' : null,
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Correo electrónico inválido'),
       password: (value) =>
         value.length >= 6 ? null : 'La contraseña debe tener al menos 6 caracteres',
-      confirm_password: (value, values) =>
+      password_confirmation: (value, values) =>
         value === values.password ? null : 'Las contraseñas no coinciden',
       dni: (value) =>
         dniDetails.regex.test(nacionality + value) ? null : 'La cédula debe ser válida',
       phone: (value) =>
-        /^\d{10}$/.test(value) ? null : 'Número telefónico debe tener exactamente 10 dígitos',
+        phoneRegex.test(`${prefix} ${value}`) ? null : 'Número telefónico debe tener exactamente 10 dígitos',
+    },
+    onValuesChange: (values) => {
+      if (values.phone) {
+        const parsedPhone = formatPhone(values.phone);
+      
+        form.setFieldValue('phone', parsedPhone)
+      }
     },
   });
 
   return (
-    <form
-      onSubmit={form.onSubmit((values) => {
-        const completePhone = `${values.phonePrefix} ${values.phone}`;
-        const completeValues = { ...values, dni: nacionality + values.dni, phone: completePhone };
-        onSubmit(completeValues);
-      })}
-    >
+    <form onSubmit={handleSubmit}>
       <Grid>
         <Grid.Col span={6}>
           <TextInput
@@ -88,6 +94,7 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
           label="Nacionalidad"
           value={nacionality}
           onChange={setNacionality}
+          allowDeselect={false}
           mt={15}
           size="md"
         />
@@ -102,29 +109,26 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
         />
       </Group>
 
-      <Grid mt={15}>
-        <Grid.Col span={3}>
-          <Select
-            data={phone.global.systemCountries}
-            label="Prefijo"
-            defaultValue={'+58'}
-            size="md"
-            {...form.getInputProps('phonePrefix')}
-          />
-        </Grid.Col>
-
-        <Grid.Col span={9}>
-          <NumberInput
-            leftSection={<IconPhone />}
-            hideControls
-            withAsterisk
-            size="md"
-            label="Teléfono"
-            placeholder="numero"
-            {...form.getInputProps('phone')}
-          />
-        </Grid.Col>
-      </Grid>
+      <Group mt={15}>
+        <Select
+          data={phone.global.systemCountries}
+          label="Prefijo"
+          w={100}
+          value={prefix}
+          onChange={setPrefix}
+          allowDeselect={false}
+          size="md"
+        />
+        <TextInput
+          leftSection={<IconPhone />}
+          withAsterisk
+          size="md"
+          w='calc(100% - 116px)'
+          label="Teléfono"
+          placeholder="Ingresa tu número telefónico"
+          {...form.getInputProps('phone')}
+        />
+      </Group>
 
       <Grid mt={15}>
         <Grid.Col span={6}>
@@ -144,7 +148,7 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
             label="Repetir contraseña"
             size="md"
             placeholder="Confirma tu contraseña"
-            {...form.getInputProps('confirm_password')}
+            {...form.getInputProps('password_confirmation')}
           />
         </Grid.Col>
       </Grid>
@@ -161,4 +165,4 @@ const AddSeller = ({ onSubmit }: IAddSeller) => {
   );
 };
 
-export default AddSeller;
+export default AddSellerForm;

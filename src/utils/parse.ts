@@ -1,3 +1,5 @@
+import { phone } from "@assets/phone"
+
 export const sellStatus = (status: string) => {
   switch(status) {
     case 'active': 
@@ -25,3 +27,15 @@ export const adminStatus = (status: string) => {
       return status
   }
 }
+
+export const formatPhone = (phone: string,) => {
+  const digits = phone.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/)
+
+  if (phone !== '') {
+    if (digits) {
+      return `(${digits[1]}) ${digits[2]}-${digits[3]}`
+    }
+  }
+
+  return ''
+};

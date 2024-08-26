@@ -5,7 +5,7 @@ import { Dropzone, IMAGE_MIME_TYPE, FileWithPath } from '@mantine/dropzone';
 import { IconLockExclamation, IconLock, IconLockCheck } from '@tabler/icons-react';
 import { Avatar, Card, Center, Button, Group, PasswordInput } from '@mantine/core';
 
-const FormEditUser = () => {
+function EditUserForm () {
   const { user } = useUser();
   const [files, setFiles] = useState<FileWithPath[]>([]);
   const avatarUrl = files.length > 0 && files[0] ? URL.createObjectURL(files[0]) : user?.avatar;
@@ -102,4 +102,4 @@ const FormEditUser = () => {
   );
 }
 
-export default FormEditUser;
+export default EditUserForm;

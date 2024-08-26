@@ -200,7 +200,7 @@ export interface IAddSeller {
  */
 export interface IAddSellerForm extends ISeller {
   password: string;
-  confirm_password: string;
+  password_confirmation: string;
 }
 
 /**
