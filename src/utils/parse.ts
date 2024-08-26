@@ -1,10 +1,8 @@
-import { phone } from "@assets/phone"
-
 export const sellStatus = (status: string) => {
-  switch(status) {
-    case 'active': 
+  switch (status) {
+    case 'active':
       return 'activo'
-    case 'sent': 
+    case 'sent':
       return 'enviada'
     case 'sold':
       return 'agotado'
@@ -14,10 +12,10 @@ export const sellStatus = (status: string) => {
 }
 
 export const adminStatus = (status: string) => {
-  switch(status) {
-    case 'pending': 
+  switch (status) {
+    case 'pending':
       return 'pendiente'
-    case 'payed': 
+    case 'payed':
       return 'pagada'
     case 'unpayed':
       return 'no pagada'
@@ -28,14 +26,16 @@ export const adminStatus = (status: string) => {
   }
 }
 
-export const formatPhone = (phone: string,) => {
-  const digits = phone.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/)
+export const formatPhone = (phone: string) => {
+  const digits = phone.replace(/\D/g, '');
 
-  if (phone !== '') {
-    if (digits) {
-      return `(${digits[1]}) ${digits[2]}-${digits[3]}`
-    }
+  if (digits.length === 0) {
+    return '';
+  } else if (digits.length <= 3) {
+    return `(${digits}`;
+  } else if (digits.length <= 6) {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  } else {
+    return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
   }
-
-  return ''
 };

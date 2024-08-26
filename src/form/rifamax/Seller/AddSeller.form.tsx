@@ -14,12 +14,7 @@ function AddSellerForm({ onSubmit }: IAddSeller) {
   const dniDetails = DNIs.venezuela;
   const phoneRegex = phone.global.regex;
 
-  const handleSubmit = () => {
-    console.log(form.values);
-  };
-
   const form = useForm<IAddSellerForm>({
-    mode: 'uncontrolled',
     initialValues: {
       name: '',
       lastname: '',
@@ -43,15 +38,27 @@ function AddSellerForm({ onSubmit }: IAddSeller) {
       dni: (value) =>
         dniDetails.regex.test(nacionality + value) ? null : 'La cédula debe ser válida',
       phone: (value) =>
-        phoneRegex.test(`${prefix} ${value}`) ? null : 'Número telefónico debe tener exactamente 10 dígitos',
+        value.length === 14 ? null : 'Número telefónico debe tener exactamente 10 dígitos',
     },
-    onValuesChange: (values) => {
-      if (values.phone) {
-        const parsedPhone = formatPhone(values.phone);
-      
-        form.setFieldValue('phone', parsedPhone)
-      }
-    },
+  });
+
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedPhone = formatPhone(event.target.value);
+    form.setFieldValue('phone', formattedPhone);
+  };
+
+  const handleSubmit = form.onSubmit((values) => {
+    const phoneWithoutPrefix = values.phone.replace(/[\(\)\-\s]/g, ''); 
+    const fullPhone = `${prefix || '+58'} ${phoneWithoutPrefix}`;
+    const formattedValues = {
+      ...values,
+      phone: formatPhone(phoneWithoutPrefix),
+    };
+
+    onSubmit({
+      ...formattedValues,
+      phone: fullPhone, 
+    });
   });
 
   return (
@@ -123,10 +130,11 @@ function AddSellerForm({ onSubmit }: IAddSeller) {
           leftSection={<IconPhone />}
           withAsterisk
           size="md"
-          w='calc(100% - 116px)'
+          w="calc(100% - 116px)"
           label="Teléfono"
           placeholder="Ingresa tu número telefónico"
           {...form.getInputProps('phone')}
+          onChange={handlePhoneChange}
         />
       </Group>
 

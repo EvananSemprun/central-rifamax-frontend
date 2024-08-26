@@ -1,4 +1,4 @@
-import FormEditUser from '@form/shared/FormEditUser';
+import EditUserForm from '@/form/shared/EditUser.form';
 import { modals } from '@mantine/modals';
 import { Button, Title } from '@mantine/core';
 
@@ -11,9 +11,7 @@ function ModalEditUser() {
     centered: true,
     closeOnClickOutside: false,
     children: (
-      <>
-        <FormEditUser />
-      </>
+			<EditUserForm />
     ),
   });
 
