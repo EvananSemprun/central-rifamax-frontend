@@ -21,6 +21,11 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<UserState>) => {
       state.user = action.payload.user;
     },
+    setPfp: (state, action: PayloadAction<string | null>) => {
+      if (state.user) {
+        state.user.avatar = action.payload
+      }
+    },
     clearUser: (state) => {
       localStorage.removeItem("token");
       localStorage.removeItem("trust");
@@ -35,7 +40,8 @@ export const {
   trustInDevice, 
   setUser, 
   clearUser, 
-  setToken 
+  setToken,
+  setPfp
 } = userSlice.actions;
 
 export default userSlice.reducer;

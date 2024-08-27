@@ -2,6 +2,7 @@ import {
   setUser,
   clearUser,
   setToken,
+  setPfp
 } from "@config/store/reducers/user.slice";
 import { RootState } from "@config/store/index";
 import { IUser } from "@interfaces/models.interfaces";
@@ -26,7 +27,11 @@ function useUser() {
     dispatch(setUser(user));
   };
 
-  return { user, clear, update, updateNoToken };
+  const setAvatar = (avatar: string | null) => {
+    dispatch(setPfp(avatar))
+  };
+
+  return { user, clear, update, updateNoToken, setAvatar };
 }
 
 export default useUser;

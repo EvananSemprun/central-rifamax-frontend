@@ -7,7 +7,8 @@ import {
 	IRepeatToApp, 
 	IUnpayRaffle,
 	IRefundRaffle, 
-  IGetClosedRaffles
+  IGetClosedRaffles,
+  IUploadAvatar
 } from '@interfaces/requests.interfaces'
 
 // GET /rifamax/raffles/{queryType}?page={page}&items={items}
@@ -95,3 +96,17 @@ export const refundRaffle = ({ token, raffle_id }: IRefundRaffle) => {
     }
   })
 }
+
+export const uploadAvatar = ({ token, avatar }: IUploadAvatar) => {
+  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/shared/users/avatar`, {
+    shared_user: {
+      avatar: avatar
+    }
+  }, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+      'Accept': 'application/json'
+    },
+  });
+};

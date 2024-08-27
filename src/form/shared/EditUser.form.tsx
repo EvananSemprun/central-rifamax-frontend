@@ -1,15 +1,9 @@
-import useUser from "@hooks/useUser";
-import { useState } from 'react';
+import UpdateAvatar from './UpdateAvatar';
 import { useForm } from '@mantine/form';
-import { Dropzone, IMAGE_MIME_TYPE, FileWithPath } from '@mantine/dropzone';
+import { Card, Button, Group, PasswordInput } from '@mantine/core';
 import { IconLockExclamation, IconLock, IconLockCheck } from '@tabler/icons-react';
-import { Avatar, Card, Center, Button, Group, PasswordInput } from '@mantine/core';
 
-function EditUserForm () {
-  const { user } = useUser();
-  const [files, setFiles] = useState<FileWithPath[]>([]);
-  const avatarUrl = files.length > 0 && files[0] ? URL.createObjectURL(files[0]) : user?.avatar;
-
+function EditUserForm() {
   const form = useForm({
     initialValues: {
       old_password: '',
@@ -19,11 +13,11 @@ function EditUserForm () {
     validate: {
       old_password: (value) => (value.length > 0 ? null : 'Debes ingresar tu contraseña actual'),
       password: (value, values) =>
-        value.length >= 8 ? 
-          value !== values.old_password ? 
-            null : 
-              'La contraseña debe ser diferente a la antigua' : 
-                'La nueva contraseña debe tener al menos 8 caracteres',
+        value.length >= 8 ?
+          value !== values.old_password ?
+            null :
+            'La contraseña debe ser diferente a la antigua' :
+          'La nueva contraseña debe tener al menos 8 caracteres',
       password_confirmation: (value, values) =>
         value === values.password ? null : 'Las contraseñas no coinciden',
     },
@@ -32,29 +26,8 @@ function EditUserForm () {
   return (
     <>
       <Card py={20} radius='md'>
-        <Center>
-          <Avatar
-            size="xl"
-            radius="5px 5px 0 0"
-            w={150}
-            h={150}
-            src={avatarUrl}
-          />
-        </Center>
 
-        <Center mb={10}>
-          <Dropzone
-            w={150} accept={IMAGE_MIME_TYPE} onDrop={setFiles}>
-            <Button 
-              ta='center' 
-              fullWidth 
-              variant="filled"
-              radius='0px 0px 5px 5px'
-            >
-              Actualizar foto
-            </Button>
-          </Dropzone>
-        </Center>
+        <UpdateAvatar />
 
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
           <PasswordInput
@@ -64,7 +37,7 @@ function EditUserForm () {
             withAsterisk
             label="Contraseña actual"
             placeholder="Ingresa tu contraseña actual"
-            {...form.getInputProps('old_password')} 
+            {...form.getInputProps('old_password')}
           />
           <PasswordInput
             withAsterisk

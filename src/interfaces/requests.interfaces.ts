@@ -131,3 +131,8 @@ export interface IFilterSeller {
   token: string;
   query: string;
 }
+
+export interface IUploadAvatar {
+  token: string;
+  avatar: File;
+}

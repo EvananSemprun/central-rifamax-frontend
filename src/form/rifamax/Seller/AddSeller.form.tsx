@@ -12,7 +12,6 @@ function AddSellerForm({ onSubmit }: IAddSeller) {
   const [prefix, setPrefix] = useState<string | null>('+58');
 
   const dniDetails = DNIs.venezuela;
-  const phoneRegex = phone.global.regex;
 
   const form = useForm<IAddSellerForm>({
     initialValues: {
