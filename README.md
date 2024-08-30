@@ -53,7 +53,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Rifamax Team - [email](mailto:javierdiazt406@icloud.com)
 
-Project Link: [https://github.com/your-username/central-rifamax](https://github.com/Dataweb-C-A/central-rifamax-frontend)
+Project Link: [Central Rifamax](https://github.com/Dataweb-C-A/central-rifamax-frontend)
 
 ---
 
