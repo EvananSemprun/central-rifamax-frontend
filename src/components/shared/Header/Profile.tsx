@@ -1,15 +1,17 @@
-import useAuth from "@hooks/useAuth"
-import useUser from "@hooks/useUser"
-import classes from "./Profile.module.css"
-import LoaderBlur from "../Loaders/LoaderBlur"
-import ModalEditUser from "./ModalEditUser"
-import { initials } from "@utils/string"
-import { IconUserCircle } from "@tabler/icons-react"
-import { Avatar, Button, Center, Group, Popover, Text } from "@mantine/core"
+import useAuth from "@hooks/useAuth";
+import useUser from "@hooks/useUser";
+import classes from "./Profile.module.css";
+import LoaderBlur from "../Loaders/LoaderBlur";
+import ModalEditUser from "./ModalEditUser";
+import { initials } from "@utils/string";
+import { IconUserCircle } from "@tabler/icons-react";
+import { Avatar, Button, Center, Group, Popover, Text } from "@mantine/core";
 
 function Profile() {
-  const { user } = useUser()
-  const { logout } = useAuth()
+  const { user } = useUser();
+  const { logout } = useAuth();
+
+  const avatarUrl = user?.avatar ? `${user.avatar}?t=${new Date().getTime()}` : null;
 
   const PopoverContent = () => {
     const userInfo = [
@@ -27,7 +29,7 @@ function Profile() {
             color="blue"
             size="xl"
             radius="lg"
-            src={user?.avatar}
+            src={avatarUrl}
           >
             {initials(user?.name || '')}
           </Avatar>
@@ -47,8 +49,8 @@ function Profile() {
           </Button>
         </Group>
       </>
-    )
-  }
+    );
+  };
 
   return (
     <Popover width={300} position="bottom" withArrow shadow="md">
@@ -64,7 +66,7 @@ function Profile() {
         {user ? <PopoverContent /> : <LoaderBlur label="Cargando perfil..." />}
       </Popover.Dropdown>
     </Popover>
-  )
+  );
 }
 
-export default Profile
+export default Profile;

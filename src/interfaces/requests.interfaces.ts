@@ -136,3 +136,12 @@ export interface IUploadAvatar {
   token: string;
   avatar: File;
 }
+
+/**
+ * @interface IGetTicketId
+ * @description Interface of IGetTicketId request function
+ */
+export interface IGetTicketId {
+  token: string;
+  raffleId: number;
+}

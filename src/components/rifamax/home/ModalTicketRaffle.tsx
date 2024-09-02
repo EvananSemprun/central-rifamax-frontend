@@ -1,27 +1,37 @@
+import useAuth from "@/hooks/useAuth";
 import { motion } from 'framer-motion';
 import { modals } from '@mantine/modals';
+import { ITicket } from '@/interfaces/models.interfaces';
+import { useQuery } from '@tanstack/react-query';
+import { getTicketseId } from '@/api/rifamax/Raffles.request';
 import { Button, Card, Grid, Text, Title } from '@mantine/core';
 
-function ModalTicketRaffle() {
-  const zodiacSigns = [
-    "Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo",
-    "Libra", "Escorpio", "Sagitario", "Capricornio", "Acuario", "Piscis"
-  ];
 
-  const openCloseDayModal = () => modals.open({
+function ModalTicketRaffle({ raffleId }: { raffleId: number }) {
+  const { token } = useAuth();
+
+  const { data } = useQuery({
+    queryKey: ['ticketsByRaffle', raffleId],
+    queryFn: () => getTicketseId({ token, raffleId })
+  });
+
+
+  const tickets: ITicket[] = data?.data;
+
+  const openraffleModal = () => modals.open({
     title: (
       <>
         <Title order={3}>Tickets - Rifa: Signos Zodiacales</Title>
       </>
     ),
-    size: 'lg',
+    size: 'md',
     centered: true,
     closeOnClickOutside: false,
     children: (
       <>
         <Grid mt={15}>
-          {zodiacSigns.map((signo, index) => (
-            <Grid.Col span={4} key={index}>
+          {tickets?.map((ticket, index) => (
+            <Grid.Col span={4} key={ticket.id}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -33,22 +43,24 @@ function ModalTicketRaffle() {
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
                 <Card h={145} shadow="sm" padding="lg" radius="md" style={{ position: 'relative' }}>
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: "5px",
-                      right: "-15px",
-                      background: 'red',
-                      transform: 'rotate(30deg)',
-                      padding: '2px 8px' 
-                    }}
-                  >
-                    <Text ta='center' ml={15} size="xs" w={100} c='white'>
-                      Vendido
-                    </Text>
-                  </div>
+                  {ticket.is_sold && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "5px",
+                        right: "-15px",
+                        background: 'red',
+                        transform: 'rotate(30deg)',
+                        padding: '2px 8px'
+                      }}
+                    >
+                      <Text ta='center' ml={15} size="xs" w={100} c='white'>
+                        Vendido
+                      </Text>
+                    </div>
+                  )}
 
-                  <Text mt={35} ta="center" size="lg">{signo}</Text>
+                  <Text mt={35} ta="center" size="lg">{ticket.wildcard}</Text>
                 </Card>
               </motion.div>
             </Grid.Col>
@@ -61,12 +73,12 @@ function ModalTicketRaffle() {
   return (
     <Button
       variant="light"
-      size="lg" radius="xs"
-      onClick={openCloseDayModal}
+      size="lg"
+      radius="xs"
+      onClick={openraffleModal}
     >
-      Cerrar día
+      Ver Tickets
     </Button>
   );
 }
-
-export default ModalTicketRaffle;
+export default ModalTicketRaffle; 

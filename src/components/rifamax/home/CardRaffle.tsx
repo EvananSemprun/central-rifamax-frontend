@@ -50,7 +50,7 @@ function CardRaffle({ raffle }: ICardRaffle) {
       <Text ta='center' mt={15} mb={15} c='grey' size="lg">
         Esto es una representación de como lucirán los tickets.
       </Text>
-      <ModalTicketRaffle />
+      <ModalTicketRaffle raffleId={raffle.id} />
     </Card>
   );
 }

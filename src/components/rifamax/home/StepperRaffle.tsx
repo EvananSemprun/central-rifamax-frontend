@@ -19,11 +19,11 @@ function StepperRaffle() {
   const addRaffleMutation = useMutation({
     mutationKey: ['raffles', 'add'],
     mutationFn: addRaffles,
-    onError: () => {
+    onSuccess: () => {
       setActive(2);
       start();
     },
-    onSuccess: () => ErrorNotification({
+    onError: () => ErrorNotification({
       position: 'top',
       title: 'Error al crear rifa',
       label: 'No se pudo agregar la rifa'
