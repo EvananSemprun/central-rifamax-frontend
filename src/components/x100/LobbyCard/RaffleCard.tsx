@@ -6,23 +6,17 @@ import { getProgress } from "@api/x100/Raffles.request";
 import useAuth from "@hooks/useAuth";
 import { AxiosResponse } from "axios";
 import { IGetProgressResponse } from "@interfaces/requests.interfaces";
-import { ITripleRaffle } from "@interfaces/models.interfaces";
+import { IRaffleCard } from "@interfaces/index";
 
-interface IRaffleCard {
-  raffle: {
-    id: number;
-  }
-}
-
-const RaffleCard: React.FC<IRaffleCard> = ({ raffle }) => {
+const RaffleCard: React.FC<IRaffleCard> = ({ raffle }: IRaffleCard) => {
   const { ref, width } = useElementSize();
   const { token } = useAuth();
 
   const prizes = [
     {
-      name: 'Moto Bera SBR 2024',
+      name: 'Moto Bera 2024',
       days_to_award: 15,
-      prize_position: 1
+      prize_position: 1 
     },
     {
       name: '500$',
@@ -31,14 +25,14 @@ const RaffleCard: React.FC<IRaffleCard> = ({ raffle }) => {
     }
   ]
 
-  const { data: request, isLoading } = useQuery<AxiosResponse<IGetProgressResponse>>({
+  const { data: request, isPending } = useQuery<AxiosResponse<IGetProgressResponse>>({
     queryKey: ['raffle', 'progress', raffle.id],
     queryFn: () => getProgress({ token: token, raffleId: raffle.id})
   })
 
   const PostCard: React.FC = () => {
     const details = [
-      { label: '1er premio:', value: 'Moto' },
+      { label: '1er premio:', value: 'Moto Bera 2024' },
       { label: 'Fecha:', value: '30/09/2024' },
       { label: '2do premio:', value: '500$' },
       { label: 'Fecha:', value: '30/09/2024' },
@@ -78,17 +72,21 @@ const RaffleCard: React.FC<IRaffleCard> = ({ raffle }) => {
           {
             width > 350 && (
               <Avatar h="100%" w={150} radius="xl">
-                <RingProgress
-                  size={150}
-                  thickness={10}
-                  roundCaps
-                  label={
-                    <Text size="md" fw={700} ta="center">
-                      {request?.data.progress}%
-                    </Text>
-                  }
-                  sections={[{ value: Number(request?.data.progress), color: 'teal' }]}
-                />
+                {
+                  isPending ? <Loader /> : (
+                    <RingProgress
+                      size={150}
+                      thickness={10}
+                      roundCaps
+                      label={
+                        <Text size="md" fw={700} ta="center">
+                          {request?.data.progress}%
+                        </Text>
+                      }
+                      sections={[{ value: Number(request?.data.progress), color: 'teal' }]}
+                    />
+                  )
+                }
               </Avatar>
             )
           }

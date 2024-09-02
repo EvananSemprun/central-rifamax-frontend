@@ -69,6 +69,14 @@ export interface IGetRaffles {
 }
 
 /**
+ * @interface IGetTriples
+ * @description Interface of getTriples request function
+ */
+export interface IGetTriples {
+  token: string;
+}
+
+/**
  * @interface IGetClosedRaffles
  * @description Interface of getClosedRaffles request function
  */

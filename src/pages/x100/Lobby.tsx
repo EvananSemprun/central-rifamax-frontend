@@ -1,22 +1,19 @@
+import useAuth from "@hooks/useAuth"
 import LobbyCard from "@components/x100/LobbyCard"
-import { Grid, Title } from "@mantine/core"
+import { AxiosResponse } from "axios"
+import { useQuery } from "@tanstack/react-query"
+import { IconReload } from "@tabler/icons-react"
+import { getTriples } from "@/api/x100/Raffles.request"
+import { ITripleRaffle } from "@interfaces/models.interfaces"
+import { Avatar, Button, Card, Center, Grid, Loader, Text, Title } from "@mantine/core"
 
 function Lobby() {
-  const lobbyData = [
-    {
-      id: 1,
-      title: 'Moto Bera + 500$',
-      price: 3,
-      numbers: 1000,
-    },
-    {
-      id: 1,
-      title: 'Moto Bera + 500$',
-      price: 3,
-      numbers: 1000,
-    },
-  ]
-
+  const { token } = useAuth();
+  const { data: raffles, isLoading, isError, refetch } = useQuery<AxiosResponse<ITripleRaffle[]>>({
+    queryKey: ['triples', 'raffles'],
+    queryFn: () => getTriples({ token }),
+    retry: 2
+  })
   return (
     <>
       <Title 
@@ -29,19 +26,46 @@ function Lobby() {
       </Title>
       <Grid m={20} justify="center">
         {
-          lobbyData.map((item) => (
+          raffles?.data.map((raffle) => (
             <Grid.Col 
               span={{ base: 12, md: 6, lg: 3 }} 
-              key={item.id}
+              key={raffle.id}
             >
               <LobbyCard 
-                title={item.title}
-                price={item.price}
-                numbers={item.numbers}
-                url="/"
+                raffle={raffle}
+                url='/'
               />
             </Grid.Col>
           ))
+        }
+        {
+          isLoading && (
+            <Avatar size={200} radius='xl'>
+              <Loader />
+            </Avatar>
+          )
+        }
+        {
+          isError && (
+            <Card w={560} py={40}>
+              <Text ta='center' fw={700}>
+                ¡Oops! Parece que no tienes conexión.
+              </Text>
+              <Text ta='center' fw={300} mb={20}>
+                Verifica e intenta nuevamente.
+              </Text>
+              <Center>
+                <Button
+                  variant="light"
+                  color="blue"
+                  leftSection={<IconReload />}
+                  onClick={() => refetch()}
+                >
+                  Recargar
+                </Button>
+              </Center>
+            </Card>
+          )
         }
       </Grid>
     </>

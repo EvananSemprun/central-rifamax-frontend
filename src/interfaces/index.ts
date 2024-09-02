@@ -1,6 +1,6 @@
 // General interfaces
 
-import { IRaffle, ISeller, IUser, Role } from "./models.interfaces";
+import { IRaffle, ISeller, IUser, Role, ITripleRaffle } from "./models.interfaces";
 import { IRafflesResponse } from "./requests.interfaces";
 import { Style } from '@react-pdf/types/style'; 
 
@@ -29,6 +29,22 @@ export interface IToBet {
   betType: BetType;
 }
 
+/**
+ * @interface IRaffleCard
+ * @description This interface is for the component IRaffleCard
+ */
+export interface IRaffleCard {
+  raffle: ITripleRaffle;
+}
+
+/**
+ * @interface ILobbyCard
+ * @description This interface is for the component ILobbyCard
+ */
+export interface ILobbyCard {
+  raffle: ITripleRaffle;
+  url: string;
+}
 
 /**
  * @interface ILinksList
@@ -44,7 +60,7 @@ export interface ILinksList {
  */
 export interface INotifications {
   position?: 'left' | 'right' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-  title: string
+  title: string;
   label: string;
 }
 

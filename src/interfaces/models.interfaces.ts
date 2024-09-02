@@ -49,6 +49,29 @@ export interface IUser {
 }
 
 /**
+ * @interface IFullUser
+ * @description This is a general interface for full user model
+ */
+export interface IFullUser {
+  id: number,
+  avatar: {
+    url: null
+  },
+  name: string,
+  role: Role,
+  dni: string,
+  email: string,
+  phone: string,
+  is_active: boolean,
+  rifero_ids: number[],
+  module_assigned: number[],
+  created_at: Date | string,
+  updated_at: string,
+  is_integration: boolean,
+  is_first_entry: boolean
+}
+
+/**
  * @interface IPrize
  * @description This is a general interface for prizes on rifamax module
  */
@@ -132,7 +155,7 @@ export interface ITripleRaffle {
   winners: null;
   has_winners: boolean;
   automatic_taquillas_ids: number[];
-  agency: IUser['user'];
+  agency: IFullUser;
   combos: ICombo[];
   created_at: Date | string;
   updated_at: Date | string;

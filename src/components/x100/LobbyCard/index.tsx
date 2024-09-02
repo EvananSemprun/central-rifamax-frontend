@@ -3,16 +3,10 @@ import classes from './index.module.css';
 import { useState } from 'react';
 import { setBet } from '@utils/transform';
 import { useNavigate } from 'react-router-dom';
+import { ILobbyCard } from '@interfaces/index';
 import { Card, Text, Group, Center, Badge } from '@mantine/core';
 
-interface ILobbyCard {
-  title: string;
-  price: number;
-  numbers: number;
-  url: string;
-}
-
-function LobbyCard({ title, numbers, price, url }: ILobbyCard) {
+function LobbyCard({ raffle, url }: ILobbyCard) {
   const [isHovering, setIsHovering] = useState<boolean>(false)
 
   const navigate = useNavigate()
@@ -43,7 +37,7 @@ function LobbyCard({ title, numbers, price, url }: ILobbyCard) {
         <div>
           <Group justify="space-between" gap="xs">
             <Text size="lg" className={classes.title} fw={500}>
-              {title}
+              {raffle.title}
             </Text>
 
             <Group gap="lg">
@@ -52,21 +46,21 @@ function LobbyCard({ title, numbers, price, url }: ILobbyCard) {
                   color='teal'
                   className={classes.badge}
                 >
-                  USD {price}
+                  USD {raffle.price_unit}
                 </Badge>
               </Center>
               <Center>
                 <Badge
                   className={classes.badge}
                 >
-                  {setBet(numbers)}
+                  {setBet(raffle.tickets_count)}
                 </Badge>
               </Center>
             </Group>
           </Group>
         </div>
       </div>
-      { isHovering && <RaffleCard raffle={{id: 38}}/> }
+      { isHovering && <RaffleCard raffle={raffle} /> }
     </Card>
   );
 }
