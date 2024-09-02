@@ -35,7 +35,7 @@ function Index() {
   const { data: rafflesData, isLoading, isError, isPlaceholderData, refetch } = useQuery<
   AxiosResponse<IRafflesResponse>
 >({
-  queryKey: ['raffles', token, page, queryType],
+  queryKey: ['raffles', page, queryType],
   queryFn: () => fetchRaffles(page, queryType),
   retry: 2,
   placeholderData: keepPreviousData,
