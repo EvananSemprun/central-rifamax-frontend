@@ -98,6 +98,7 @@ export const refundRaffle = ({ token, raffle_id }: IRefundRaffle) => {
   })
 }
 
+// TODO: Change this endpoint to User.request.ts
 export const uploadAvatar = ({ token, avatar }: IUploadAvatar) => {
   return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/shared/users/avatar`, {
     shared_user: {
