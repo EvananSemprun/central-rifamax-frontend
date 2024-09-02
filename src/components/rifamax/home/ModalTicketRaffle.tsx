@@ -15,14 +15,11 @@ function ModalTicketRaffle({ raffleId }: { raffleId: number }) {
     queryFn: () => getTicketseId({ token, raffleId })
   });
 
-
   const tickets: ITicket[] = data?.data;
 
   const openraffleModal = () => modals.open({
     title: (
-      <>
-        <Title order={3}>Tickets - Rifa: Signos Zodiacales</Title>
-      </>
+      <Title order={3}>Tickets</Title>
     ),
     size: 'md',
     centered: true,
