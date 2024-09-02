@@ -4,6 +4,10 @@ export const ALL = [
   "Desarrollador"
 ]
 
+export const GATES = [
+  "Taquilla",
+]
+
 export const ADMIN = [
   "Admin",
   "Desarrollador"

@@ -1,4 +1,4 @@
-import { IToBet } from "@interfaces/index";
+import { BetType, IToBet } from "@interfaces/index";
 
 /**
  * Pads a number with leading zeros based on the length provided.
@@ -31,3 +31,24 @@ export const toBet = ({ value, betType }: IToBet): string => {
       return String(value);
   }
 };
+
+/**
+ * Converts a value to a full format bet based on bet type.
+ * 
+ * @param value - The value to be converted.
+ * @returns The value as a formatted string based on the bet type.
+ */
+export const setBet = (value: number): BetType => {
+  switch (value) {
+    case 0:
+      return 'Infinito'
+    case 12:
+      return 'Raffle'
+    case 100:
+      return 'Terminal'
+    case 1000:
+      return 'Triple'
+    default:
+      return 'Raffle'
+  }
+}

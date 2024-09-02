@@ -1,5 +1,5 @@
-import { ILoginBody } from "@interfaces/index";
 import axios from "axios";
+import { ILoginBody } from "@interfaces/requests.interfaces";
 
 // POST /login
 export const authRequest = (data: ILoginBody) => {
