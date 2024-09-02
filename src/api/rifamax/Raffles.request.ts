@@ -8,6 +8,8 @@ import {
 	IUnpayRaffle,
 	IRefundRaffle, 
   IGetClosedRaffles,
+  IUploadAvatar,
+  IGetTicketId
 } from '@interfaces/requests.interfaces'
 
 // GET /rifamax/raffles/{queryType}?page={page}&items={items}
@@ -94,4 +96,27 @@ export const refundRaffle = ({ token, raffle_id }: IRefundRaffle) => {
       Authorization: `Bearer ${token}`
     }
   })
+}
+
+export const uploadAvatar = ({ token, avatar }: IUploadAvatar) => {
+  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/shared/users/avatar`, {
+    shared_user: {
+      avatar: avatar
+    }
+  }, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+      'Accept': 'application/json'
+    },
+  });
+};
+
+// GET /rifamax/tickets/get_tickets?raffle_id={id}
+export const getTicketseId = ({ token, raffleId }: IGetTicketId) => {
+  return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/tickets/get_tickets?raffle_id=${raffleId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 }

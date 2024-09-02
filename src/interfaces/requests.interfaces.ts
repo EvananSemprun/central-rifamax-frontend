@@ -169,9 +169,18 @@ export interface IUploadAvatar {
 }
 
 /**
- * @interface IGetProgress
- * @description Interface of getProgress request function
+ * @interface IGetTicketId
+ * @description Interface of IGetTicketId request function
  */
+export interface IGetTicketId {
+  token: string;
+  raffleId: number;
+}
+
+/**
+* @interface IGetProgress
+* @description Interface of getProgress request function
+*/
 export interface IGetProgress {
   token: string;
   raffleId: number;

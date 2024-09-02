@@ -39,6 +39,7 @@ function Index() {
     queryFn: () => fetchRaffles(page, queryType),
     retry: 2,
     placeholderData: keepPreviousData,
+    refetchInterval: 3000,
   });
 
   const changeQueryType = (value: string | null) => {
@@ -54,7 +55,6 @@ function Index() {
       setPage(value);
     }
   }
-
   const ResponsiveSection = ({ children }: IWrapper) =>
     isSmallScreen ? (
       <Stack align='center'>
@@ -114,6 +114,7 @@ function Index() {
             ta={isSmallScreen ? 'center' : 'inherit'}
           />
           <ActionButtons />
+
         </ResponsiveSection>
         {!isSmallScreen && (
           <Pagination

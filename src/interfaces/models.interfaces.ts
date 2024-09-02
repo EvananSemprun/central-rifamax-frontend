@@ -172,3 +172,13 @@ export interface ISeller {
   phone: string;
   email: string;
 }
+
+/**
+ * @interface ITicket
+ * @description This is a general interface for Ticket on rifamax module
+ */
+export interface ITicket {
+  id: number;
+  wildcard: string;
+  is_sold: boolean;
+}
