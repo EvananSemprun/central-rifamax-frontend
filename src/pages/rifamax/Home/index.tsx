@@ -32,15 +32,15 @@ function Index() {
   const fetchRaffles = (page: number, queryType: string | null) =>
     getRaffles({ token, queryType, page, items });
 
-  const { data: rafflesData, isLoading, isError, isPlaceholderData } = useQuery<
-    AxiosResponse<IRafflesResponse>
-  >({
-    queryKey: ['raffles', token, page, queryType],
-    queryFn: () => fetchRaffles(page, queryType),
-    retry: 2,
-    placeholderData: keepPreviousData,
-    refetchInterval: 3000,
-  });
+  const { data: rafflesData, isLoading, isError, isPlaceholderData, refetch } = useQuery<
+  AxiosResponse<IRafflesResponse>
+>({
+  queryKey: ['raffles', token, page, queryType],
+  queryFn: () => fetchRaffles(page, queryType),
+  retry: 2,
+  placeholderData: keepPreviousData,
+});
+
 
   const changeQueryType = (value: string | null) => {
     if (value === 'newest') {
@@ -113,8 +113,7 @@ function Index() {
             desc='Aquí podrás gestionar y ver todas tus rifas.'
             ta={isSmallScreen ? 'center' : 'inherit'}
           />
-          <ActionButtons />
-
+ <ActionButtons refetchRaffles={refetch} />
         </ResponsiveSection>
         {!isSmallScreen && (
           <Pagination
