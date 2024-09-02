@@ -1,7 +1,7 @@
 import useUser from "@hooks/useUser";
 import useAuth from "@/hooks/useAuth";
 import { useState } from 'react';
-import { uploadAvatar } from "@api/rifamax/Raffles.request";
+import { uploadAvatar } from "@api/shared/App.request";
 import { useMutation } from '@tanstack/react-query';
 import { Avatar, Center, Button } from '@mantine/core';
 import { Dropzone, IMAGE_MIME_TYPE, FileWithPath } from '@mantine/dropzone';

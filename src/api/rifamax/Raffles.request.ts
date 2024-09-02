@@ -77,7 +77,7 @@ export const payRaffle = ({ token, raffle_id, data }: IPayRaffle) => {
 }
 
 // POST /rifamax/raffles/unpay
-export const unPayRaffle = ({ token, raffle_id }: IUnpayRaffle) => {
+export const unpayRaffle = ({ token, raffle_id }: IUnpayRaffle) => {
   return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/unpay`, {
     raffle_id: raffle_id
   }, {

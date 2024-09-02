@@ -1,12 +1,8 @@
 // General interfaces
 
-import { IRaffle, ISeller, IUser, Role } from "./models.interfaces";
+import { IRaffle, ISeller, IUser, Role, ITripleRaffle } from "./models.interfaces";
 import { IRafflesResponse } from "./requests.interfaces";
-
-export interface ILoginBody {
-  email: string;
-  password: string;
-}
+import { Style } from '@react-pdf/types/style'; 
 
 /**
  * @type BetType
@@ -15,12 +11,39 @@ export interface ILoginBody {
 export type BetType = 'Triple' | 'Terminal' | 'Infinito' | 'Raffle';
 
 /**
+ * @interface IQRCode
+ * @description This interface if for component QrGenerator
+ */
+export interface IQrGenerator {
+  value: string;
+  type: 'react' | 'pdf';
+  style?: React.CSSProperties | Style
+}
+
+/**
  * @interface IToBet
  * @description This interface is for the util tool toBet, it is used to change the value to its respective bet/raffle type.
  */
 export interface IToBet {
   value: number;
   betType: BetType;
+}
+
+/**
+ * @interface IRaffleCard
+ * @description This interface is for the component IRaffleCard
+ */
+export interface IRaffleCard {
+  raffle: ITripleRaffle;
+}
+
+/**
+ * @interface ILobbyCard
+ * @description This interface is for the component ILobbyCard
+ */
+export interface ILobbyCard {
+  raffle: ITripleRaffle;
+  url: string;
 }
 
 /**
@@ -37,7 +60,7 @@ export interface ILinksList {
  */
 export interface INotifications {
   position?: 'left' | 'right' | 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-  title: string
+  title: string;
   label: string;
 }
 

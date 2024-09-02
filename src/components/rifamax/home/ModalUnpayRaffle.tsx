@@ -4,7 +4,7 @@ import { modals } from "@mantine/modals";
 import { IAccordionSteps } from "@interfaces/index";
 import { Text, Title, Button } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
-import { unPayRaffle } from "@api/rifamax/Raffles.request";
+import { unpayRaffle } from "@api/rifamax/Raffles.request";
 import { IconMailX, IconSkull } from "@tabler/icons-react";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
@@ -12,7 +12,7 @@ function ModalUnpayRaffle({ raffle_id }: IAccordionSteps) {
   const { token } = useAuth()
 
   const mutation = useMutation({
-    mutationFn: unPayRaffle,
+    mutationFn: unpayRaffle,
     onSuccess: () => (
       SuccessNotification({
         position: 'top',

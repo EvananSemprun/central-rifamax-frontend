@@ -11,7 +11,7 @@ import {
   IconServer2,
   IconUsers
 } from '@tabler/icons-react';
-import { ADMIN, ALL } from '@utils/roles';
+import { ADMIN, ALL, GATES } from '@utils/roles';
 
 export const HeaderLinks: { [key: string]: { title: string; to: string, role: string[], icon?: React.ReactNode }[] } = {
   productos: [
@@ -24,10 +24,10 @@ export const HeaderLinks: { [key: string]: { title: string; to: string, role: st
   ],
   rifamax: [
     { title: 'Inicio', to: '/rifamax/dashboard', role: ALL, icon: <IconHome size='1.8rem' stroke={1.6} /> },
-    { title: 'Riferos', to: '/rifamax/sellers', role: ADMIN, icon: <IconUsers size='1.8rem' stroke={1.6} /> },
+    { title: 'Riferos', to: '/rifamax/sellers', role: GATES, icon: <IconUsers size='1.8rem' stroke={1.6} /> },
   ],
   x100: [
-    { title: 'Lobby', to: '/x100/lobby', role: ALL, icon: <IconBrandAppleArcade size='1.8rem' stroke={1.6} /> },
+    { title: 'Lobby', to: '/x100', role: ALL, icon: <IconBrandAppleArcade size='1.8rem' stroke={1.6} /> },
   ],
   "opciones de desarrollador": [
     { title: 'Información del Server', to: '/dev/server', role: ADMIN, icon: <IconServer2 size='1.8rem' stroke={1.6} /> },

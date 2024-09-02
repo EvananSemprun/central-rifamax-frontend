@@ -4,6 +4,15 @@ import { IRaffleForm } from ".";
 import { IRaffle, IUser } from "./models.interfaces";
 
 /**
+ * @interface ILoginBody
+ * @description This is the interface for the body of login endpoint
+ */
+export interface ILoginBody {
+  email: string;
+  password: string;
+}
+
+/**
  * @interface IRenewTokenResponse
  * @description This is the interface for the response of the renew token endpoint
  */
@@ -39,6 +48,16 @@ export interface IRafflesResponse {
 }
 
 /**
+ * @interface IGetProgressResponse
+ * @description This is the interface for the response of get progress of x100 raffles endpoint
+ */
+export interface IGetProgressResponse {
+  raffle_id: number;
+	progress: number;
+	current_solds: number;
+}
+
+/**
  * @interface IGetRaffles
  * @description Interface of getRaffles request function
  */
@@ -47,6 +66,14 @@ export interface IGetRaffles {
   queryType?: 'newest' | 'initialized' | 'to-close' | string | null;
   page: number;
   items: number; 
+}
+
+/**
+ * @interface IGetTriples
+ * @description Interface of getTriples request function
+ */
+export interface IGetTriples {
+  token: string;
 }
 
 /**
@@ -125,13 +152,17 @@ export interface IRefundRaffle {
 
 /**
  * @interface IFilterSeller
- * @description Interface of filterSller request function
+ * @description Interface of filterSeller request function
  */
 export interface IFilterSeller {
   token: string;
   query: string;
 }
 
+/**
+ * @interface IUploadAvatar
+ * @description Interface of uploadAvatar request function
+ */
 export interface IUploadAvatar {
   token: string;
   avatar: File;
@@ -142,6 +173,15 @@ export interface IUploadAvatar {
  * @description Interface of IGetTicketId request function
  */
 export interface IGetTicketId {
+  token: string;
+  raffleId: number;
+}
+
+/**
+* @interface IGetProgress
+* @description Interface of getProgress request function
+*/
+export interface IGetProgress {
   token: string;
   raffleId: number;
 }

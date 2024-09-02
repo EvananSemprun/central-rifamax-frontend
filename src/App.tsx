@@ -8,6 +8,9 @@ const Lobby = lazy(() => import('@pages/shared/Lobby'))
 const Login = lazy(() => import('@pages/shared/Login'))
 const Home = lazy(() => import('@pages/rifamax/Home'))
 const Seller = lazy(() => import('@pages/rifamax/Seller'))
+const TriplesLobby = lazy(() => import('@pages/x100/Lobby'))
+const TriplesRaffle = lazy(() => import('@pages/x100/TripleRaffle'))
+const TriplesInfinity = lazy(() => import('@pages/x100/InfinityRaffle'))
 const FeatureFlags = lazy(() => import('@pages/dev/FeatureFlags'))
 
 function App() {
@@ -18,6 +21,12 @@ function App() {
         <Route path='rifamax' element={<AuthRoute roles={ALL} />}>
           <Route path='dashboard' element={<Home />} />
           <Route path='sellers' element={<Seller />} />
+        </Route>
+        <Route path="/x100?/t?/:integrator?/p?/:playerId?/c?/:currency" element={<AuthRoute roles={ALL} />}>
+          <Route index element={<TriplesLobby />} />
+          <Route path='raffle/:raffleId' element={<TriplesRaffle />}>  
+            <Route path='infinty' element={<TriplesInfinity />} />
+          </Route>
         </Route>
         <Route path='dev' element={<AuthRoute roles={ADMIN} />}>
           <Route path='featureFlags' element={<FeatureFlags />} />
