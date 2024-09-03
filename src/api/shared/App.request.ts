@@ -10,7 +10,7 @@ export const getUserProfile = (token: string) => {
   })
 }
 
-// GET /shared/users/avatar
+// POST/shared/users/avatar
 export const uploadAvatar = ({ token, avatar }: IUploadAvatar) => {
   return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/shared/users/avatar`, {
     shared_user: {

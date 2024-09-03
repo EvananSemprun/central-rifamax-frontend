@@ -4,6 +4,7 @@ import {
   IGetTriples
 } from "@interfaces/requests.interfaces"
 
+// GET /x100/raffles
 export const getTriples = ({ token }: IGetTriples) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/x100/raffles`, {
     headers: {
@@ -12,6 +13,7 @@ export const getTriples = ({ token }: IGetTriples) => {
   })
 }
 
+// GET /x100/raffles/progress?raffle_id={raffleId}
 export const getProgress = ({ token, raffleId }: IGetProgress) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/x100/raffles/progress?raffle_id=${raffleId}`, {
     headers: {

@@ -1,9 +1,9 @@
+import classes from "./index.module.css"
+import { v6 as uuid } from "uuid"
+import { rem } from "@mantine/core"
 import { INotifications } from "@interfaces/index"
 import { notifications } from "@mantine/notifications"
-import { v6 as uuid } from "uuid"
-import classes from "./index.module.css"
 import { IconCheck, IconX, IconInfoCircle } from "@tabler/icons-react"
-import { rem } from "@mantine/core"
 
 export const InfoNotification = ({ position, title, label }: INotifications) => {
   return (

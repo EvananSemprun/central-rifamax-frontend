@@ -1,13 +1,13 @@
 import useUser from "@hooks/useUser";
 import useAuth from "@/hooks/useAuth";
 import { useState } from 'react';
-import { uploadAvatar } from "@api/shared/App.request";
+import { AxiosResponse } from "axios";
 import { useMutation } from '@tanstack/react-query';
+import { IUser } from '@interfaces/models.interfaces';
+import { uploadAvatar } from "@api/shared/App.request";
 import { Avatar, Center, Button } from '@mantine/core';
 import { Dropzone, IMAGE_MIME_TYPE, FileWithPath } from '@mantine/dropzone';
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
-import { IUser } from '@interfaces/models.interfaces';
-import { AxiosResponse } from "axios";
 
 const UpdateAvatar = () => {
   const { token } = useAuth();

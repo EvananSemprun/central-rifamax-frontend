@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import { DNIs } from '@assets/DNIs';
 import { phone } from '@assets/phone';
 import { useForm } from '@mantine/form';
-import { useState } from 'react';
+import { formatPhone } from '@utils/parse';
 import { IAddSeller, IAddSellerForm } from '@interfaces/index';
-import { IconAt, IconLock, IconPhone, IconSearch, IconUser } from '@tabler/icons-react';
 import { TextInput, PasswordInput, Grid, Group, Select, Button } from '@mantine/core';
-import { formatPhone } from '@/utils/parse';
+import { IconAt, IconLock, IconPhone, IconSearch, IconUser } from '@tabler/icons-react';
 
 function AddSellerForm({ onSubmit }: IAddSeller) {
   const [nacionality, setNacionality] = useState<string | null>('V-');

@@ -1,7 +1,7 @@
-// API responses interfaces
-
 import { IRaffleForm } from ".";
 import { IRaffle, IUser } from "./models.interfaces";
+
+// API responses interfaces
 
 /**
  * @interface ILoginBody

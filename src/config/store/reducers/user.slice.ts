@@ -1,5 +1,5 @@
-import { TokenState, TrustState, UserState } from "@interfaces/index";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TokenState, TrustState, UserState } from "@interfaces/index";
 
 const initialState: UserState & TokenState & TrustState = {
   user: null,

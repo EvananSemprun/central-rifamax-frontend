@@ -1,6 +1,6 @@
-import { Meta, StoryFn } from '@storybook/react';
 import AddRaffleModal from '@components/rifamax/home/ModalAddRaffle';
 import { Center } from '@mantine/core';
+import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Rifamax/Dashboard/Componentes/Modales/Crear rifa',

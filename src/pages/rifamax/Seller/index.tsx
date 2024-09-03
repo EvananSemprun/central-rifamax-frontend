@@ -3,7 +3,7 @@ import SellerTable from '@components/rifamax/Seller/sellerTable'
 import ModalCreateSeller from '@components/rifamax/Seller/ModalCreateSeller'
 import { ReactNode } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
-import { Card, Group, ScrollArea, Title, Stack, Text } from '@mantine/core'
+import { Card, Group, Title, Stack, Text } from '@mantine/core'
 
 function index() {
   const isSmallScreen = useMediaQuery('(max-width: 940px)');

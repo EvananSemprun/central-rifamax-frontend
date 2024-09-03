@@ -1,8 +1,8 @@
 import useAuth from "@hooks/useAuth";
 import useUser from "@hooks/useUser";
 import classes from "./Profile.module.css";
-import LoaderBlur from "../Loaders/LoaderBlur";
 import ModalEditUser from "./ModalEditUser";
+import LoaderBlur from "../Loaders/LoaderBlur";
 import { initials } from "@utils/string";
 import { IconUserCircle } from "@tabler/icons-react";
 import { Avatar, Button, Center, Group, Popover, Text } from "@mantine/core";

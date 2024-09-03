@@ -1,12 +1,12 @@
-import { motion } from "framer-motion";
-import { useElementSize } from "@mantine/hooks";
-import { Avatar, Card, Group, Loader, rgba, RingProgress, Text } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
-import { getProgress } from "@api/x100/Raffles.request";
 import useAuth from "@hooks/useAuth";
 import { AxiosResponse } from "axios";
-import { IGetProgressResponse } from "@interfaces/requests.interfaces";
+import { motion } from "framer-motion";
 import { IRaffleCard } from "@interfaces/index";
+import { useElementSize } from "@mantine/hooks";
+import { useQuery } from "@tanstack/react-query";
+import { getProgress } from "@api/x100/Raffles.request";
+import { IGetProgressResponse } from "@interfaces/requests.interfaces";
+import { Avatar, Card, Group, Loader, rgba, RingProgress, Text } from "@mantine/core";
 
 const RaffleCard: React.FC<IRaffleCard> = ({ raffle }: IRaffleCard) => {
   const { ref, width } = useElementSize();

@@ -1,9 +1,9 @@
 import useAuth from "@/hooks/useAuth";
 import { motion } from 'framer-motion';
 import { modals } from '@mantine/modals';
-import { ITicket } from '@/interfaces/models.interfaces';
 import { useQuery } from '@tanstack/react-query';
-import { getTicketseId } from '@/api/rifamax/Raffles.request';
+import { ITicket } from '@/interfaces/models.interfaces';
+import { getTicketId } from '@/api/rifamax/Raffles.request';
 import { Button, Card, Grid, Text, Title } from '@mantine/core';
 
 
@@ -12,7 +12,7 @@ function ModalTicketRaffle({ raffleId }: { raffleId: number }) {
 
   const { data } = useQuery({
     queryKey: ['ticketsByRaffle', raffleId],
-    queryFn: () => getTicketseId({ token, raffleId })
+    queryFn: () => getTicketId({ token, raffleId })
   });
 
   const tickets: ITicket[] = data?.data;

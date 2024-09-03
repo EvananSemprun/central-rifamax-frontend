@@ -1,5 +1,5 @@
-import { Meta, StoryFn } from '@storybook/react';
 import ModalAddRaffle from '@components/rifamax/home/ModalAddRaffle';
+import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Rifamax/Dashboard/Componentes/Modales/Añadir Rifas',

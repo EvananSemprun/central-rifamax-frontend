@@ -1,6 +1,6 @@
-import { Meta, StoryFn } from '@storybook/react';
 import ModalPrintTickets from '@components/rifamax/home/ModalPrintTickets';
 import { Center } from '@mantine/core';
+import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Rifamax/Dashboard/Componentes/Modales/Imprimir rifa',

@@ -1,6 +1,6 @@
-import { Meta, StoryFn } from '@storybook/react';
 import ModalSendToApp from '@components/rifamax/home/ModalSendToApp';
 import { Center } from '@mantine/core';
+import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Rifamax/Dashboard/Componentes/Modales/Enviar a App',

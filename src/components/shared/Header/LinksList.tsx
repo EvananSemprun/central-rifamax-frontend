@@ -6,8 +6,8 @@ import { useDisclosure } from '@mantine/hooks'
 import { ILinksList } from '@interfaces/index'
 import { IconMenu2 } from '@tabler/icons-react'
 import { HeaderLinks } from '@assets/HeaderLinks'
-import { Drawer, Button, Title, Text } from '@mantine/core'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { Drawer, Button, Title, Text } from '@mantine/core'
 
 function LinksList({ position }: ILinksList) {
   const [opened, { open, close }] = useDisclosure(false)

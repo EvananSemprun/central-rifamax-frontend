@@ -1,5 +1,5 @@
-import { Meta, StoryFn } from '@storybook/react';
 import CloseDayModal from '@components/rifamax/home/ModalCloseDay';
+import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Rifamax/Dashboard/Componentes/Modales/Cerrar Día',

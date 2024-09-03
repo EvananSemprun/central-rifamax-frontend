@@ -1,5 +1,5 @@
-import { Meta, StoryFn } from '@storybook/react';
 import ActionButtons from '@components/rifamax/home/ActionButtons';
+import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Rifamax/Dashboard/Componentes/Botones de acción',

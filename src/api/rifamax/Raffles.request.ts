@@ -4,12 +4,11 @@ import {
 	IPayRaffle, 
 	IGetRaffles, 
 	IAddRaffles, 
+  IGetTicketId,
 	IRepeatToApp, 
 	IUnpayRaffle,
 	IRefundRaffle, 
-  IGetClosedRaffles,
-  IUploadAvatar,
-  IGetTicketId
+  IGetClosedRaffles
 } from '@interfaces/requests.interfaces'
 
 // GET /rifamax/raffles/{queryType}?page={page}&items={items}
@@ -98,23 +97,8 @@ export const refundRaffle = ({ token, raffle_id }: IRefundRaffle) => {
   })
 }
 
-// TODO: Change this endpoint to User.request.ts
-export const uploadAvatar = ({ token, avatar }: IUploadAvatar) => {
-  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/shared/users/avatar`, {
-    shared_user: {
-      avatar: avatar
-    }
-  }, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data',
-      'Accept': 'application/json'
-    },
-  });
-};
-
 // GET /rifamax/tickets/get_tickets?raffle_id={id}
-export const getTicketseId = ({ token, raffleId }: IGetTicketId) => {
+export const getTicketId = ({ token, raffleId }: IGetTicketId) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/tickets/get_tickets?raffle_id=${raffleId}`, {
     headers: {
       Authorization: `Bearer ${token}`

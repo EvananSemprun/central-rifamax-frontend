@@ -1,6 +1,6 @@
-import { Meta, StoryFn } from '@storybook/react';
 import ModalUnpayRaffle from '@components/rifamax/home/ModalUnpayRaffle';
 import { Center } from '@mantine/core';
+import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
   title: 'Rifamax/Dashboard/Componentes/Modales/Rechazar rifa',

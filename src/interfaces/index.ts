@@ -1,8 +1,8 @@
-// General interfaces
-
-import { IRaffle, ISeller, IUser, Role, ITripleRaffle } from "./models.interfaces";
-import { IRafflesResponse } from "./requests.interfaces";
 import { Style } from '@react-pdf/types/style'; 
+import { IRafflesResponse } from "./requests.interfaces";
+import { IRaffle, ISeller, IUser, Role, ITripleRaffle } from "./models.interfaces";
+
+// General interfaces
 
 /**
  * @type BetType

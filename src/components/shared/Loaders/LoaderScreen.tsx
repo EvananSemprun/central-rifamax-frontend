@@ -1,5 +1,5 @@
-import { Card, Group, Loader, Text } from '@mantine/core'
 import classes from './LoaderScreen.module.css'
+import { Card, Group, Loader, Text } from '@mantine/core'
 
 interface ILoaderScreen {
   label?: string
