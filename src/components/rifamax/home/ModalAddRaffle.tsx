@@ -1,11 +1,11 @@
 import StepperRaffle from './StepperRaffle';
 import useConfetti from '@hooks/useConfetti';
-import { day } from '@utils/time'
-import { modals } from '@mantine/modals'
-import { IconPlus } from '@tabler/icons-react'
-import { Button, Text, Title } from '@mantine/core'
+import { day } from '@utils/time';
+import { modals } from '@mantine/modals';
+import { IconPlus } from '@tabler/icons-react';
+import { Button, Text, Title } from '@mantine/core';
 
-function AddRaffleModal() {
+function AddRaffleModal({ refetchRaffles }: { refetchRaffles: () => void }) {
   const { stop } = useConfetti();
 
   const openAddRaffleModal = () => modals.open({
@@ -20,14 +20,17 @@ function AddRaffleModal() {
     size: 'xl',
     centered: true,
     closeOnClickOutside: false,
-    onClose: stop,
+    onClose: () => {
+      stop();
+      refetchRaffles();
+    },
     children: (
-      <StepperRaffle/> 
+      <StepperRaffle />
     ),
-  })
+  });
 
   return (
-    <Button 
+    <Button
       variant='light'
       color='blue'
       leftSection={<IconPlus />}
@@ -35,7 +38,7 @@ function AddRaffleModal() {
     >
       Añadir rifa
     </Button>
-  )
+  );
 }
 
-export default AddRaffleModal
+export default AddRaffleModal;

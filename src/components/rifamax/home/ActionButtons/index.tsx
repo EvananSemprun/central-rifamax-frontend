@@ -1,16 +1,16 @@
-import classes from './index.module.css'
-import CloseDayModal from '../ModalCloseDay'
-import AddRaffleModal from '../ModalAddRaffle'
+import classes from './index.module.css';
+import CloseDayModal from '../ModalCloseDay';
+import AddRaffleModal from '../ModalAddRaffle';
 
-function ActionButtons() {
+function ActionButtons({ refetchRaffles }: { refetchRaffles: () => void }) {
   return (
-    <div >
+    <div>
       <div className={classes.actionsButtons}>
-        <AddRaffleModal />
+        <AddRaffleModal refetchRaffles={refetchRaffles} /> 
         <CloseDayModal />
       </div>
     </div>
-  )
+  );
 }
 
-export default ActionButtons
+export default ActionButtons;
