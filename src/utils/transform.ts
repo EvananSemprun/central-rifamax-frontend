@@ -52,3 +52,54 @@ export const setBet = (value: number): BetType => {
       return 'Raffle'
   }
 }
+
+/**
+ * Converts a number to its ordinal representation.
+ * 
+ * @param value - The value to be converted.
+ * @returns The value as a formatted string based on its ordinal order in english.
+ */
+export const setOrdinalEn = (value: number): string => {
+  const suffixes = ['ro', 'do', 'nd', 'rd'];
+  const remainder = value % 100;
+
+  const suffix = suffixes[(remainder - 20) % 10] || suffixes[remainder] || suffixes[0];
+
+  return `${value}${suffix}`;
+}
+
+/**
+ * Converts a number to its ordinal representation in Spanish.
+ * 
+ * @param value - The value to be converted.
+ * @returns The value as a formatted string based on its ordinal order in Spanish.
+ */
+export const setOrdinal = (value: number): string => {
+  const irregulars: { [key: string]: string } = {
+    '1': 'er',
+    '2': 'do',
+    '3': 'er',
+    '4': 'to',
+    '5': 'to',
+    '6': 'to',
+    '7': 'mo',
+    '8': 'vo',
+    '9': 'no',
+    '10': 'mo',
+  };
+
+  const getSuffix = (num: number): string => {
+    if (num <= 10) return irregulars[num.toString()] ?? 'avo';
+
+    const lastDigit = num % 10;
+    const secondLastDigit = Math.floor((num % 100) / 10);
+
+    if (secondLastDigit === 1) {
+      return 'avo'; 
+    }
+
+    return irregulars[lastDigit.toString()] ?? 'avo';
+  };
+
+  return `${value}${getSuffix(value)}`;
+}

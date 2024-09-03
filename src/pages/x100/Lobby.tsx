@@ -33,7 +33,7 @@ function Lobby() {
             >
               <LobbyCard 
                 raffle={raffle}
-                url='/'
+                url={`/x100/raffle/${raffle.id}`}
               />
             </Grid.Col>
           ))

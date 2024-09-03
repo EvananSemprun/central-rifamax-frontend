@@ -1,6 +1,7 @@
 import { Style } from '@react-pdf/types/style'; 
-import { IRafflesResponse } from "./requests.interfaces";
+import { IGetProgressResponse, IRafflesResponse } from "./requests.interfaces";
 import { IRaffle, ISeller, IUser, Role, ITripleRaffle } from "./models.interfaces";
+import { AxiosResponse } from 'axios';
 
 // General interfaces
 
@@ -35,6 +36,16 @@ export interface IToBet {
  */
 export interface IRaffleCard {
   raffle: ITripleRaffle;
+}
+
+/**
+ * @interface IRaffleCardContent
+ * @description This interface is for the component IRaffleCardContent
+ */
+export interface IRaffleCardContent {
+  raffle: ITripleRaffle;
+  isPending: boolean;
+  request: AxiosResponse<IGetProgressResponse, any> | undefined;
 }
 
 /**
