@@ -6,7 +6,7 @@ export function AccordionStepOne({ raffle_id }: IAccordionSteps) {
   return (
     <>
       <ModalSendToApp raffle_id={raffle_id} />
-      <ModalPrintTickets />
+      {/* <ModalPrintTickets /> */}
     </>
   );
 }

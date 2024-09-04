@@ -185,3 +185,27 @@ export interface IGetProgress {
   token: string;
   raffleId: number;
 }
+
+/**
+ * @interface IGetRafflers
+ * @description Interface for getRafflers request function
+ */
+export interface IGetRafflers {
+  token: string;
+  page: number;
+}
+
+/**
+ * @interface IRafflersResponse
+ * @description Interface for response sent via API of rafflers function
+ */
+export interface IRafflersResponse {
+  rafflers: IRaffler[];
+  metadata: {
+    page: number;
+    count: number;
+    items: number;
+    pages: number;
+  };
+}
+

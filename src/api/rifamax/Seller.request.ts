@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IFilterSeller } from '@interfaces/requests.interfaces';
+import { IFilterSeller, IGetRafflers } from '@interfaces/requests.interfaces';
 
 // GET /rifamax/sellers/search?query={query}
 export const filterSeller = ({ token, query }: IFilterSeller) => {
@@ -9,3 +9,12 @@ export const filterSeller = ({ token, query }: IFilterSeller) => {
     }
   })
 }
+
+// GET /shared/users/raffles?page={page}
+export const getRafflers = ({ token, page }: IGetRafflers) => {
+  return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/shared/users/rafflers?page=${page}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+};

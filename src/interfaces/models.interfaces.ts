@@ -182,3 +182,20 @@ export interface ITicket {
   wildcard: string;
   is_sold: boolean;
 }
+
+
+/**
+ * @interface IRaffler
+ * @description This is a general interface for Raffler on rifamax module
+ */
+export interface IRaffler {
+  id: number;
+  avatar: { url: string | null };
+  name: string;
+  role: string;
+  dni: string;
+  email: string;
+  phone: string;
+  is_active: boolean;
+  is_first_entry: boolean;
+}

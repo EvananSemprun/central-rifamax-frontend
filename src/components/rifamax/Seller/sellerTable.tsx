@@ -1,34 +1,42 @@
 import useAuth from '@hooks/useAuth';
+import LoaderBlur from '@components/shared/Loaders/LoaderBlur';
 import { useState } from 'react';
-import { useViewportSize } from '@mantine/hooks';
-import { useMutation } from '@tanstack/react-query';
-import { filterSeller } from '@api/rifamax/Seller.request';
-import { IconSearch, IconUserSearch } from '@tabler/icons-react';
-import { Table, Badge, TextInput, ScrollArea, Group, ActionIcon, Pagination } from '@mantine/core';
+import { AxiosResponse } from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { getRafflers } from '@api/rifamax/Seller.request';
+import { IconUserSearch, IconSearch } from '@tabler/icons-react';
+import { IRafflersResponse } from '@interfaces/requests.interfaces';
+import { Table, Badge, ScrollArea, Group, Pagination, ActionIcon, TextInput } from '@mantine/core';
 
 const SellerTable = () => {
   const { token } = useAuth();
-  const { width } = useViewportSize();
+  const [page, setPage] = useState(1);
 
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const fetchRafflers = (page: number) => getRafflers({ token, page });
 
-  const elements = [
-    { name: 'Evanan Semprun', dni: 'V-25488961', email: 'evanancrack@gmail.com', phone: '+58 (414) 636-1786', is_active: false, role: 'Rifero', created_at: '20/08/2024 - 10:00pm' },
-    { name: 'Javier Diaz', dni: 'V-25488961', email: 'rifamaxjavier@gmail.com', phone: '+58 (412) 168-8466', is_active: true, role: 'Rifero', created_at: '20/08/2024 - 10:00pm' },
-  ];
+  const { data: rafflersData, isLoading, isError } = useQuery<AxiosResponse<IRafflersResponse>>({
+    queryKey: ['rafflers', page],
+    queryFn: () => fetchRafflers(page),
+    retry: 2,
+  });
 
-  const filteredElements = elements.filter((element) =>
-    element.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    element.dni.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const elements = rafflersData?.data?.rafflers || [];
 
-  const rows = filteredElements.map((element) => (
-    <Table.Tr ta="center" key={element.name}>
-      <Table.Td >{element.name}</Table.Td>
-      <Table.Td >{element.dni}</Table.Td>
-      <Table.Td >{element.email}</Table.Td>
-      <Table.Td >{element.phone}</Table.Td>
-      <Table.Td >
+  if (isError) {
+    return <h1>Error</h1>;
+  }
+
+  if (isLoading) {
+    return <LoaderBlur label='Cargando Riferos...' />;
+  }
+
+  const rows = elements.map((element) => (
+    <Table.Tr ta="center" key={element.id}>
+      <Table.Td>{element.name}</Table.Td>
+      <Table.Td>{element.dni}</Table.Td>
+      <Table.Td>{element.email}</Table.Td>
+      <Table.Td>{element.phone}</Table.Td>
+      <Table.Td>
         <Badge
           variant="light"
           color={element.is_active ? 'green' : 'red'}
@@ -37,83 +45,49 @@ const SellerTable = () => {
           {element.is_active ? 'Activo' : 'Inactivo'}
         </Badge>
       </Table.Td>
-      <Table.Td >{element.role}</Table.Td>
-      <Table.Td >{element.created_at}</Table.Td>
+      <Table.Td>{element.role}</Table.Td>
     </Table.Tr>
   ));
 
-  const mutation = useMutation({
-    mutationFn: (query: string) => filterSeller({ token: token, query: query }),
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.error(error);
-    }
-  });
-
-  const handleSearch = () => {
-    mutation.mutate(searchTerm);
-  };
-
   return (
     <>
-      <Group 
-        justify={width < 940 ? 'center' : 'space-between'} 
-        mt={15}
-        gap={10}
-      >
-        <Group 
-          gap={0} 
-          w={width < 940 ? '100%' : 'calc(50% - 10px)'}
-        >
+      <Group justify="space-between" mt={15} gap={10}>
+
+      <Group gap={0}>
           <TextInput
             size="lg"
             leftSection={<IconUserSearch />}
             radius="5px 0 0 5px"
-            w={width < 940 ? 'calc(100% - 35px)' : 300}
             placeholder="Buscar por Nombre o Cédula"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.currentTarget.value)}
+            
           />
-          <ActionIcon 
-            h={50} 
+          <ActionIcon
+            h={50}
             style={{ borderRadius: '0 5px 5px 0' }}
-            size="lg" 
-            aria-label="Search" 
-            onClick={handleSearch}
-            >
+            size="lg"
+            aria-label="Search"
+          >
             <IconSearch stroke={1.5} />
           </ActionIcon>
         </Group>
-        <Pagination total={10} size="lg" />
+        <Pagination
+          total={rafflersData?.data.metadata.pages || 1}
+          size="lg"
+          value={page}
+          onChange={setPage}
+        />
       </Group>
 
       <ScrollArea type="auto" w="100%" style={{ maxWidth: '100%', overflowX: 'auto' }}>
         <Table mt={10} highlightOnHover withTableBorder withColumnBorders>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th fz={16} ta="center">
-                Nombre
-              </Table.Th>
-              <Table.Th fz={16} ta="center">
-                Cédula
-              </Table.Th>
-              <Table.Th fz={16} ta="center">
-                Email
-              </Table.Th>
-              <Table.Th fz={16} ta="center">
-                Telefono
-              </Table.Th>
-              <Table.Th fz={16} ta="center">
-                Estado
-              </Table.Th>
-              <Table.Th fz={16} ta="center">
-                Rol
-              </Table.Th>
-              <Table.Th fz={16} ta="center">
-                Fecha
-              </Table.Th>
+              <Table.Th fz={16} ta="center">Nombre</Table.Th>
+              <Table.Th fz={16} ta="center">Cédula</Table.Th>
+              <Table.Th fz={16} ta="center">Email</Table.Th>
+              <Table.Th fz={16} ta="center">Telefono</Table.Th>
+              <Table.Th fz={16} ta="center">Estado</Table.Th>
+              <Table.Th fz={16} ta="center">Rol</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>{rows}</Table.Tbody>
@@ -121,6 +95,6 @@ const SellerTable = () => {
       </ScrollArea>
     </>
   );
-}
+};
 
 export default SellerTable;
