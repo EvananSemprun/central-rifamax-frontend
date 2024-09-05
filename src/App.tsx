@@ -22,7 +22,10 @@ function App() {
           <Route path='dashboard' element={<Home />} />
           <Route path='sellers' element={<Seller />} />
         </Route>
-        <Route path="/x100?/t?/:integrator?/p?/:playerId?/c?/:currency?" element={<AuthRoute roles={ALL} />}>
+        <Route path='/' element={<AuthRoute roles={ALL} />}>
+          <Route index element={<Lobby />} />
+        </Route>
+        <Route path="x100?/t?/:integrator?/p?/:playerId?/c?/:currency?" element={<AuthRoute roles={ALL} />}>
           <Route index element={<TriplesLobby />} />
           <Route path='raffle/:raffleId' element={<TriplesRaffle />}>
             <Route path='infinty' element={<TriplesInfinity />} />
@@ -30,9 +33,6 @@ function App() {
         </Route>
         <Route path='dev' element={<AuthRoute roles={ADMIN} />}>
           <Route path='featureFlags' element={<FeatureFlags />} />
-        </Route>
-        <Route path='/' element={<AuthRoute roles={ALL} />}>
-          <Route path='/' element={<Lobby />} />
         </Route>
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
