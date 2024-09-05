@@ -208,4 +208,3 @@ export interface IRafflersResponse {
     pages: number;
   };
 }
-

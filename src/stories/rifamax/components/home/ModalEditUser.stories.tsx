@@ -1,17 +1,17 @@
-import ModalSendToApp from '@components/rifamax/home/ModalSendToApp';
+import ModalEditUser from '@/components/shared/Header/ModalEditUser';
 import { Center } from '@mantine/core';
 import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
-  title: 'Rifamax/Dashboard/Componentes/Modales/Enviar a App',
-  component: ModalSendToApp,
+  title: 'Rifamax/Dashboard/Componentes/Modales/editar usuario',
+  component: ModalEditUser,
 };
 
 export default meta;
 
 const Template: StoryFn = (args) => (
   <Center>
-    <ModalSendToApp raffle_id={0} {...args} />
+    <ModalEditUser  {...args} />
   </Center>
 )
 

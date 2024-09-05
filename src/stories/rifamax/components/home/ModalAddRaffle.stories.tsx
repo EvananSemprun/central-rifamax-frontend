@@ -8,7 +8,9 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn = (args) => <ModalAddRaffle {...args} />;
+const Template: StoryFn = (args) => <ModalAddRaffle refetchRaffles={function (): void {
+  throw new Error('Function not implemented.');
+} } {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

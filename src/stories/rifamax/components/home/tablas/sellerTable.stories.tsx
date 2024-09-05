@@ -1,17 +1,17 @@
-import ModalSendToApp from '@components/rifamax/home/ModalSendToApp';
+import SellerTable from './Sellertable';
 import { Center } from '@mantine/core';
 import { Meta, StoryFn } from '@storybook/react';
 
 const meta: Meta = {
-  title: 'Rifamax/Dashboard/Componentes/Modales/Enviar a App',
-  component: ModalSendToApp,
+  title: 'Rifamax/Dashboard/Componentes/Modales/tabla rifero',
+  component: SellerTable,
 };
 
 export default meta;
 
 const Template: StoryFn = (args) => (
   <Center>
-    <ModalSendToApp raffle_id={0} {...args} />
+    <SellerTable  {...args} />
   </Center>
 )
 

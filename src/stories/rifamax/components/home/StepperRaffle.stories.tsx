@@ -11,7 +11,9 @@ export default meta;
 
 const Template: StoryFn = (args) => (
   <Center>
-    <AddRaffleModal {...args} />
+    <AddRaffleModal refetchRaffles={function (): void {
+      throw new Error('Function not implemented.');
+    } } {...args} />
   </Center>
 )
 
