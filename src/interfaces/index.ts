@@ -1,7 +1,7 @@
+import { AxiosResponse } from 'axios';
 import { Style } from '@react-pdf/types/style'; 
 import { IGetProgressResponse, IRafflesResponse } from "./requests.interfaces";
-import { IRaffle, ISeller, IUser, Role, ITripleRaffle } from "./models.interfaces";
-import { AxiosResponse } from 'axios';
+import { IRaffle, ISeller, IUser, Role, ITripleRaffle, IUserIntegrator, MoneyType, IntegratorType } from "./models.interfaces";
 
 // General interfaces
 
@@ -216,7 +216,29 @@ export interface ITitlesRafflesAccordion {
  */
 export interface IWoodTitle {
   title: string;
-  variant: 'dashed' | 'dotted' | 'default'
+  variant: 'dashed' | 'dotted' | 'default';
+}
+
+/**
+ * @interface IIntegratorInfo
+ * @description IntegratorInfo component props interface
+ */
+export interface IIntegratorInfo {
+  currency?: MoneyType;
+  playerId?: string;
+  integratorToken?: string;
+  integrator?: IntegratorType;
+}
+
+/**
+ * @interface IRaffleTicket
+ * @description IRaffleTicket component props
+ */
+export interface IRaffleTicket {
+  value: number;
+  betType: 'Terminal' | 'Triple';
+  select?: boolean;
+  onSelect?: () => void;
 }
 
 /**
@@ -283,4 +305,24 @@ export interface TrustState {
  */
 export interface UserState {
   user: IUser["user"] | null;
+}
+
+/**
+ * @interface IntegratorUserState
+ * @description This is the auxiliary interface of IntegratorState
+ */
+export interface IntegratorUserState {
+  user: IUserIntegrator
+}
+
+/**
+ * @interface IntegratorState
+ * @description This is interface for the state of integrators in integratorSlice
+ */
+export interface IntegratorState {
+  player_id: number;
+  wallet_id: number;
+  currency: MoneyType;
+  balance: string;
+  data: IntegratorUserState
 }

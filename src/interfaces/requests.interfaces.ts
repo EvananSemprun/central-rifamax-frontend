@@ -1,5 +1,5 @@
-import { IRaffleForm } from ".";
-import { IRaffle, IUser } from "./models.interfaces";
+import { IntegratorUserState, IRaffleForm } from ".";
+import { IRaffle, IRaffler, IUser, MoneyType } from "./models.interfaces";
 
 // API responses interfaces
 
@@ -196,6 +196,15 @@ export interface IGetRafflers {
 }
 
 /**
+ * @interface IGetCDAPlayer
+ * @description Interface for getCDAPlayer request function
+ */
+export interface IGetCDAPlayer {
+  playerId: number;
+  currency: MoneyType;
+}
+
+/**
  * @interface IRafflersResponse
  * @description Interface for response sent via API of rafflers function
  */
@@ -207,4 +216,16 @@ export interface IRafflersResponse {
     items: number;
     pages: number;
   };
+}
+
+/**
+ * @interface ICDAResponse
+ * @description Interface for response sent via API of CDA Integrator
+ */
+export interface ICDAResponse {
+  player_id: number;
+  wallet_id: number;
+  balance: string;
+  currency: MoneyType;
+  data: IntegratorUserState;
 }

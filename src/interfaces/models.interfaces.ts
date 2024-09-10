@@ -11,6 +11,12 @@ export type Role = "Admin" | "Taquilla" | "Desarrollador" | "Influencer" | 'Rife
 export type DrawType = "Infinito" | "Fecha limite" | "Progresiva";
 
 /**
+ * @type DevType
+ * @description This is a general type for the differents dev tools types
+ */
+export type DevType = "Showed" | "Hidden" | "Hover";
+
+/**
  * @type RaffleType
  * @description This is a general type for the differents raffle type
  */
@@ -27,6 +33,12 @@ export type StatusType = "En venta" | "Finalizando" | "Cerrado"
  * @description This is a general type for the differents money type
  */
 export type MoneyType = "USD" | "VES" | "COP"
+
+/**
+ * @type IntegratorType
+ * @description This is a general type for the differents integrators type
+ */
+export type IntegratorType = "CDA" | "BetFM4"
 
 /**
  * @interface IUser
@@ -198,4 +210,16 @@ export interface IRaffler {
   phone: string;
   is_active: boolean;
   is_first_entry: boolean;
+}
+
+/**
+ * @interface IUserIntegrator
+ * @description This is a general interface for UserIntegrator on triple module
+ */
+export interface IUserIntegrator {
+  username: string;
+  name: string;
+  lastname: string;
+  email: string;
+  status: boolean;
 }

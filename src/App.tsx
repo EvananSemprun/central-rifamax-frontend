@@ -25,7 +25,7 @@ function App() {
         <Route path='/' element={<AuthRoute roles={ALL} />}>
           <Route index element={<Lobby />} />
         </Route>
-        <Route path="x100?/t?/:integrator?/p?/:playerId?/c?/:currency?" element={<AuthRoute roles={ALL} />}>
+        <Route path="x100?/i?/:integrator?/p?/:playerId?/c?/:currency?" element={<AuthRoute roles={ALL} />}>
           <Route index element={<TriplesLobby />} />
           <Route path='raffle/:raffleId' element={<TriplesRaffle />}>
             <Route path='infinty' element={<TriplesInfinity />} />

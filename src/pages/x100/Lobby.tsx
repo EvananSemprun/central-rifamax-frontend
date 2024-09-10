@@ -1,21 +1,32 @@
 import useAuth from "@hooks/useAuth"
 import LobbyCard from "@components/x100/LobbyCard"
+import IntegratorInfo from "@components/x100/IntegratorInfo"
 import { AxiosResponse } from "axios"
+import { useLocation, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { IconReload } from "@tabler/icons-react"
-import { getTriples } from "@/api/x100/Raffles.request"
-import { ITripleRaffle } from "@interfaces/models.interfaces"
+import { getTriples } from "@api/x100/Raffles.request"
+import { ITripleRaffle, MoneyType } from "@interfaces/models.interfaces"
 import { Avatar, Button, Card, Center, Grid, Loader, Text, Title } from "@mantine/core"
 
 function Lobby() {
   const { token } = useAuth();
+  const { integrator, playerId, currency } = useParams();
+  const { pathname } = useLocation();
   const { data: raffles, isLoading, isError, refetch } = useQuery<AxiosResponse<ITripleRaffle[]>>({
     queryKey: ['triples', 'raffles'],
     queryFn: () => getTriples({ token }),
     retry: 2
   })
+
   return (
-    <>
+    <div>
+      <IntegratorInfo 
+        currency={currency as MoneyType}
+        integratorToken={integrator}
+        playerId={playerId}
+        integrator="CDA"
+      />
       <Title 
         mt={15} 
         fw={350}
@@ -68,7 +79,7 @@ function Lobby() {
           )
         }
       </Grid>
-    </>
+    </div>
   )
 }
 

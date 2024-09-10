@@ -103,3 +103,15 @@ export const setOrdinal = (value: number): string => {
 
   return `${value}${getSuffix(value)}`;
 }
+
+export const maskEmail = (email: string) => {
+  const [name, domain] = email.split('@');
+
+  const parsedName = String(name)
+
+  if (parsedName.length <= 2) {
+    return email;
+  }
+  const maskedName = `${parsedName[0]}*****${parsedName[parsedName.length - 1]}`;
+  return `${maskedName}@${domain}`;
+};
