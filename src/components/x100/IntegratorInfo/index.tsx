@@ -12,7 +12,6 @@ import { getCDAPlayer } from "@api/x100/Integrator.request"
 import { ICDAResponse } from '@interfaces/requests.interfaces';
 import { Avatar, Button, Card, CopyButton, Group, Text } from "@mantine/core"
 import { IconClipboard, IconClipboardCheck, IconTool } from "@tabler/icons-react"
-
 function index({ playerId, integrator, integratorToken }: IIntegratorInfo) {
   const [showedStatus, setShowedStatus] = useState<DevType>('Hidden')
 
@@ -30,15 +29,12 @@ function index({ playerId, integrator, integratorToken }: IIntegratorInfo) {
   const handleShowedStatus = () => {
     setShowedStatus(showedStatus === 'Showed' ? 'Hidden' : 'Showed')
   }
-
   const hoverShowedStatus = () => {
     setShowedStatus('Hover')
   }
-
   const unhoverShowedStatus = () => {
     setShowedStatus('Showed')
   }
-
   const showedStatues = {
     'Hidden': '100vh',
     'Showed': 'calc(100vh - 70px)',
@@ -50,17 +46,17 @@ function index({ playerId, integrator, integratorToken }: IIntegratorInfo) {
     'Showed': 'block',
     'Hover': 'block'
   }
-
   useHotkeys([
     ['ctrl+K', handleShowedStatus]
   ]);
 
   if (isSuccess) {
-    setIntegrator(response.data)
+    setIntegrator(response.data);
   } else if (isError) {
-    console.log('no integrator would be removed')
-    // removeIntegrator()
+    console.log('Integrator data not found, attempting to remove integrator');
+    integratorData?.player_id ? removeIntegrator() : console.warn('No integrator data available, skipping removal');
   }
+  
 
   const ReceivedParamsCard = () => (
     <Card 
