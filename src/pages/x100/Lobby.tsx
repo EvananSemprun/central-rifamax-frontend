@@ -15,7 +15,7 @@ function Lobby() {
   const { pathname } = useLocation();
   const { data: raffles, isLoading, isError, refetch } = useQuery<AxiosResponse<ITripleRaffle[]>>({
     queryKey: ['triples', 'raffles'],
-    queryFn: () => getTriples({ token }),
+    queryFn: () => getTriples({ token: integrator ? integrator : token }),
     retry: 2
   })
 
@@ -44,7 +44,9 @@ function Lobby() {
             >
               <LobbyCard 
                 raffle={raffle}
-                url={`/x100/raffle/${raffle.id}`}
+                url={`${pathname}/raffle/${raffle.id}`}
+                integratorToken={integrator}
+                isIntegrator={integrator ? true : false}
               />
             </Grid.Col>
           ))

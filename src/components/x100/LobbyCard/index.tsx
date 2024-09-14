@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { ILobbyCard } from '@interfaces/index';
 import { Card, Text, Group, Center, Badge } from '@mantine/core';
 
-function LobbyCard({ raffle, url }: ILobbyCard) {
+function LobbyCard({ raffle, url, isIntegrator = false, integratorToken }: ILobbyCard) {
   const [isHovering, setIsHovering] = useState<boolean>(false)
 
   const navigate = useNavigate()
@@ -60,7 +60,14 @@ function LobbyCard({ raffle, url }: ILobbyCard) {
           </Group>
         </div>
       </div>
-      { isHovering && <RaffleCard raffle={raffle} /> }
+      { isHovering && (
+          <RaffleCard 
+            raffle={raffle} 
+            isIntegrator={isIntegrator}
+            integratorToken={integratorToken}
+          /> 
+        )
+      }
     </Card>
   );
 }

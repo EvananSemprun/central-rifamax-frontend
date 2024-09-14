@@ -8,12 +8,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getProgress } from "@api/x100/Raffles.request";
 import { IGetProgressResponse } from "@interfaces/requests.interfaces";
 
-const RaffleCard: React.FC<IRaffleCard> = ({ raffle }: IRaffleCard) => {
+const RaffleCard: React.FC<IRaffleCard> = ({ raffle, integratorToken = '', isIntegrator }: IRaffleCard) => {
   const { token } = useAuth();
 
   const { data: request, isPending } = useQuery<AxiosResponse<IGetProgressResponse>>({
     queryKey: ['raffle', 'progress', raffle.id],
-    queryFn: () => getProgress({ token: token, raffleId: raffle.id})
+    queryFn: () => getProgress({ token: isIntegrator ? integratorToken : token, raffleId: raffle.id})
   })
 
   return (
