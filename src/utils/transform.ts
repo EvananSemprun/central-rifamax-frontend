@@ -24,7 +24,7 @@ export const toBet = ({ value, betType }: IToBet): string => {
     case 'Infinito':
       return padNumber(value === 1000 ? 0 : value, 3);
     case 'Terminal':
-      return padNumber(value, 2);
+      return padNumber(value === 100 ? 0 : value, 2);
     case 'Raffle':
       return padNumber(value > 999 ? 0 : value, 3);
     default:
@@ -104,13 +104,19 @@ export const setOrdinal = (value: number): string => {
   return `${value}${getSuffix(value)}`;
 }
 
+/**
+ * Converts an email to a censored email to persevate privacy of client.
+ * 
+ * @param email - The email value to be converted in an censored email.
+ * @returns The email of client but censored by first letter, next ******, then final letter before @ and finally the @domain.xyz
+ */
 export const maskEmail = (email: string) => {
   const [name, domain] = email.split('@');
 
   const parsedName = String(name)
 
   if (parsedName.length <= 2) {
-    return email;
+    return email; 
   }
   const maskedName = `${parsedName[0]}*****${parsedName[parsedName.length - 1]}`;
   return `${maskedName}@${domain}`;
