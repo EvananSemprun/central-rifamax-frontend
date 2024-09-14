@@ -1,4 +1,5 @@
 import useAuth from '@hooks/useAuth'
+import useIntegrator from '@hooks/useIntegrator'
 import LoaderScreen from '../Loaders/LoaderScreen'
 import Header from '@components/shared/Header/Header'
 import { AxiosResponse } from 'axios'
@@ -10,10 +11,13 @@ import { notifications } from '@mantine/notifications'
 import { refreshTokenRequest } from '@api/shared/AuthRoute.request'
 import { IRenewTokenResponse } from '@interfaces/requests.interfaces'
 
-function index({ roles }: IAuthRoute) {
+function index({ integration = false, roles }: IAuthRoute) {
   const { logout, token } = useAuth()
+  const { integrator } = useIntegrator()
 
-  const { data: request, isLoading, error, isSuccess } = useQuery<AxiosResponse<IRenewTokenResponse, string>>({
+  const showWhenIntegrator = integrator.data.user.email ? false : true 
+  
+  const { data: request, isLoading, isError, isSuccess } = useQuery<AxiosResponse<IRenewTokenResponse, string>>({
     queryKey: ['auth', 'route'],
     retry: 1,
     queryFn: () => refreshTokenRequest(token),
@@ -21,7 +25,7 @@ function index({ roles }: IAuthRoute) {
 
   if (isLoading) return <LoaderScreen label='Verificando acceso...' />
 
-  if (error) {
+  if (isError && !integration) {
     logout()
     notifications.clean()
     InfoNotification({
@@ -40,7 +44,7 @@ function index({ roles }: IAuthRoute) {
 
   return (
     <>
-      <Header />
+      { showWhenIntegrator && <Header /> }
       <Outlet />
     </>
   )

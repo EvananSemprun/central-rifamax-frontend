@@ -1,0 +1,13 @@
+.currencyButtonWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+.currencyText {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: .9rem;
+  text-align: center;
+  margin-right: -7px;
+}

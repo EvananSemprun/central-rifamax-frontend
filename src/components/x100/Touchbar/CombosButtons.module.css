@@ -1,0 +1,12 @@
+.combosButtonWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+.combosText {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: .9rem;
+  text-align: center;
+}

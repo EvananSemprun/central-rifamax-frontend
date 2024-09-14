@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import { Style } from '@react-pdf/types/style'; 
 import { IGetProgressResponse, IRafflesResponse } from "./requests.interfaces";
 import { IRaffle, ISeller, IUser, Role, ITripleRaffle, IUserIntegrator, MoneyType, IntegratorType } from "./models.interfaces";
+import { MantineColor, MantineSize, MantineSpacing } from '@mantine/core';
 
 // General interfaces
 
@@ -10,6 +11,21 @@ import { IRaffle, ISeller, IUser, Role, ITripleRaffle, IUserIntegrator, MoneyTyp
  * @description This type includes all existent types of Bets/Raffles.
  */
 export type BetType = 'Triple' | 'Terminal' | 'Infinito' | 'Raffle';
+
+/**
+ * @type MantineVariantButtons
+ * @description This type includes all existent types of variants of buttons in Mantine.
+ */
+export type MantineVariantButtons = 'subtle' | 'light' | 'default' | 'filled' | 'white'
+
+/**
+ * @type IComboData
+ * @description This interface includes all existent types of combos.
+ */
+export interface IComboData {
+  value: number;
+  price: number;
+}
 
 /**
  * @interface IQRCode
@@ -36,6 +52,8 @@ export interface IToBet {
  */
 export interface IRaffleCard {
   raffle: ITripleRaffle;
+  integratorToken?: string;
+  isIntegrator: boolean;
 }
 
 /**
@@ -55,6 +73,8 @@ export interface IRaffleCardContent {
 export interface ILobbyCard {
   raffle: ITripleRaffle;
   url: string;
+  integratorToken?: string;
+  isIntegrator?: boolean;
 }
 
 /**
@@ -80,6 +100,7 @@ export interface INotifications {
  * @description This is the interface for the AuthRoute component
  */
 export interface IAuthRoute {
+  integration?: boolean;
   roles: Role[];
 }
 
@@ -153,6 +174,18 @@ export interface IRepeatRaffleForm {
 export interface ICardRaffle {
   raffle: IRaffle;
 }
+
+/**
+ * @interface IUseAsyncGenerator
+ * @description useAsyncGenerator hook interface
+ */
+export interface IUseAsyncGenerator<T> {
+  data?: T;
+  loading: boolean;
+  error?: any;
+  refetch: () => void;
+}
+
 
 /**
  * @interface ITicketRaffle
@@ -238,7 +271,71 @@ export interface IRaffleTicket {
   value: number;
   betType: 'Terminal' | 'Triple';
   select?: boolean;
+  className?: string;
   onSelect?: () => void;
+}
+
+/**
+ * @interface IPagyButtons
+ * @description PagyButtons component on triples modules props
+ */
+export interface IPagyButtons {
+  onPressedUp?: () => void;
+  onPressedDown?: () => void;
+  disabledUp: boolean;
+  disabledDown: boolean;
+  p?: MantineSpacing;
+  size?: MantineSize;
+  className?: string;
+  color?: MantineColor;
+  variant?: MantineVariantButtons;
+}
+
+/**
+ * @interface ICurrencyButtons
+ * @description CurrencyButtons component on triples modules props
+ */
+export interface ICurrencyButtons {
+  borders?: boolean;
+  bg?: MantineColor;
+  size?: MantineSize;
+  color?: MantineColor;
+  defaultCurrency: MoneyType;
+  onChange?: (value: MoneyType) => void;
+}
+
+/**
+ * @interface ICombosButtons
+ * @description CombosButtons component on triples modules props
+ */
+export interface ICombosButtons {
+  p?: MantineSpacing;
+  px?: MantineSpacing;
+  size?: MantineSize;
+  className?: string;
+  data: IComboData[];
+  color?: MantineColor;
+  variant?: MantineVariantButtons;
+  onSelect: (price: number, value: number) => void;
+}
+
+/**
+ * @interface IPriceText
+ * @description PriceText component on triples modules props
+ */
+export interface IPriceText {
+  price: number;
+}
+
+/**
+ * @interface ITouchBar
+ * @description TouchBar component on triples modules props
+ */
+export interface ITouchBar {
+  priceText: IPriceText;
+  pagyButton: IPagyButtons;
+  combosButtons: ICombosButtons;
+  currencyButton: ICurrencyButtons;
 }
 
 /**
@@ -248,7 +345,6 @@ export interface IRaffleTicket {
 export interface IAddSeller {
   onSubmit: (data: IAddSellerForm) => void;
 }
-
 
 /**
  * @interface IAddSellerForm
