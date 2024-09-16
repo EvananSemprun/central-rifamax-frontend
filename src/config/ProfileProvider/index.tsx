@@ -14,36 +14,17 @@ interface IProfileProvider {
 }
 
 export const ProfileProvider = ({ retry, children }: IProfileProvider) => {
-  const { token, logout } = useAuth()
+  const { token } = useAuth()
   const { updateNoToken } = useUser()
   
   const location = useLocation()
 
-  const { data: query, isSuccess, isError, isLoading} = useQuery<AxiosResponse<IUser['user']>>({
+  const { data: query, isSuccess, isLoading} = useQuery<AxiosResponse<IUser['user']>>({
     queryKey: ['user', 'profile'],
     queryFn: () => getUserProfile(token),
     retry: retry,
     enabled: !publicRoutes.includes(location.pathname) && !!token,
   })
-
-  // if (isError) {
-  //   updateNoToken({
-  //     user: {
-  //       id: 0,
-  //       avatar: null,
-  //       name: 'Integrator',
-  //       email: 'integrator@gmail.com',
-  //       dni: 'J-00000000',
-  //       is_active: true,
-  //       phone: '+58 (412) 000-0000',
-  //       role: 'Taquilla',
-  //       content_code: null,
-  //       influencer_id: 0,
-  //       is_first_entry: false
-  //     }
-  //   }) 
-  //   return null
-  // }
 
   if (isSuccess) {
     updateNoToken({ user: query.data })

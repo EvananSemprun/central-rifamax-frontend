@@ -1,6 +1,7 @@
 import classes from './TripleRaffle.module.css'
 import TouchBar from '@components/x100/Touchbar'
 import useIntegrator from '@hooks/useIntegrator'
+import RaffleTicket from '@components/x100/RaffleTicket'
 import IntegratorInfo from '@components/x100/IntegratorInfo'
 import { useState } from 'react'
 import { MoneyType } from '@interfaces/models.interfaces'
@@ -77,10 +78,22 @@ function TripleRaffle() {
       </div>
       <div className={integrator ? classes.integratorWrapper : classes.wrapper}>
         <div className={classes.ticketsWrapper}>
+          <div className={classes.ticketsContainer}>
+            {
+              Array(100).fill('').map((_, key) => (
+                <RaffleTicket
+                  value={key + 1}
+                  betType='Terminal'
+                  className={classes.ticket}
+                />
+              ))
+            }
+          </div>
         </div>
-        { width >= 1150 && (
+        { 
+          width >= 1150 && (
             <div className={classes.resultWrapper}>
-              {/* Ticket order selected */}
+              
             </div> 
           )
         }

@@ -13,7 +13,6 @@ function index({
     <Button 
       disabled={!select} 
       className={className}
-      size="lg"
       radius="lg"
       onSelect={() => {
         select ? onSelect : undefined
