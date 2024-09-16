@@ -1,22 +1,34 @@
+import useAuth from '@hooks/useAuth'
 import classes from './TripleRaffle.module.css'
 import TouchBar from '@components/x100/Touchbar'
 import useIntegrator from '@hooks/useIntegrator'
-import RaffleTicket from '@components/x100/RaffleTicket'
+import ErrorPage from '@components/shared/ErrorPage'
 import IntegratorInfo from '@components/x100/IntegratorInfo'
+import LoaderScreen from '@components/shared/Loaders/LoaderScreen'
 import { useState } from 'react'
-import { MoneyType } from '@interfaces/models.interfaces'
-import { useNavigate, useParams } from 'react-router-dom'
+import { AxiosResponse } from 'axios'
 import { useViewportSize } from '@mantine/hooks'
+import { useQuery } from '@tanstack/react-query'
+import { getTripleById } from '@api/x100/Raffles.request'
+import { useNavigate, useParams } from 'react-router-dom'
+import { ITripleRaffle, MoneyType } from '@interfaces/models.interfaces'
 
 function TripleRaffle() {
+  const { token } = useAuth();
+  const { width } = useViewportSize();
+  const { integrator, playerId, raffleId, currency } = useParams();
+  
+  const [currencySelected, setCurrencySelected] = useState<MoneyType>(currency as MoneyType || 'USD')
+ 
   const navigate = useNavigate();
   const dataIntegrator = useIntegrator().integrator;
-
-  const { width } = useViewportSize();
-
-  const { integrator, playerId, raffleId, currency } = useParams();
-
-  const [currencySelected, setCurrencySelected] = useState<MoneyType>(currency as MoneyType || 'USD')
+  const selectToken = integrator ? integrator : token
+  
+  const { data: raffle, isLoading, isError, refetch } = useQuery<AxiosResponse<ITripleRaffle>>({
+    retry: 1,
+    queryKey: ['raffle', raffleId],
+    queryFn: () => getTripleById({ token: selectToken, raffleId: Number(raffleId) }),
+  })
 
   const changeExchange = (value: MoneyType) => {
     setCurrencySelected(value)
@@ -27,6 +39,16 @@ function TripleRaffle() {
 
   return (
     <>
+      <ErrorPage
+        show={isError}
+        onClick={refetch}
+        label='¡Oops! Ha ocurrido un error al cargar las rifas'
+        buttonLabel='Recargar rifas'
+      />
+      <LoaderScreen
+        label='Cargando Rifa...'
+        show={isLoading}
+      />
       <IntegratorInfo
         currency={currency as MoneyType}
         integratorToken={integrator}
@@ -55,23 +77,14 @@ function TripleRaffle() {
               },
             }}
             combosButtons={{
-              data: [
-                {
-                  price: 2,
-                  value: 4
-                },
-                {
-                  price: 3,
-                  value: 8
-                }
-              ],
+              data: raffle?.data.combos || [],
               onSelect(price, value) {
                 console.log('price', price)
                 console.log('value', value)
               },
             }}
             priceText={{
-              price: 4
+              price: raffle?.data.price_unit || 0
             }}
           />
         </div>
@@ -79,15 +92,6 @@ function TripleRaffle() {
       <div className={integrator ? classes.integratorWrapper : classes.wrapper}>
         <div className={classes.ticketsWrapper}>
           <div className={classes.ticketsContainer}>
-            {
-              Array(100).fill('').map((_, key) => (
-                <RaffleTicket
-                  value={key + 1}
-                  betType='Terminal'
-                  className={classes.ticket}
-                />
-              ))
-            }
           </div>
         </div>
         { 

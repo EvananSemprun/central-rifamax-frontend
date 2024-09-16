@@ -77,6 +77,15 @@ export interface IGetTriples {
 }
 
 /**
+ * @interface IGetTripleById
+ * @description Interface of getTripleById request function
+ */
+export interface IGetTripleById {
+  token: string;
+  raffleId: number;
+}
+
+/**
  * @interface IGetClosedRaffles
  * @description Interface of getClosedRaffles request function
  */

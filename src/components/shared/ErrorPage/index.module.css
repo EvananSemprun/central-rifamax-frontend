@@ -1,0 +1,16 @@
+.errorPageWrapper { 
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  z-index: 999999;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.errorPageCard {
+  height: 100px;
+  max-width: 450px;
+}

@@ -27,9 +27,9 @@ function CombosButtons({
             color={color}
             variant={variant}
             className={className}
-            onClick={() => onSelect(combo.price, combo.value)}
+            onClick={() => onSelect(combo.price, combo.quantity)}
           >
-            {combo.value} × {combo.price}$
+            {combo.quantity} × {combo.price}$
           </Button>
         ))
       }

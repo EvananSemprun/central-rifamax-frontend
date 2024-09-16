@@ -6,7 +6,7 @@ function IntegratorPicker({ onSelect }: IIntegratorPicker) {
   return (
     <div className={classes.integratorPickerWrapper}>
       <Text className={classes.integratorPickerTitle}>
-        Select an integrator handle it's simulation
+        Select an integrator to handle it's simulation
       </Text>
     </div>
   )

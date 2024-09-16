@@ -23,7 +23,7 @@ export type MantineVariantButtons = 'subtle' | 'light' | 'default' | 'filled' | 
  * @description This interface includes all existent types of combos.
  */
 export interface IComboData {
-  value: number;
+  quantity: number;
   price: number;
 }
 
@@ -344,6 +344,26 @@ export interface ITouchBar {
  */
 export interface IIntegratorHeaders {
   integrator: IntegratorType
+}
+
+/**
+ * @interface ILoaderScreen
+ * @description LoaderScreen component props interface
+ */
+export interface ILoaderScreen {
+  show?: boolean;
+  label?: string;
+}
+
+/**
+ * @interface IErrorPage
+ * @description ErrorPage component props interface
+ */
+export interface IErrorPage {
+  show?: boolean;
+  label?: string;
+  onClick?: () => void;
+  buttonLabel?: string;
 }
 
 /**
