@@ -339,6 +339,22 @@ export interface ITouchBar {
 }
 
 /**
+ * @interface IIntegratorHeaders
+ * @description IntegratorHeaders component props interface
+ */
+export interface IIntegratorHeaders {
+  integrator: IntegratorType
+}
+
+/**
+ * @interface IIntegratorPicker
+ * @description IntegratorPicker component props interface
+ */
+export interface IIntegratorPicker {
+  onSelect?: (select: IntegratorType) => void
+}
+
+/**
  * @interface IAddSeller
  * @description AddSeller component props interface
  */

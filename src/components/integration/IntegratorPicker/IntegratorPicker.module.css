@@ -1,0 +1,14 @@
+.integratorPickerWrapper {
+  position: absolute;
+  width: 400px;
+  height: 600px;
+  top: 0;
+  left: 0;
+  background-color: var(--mantine-color-blue-6);
+}
+
+.integratorPickerTitle {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 300;
+}
