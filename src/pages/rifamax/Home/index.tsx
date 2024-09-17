@@ -39,14 +39,16 @@ function Index() {
     placeholderData: keepPreviousData,
   });
 
-
   const changeQueryType = (value: string | null) => {
     if (value === 'newest') {
       setStep(1);
+    } else if (value === 'initialized') {
+      setStep(2);
     }
     setQueryType(value);
     setPage(1);
-  }
+  };
+  
 
   const handlePage = (value: number) => {
     if (!isPlaceholderData) {
@@ -138,7 +140,7 @@ function Index() {
   return (
     <Wrapper>
       <ScrollArea.Autosize h={isSmallScreen ? 'calc(100vh - 500px)' : 'calc(100vh - 240px)'} type='never' scrollbars='y'>
-        <RafflesAccordion step={step} data={rafflesData?.data.raffles || []} />
+      <RafflesAccordion step={step} data={rafflesData?.data.raffles || []} refetchRaffles={refetch} />
       </ScrollArea.Autosize>
     </Wrapper>
   );

@@ -1,7 +1,7 @@
 import classes from './Headers.module.css'
+import IntegratorPicker from '../IntegratorPicker/IntegratorPicker'
 import { ReactNode, useState } from 'react'
 import { IIntegratorHeaders } from '@interfaces/index'
-import IntegratorPicker from '../IntegratorPicker/IntegratorPicker'
 
 function Headers({ integrator }: IIntegratorHeaders) {
   const [importPromise, setImportPromise] = useState<ReactNode | null>(null)

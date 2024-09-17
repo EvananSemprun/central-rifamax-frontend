@@ -14,12 +14,13 @@ interface IWrapper {
   children?: React.ReactNode;
 }
 
-function Index({ step, data }: IRafflesAccordion) {
+function Index({ step, data, refetchRaffles }: IRafflesAccordion & { refetchRaffles: () => void }) {
   const [selected, setSelected] = useState<string | null>(null);
   const isSmallScreen = useMediaQuery('(max-width: 940px)');
   const handleSelect = (key: string) => {
     setSelected(selected === key ? null : key);
   }
+
   const ResponsiveSection = ({ children }: IWrapper) =>
     isSmallScreen ? (
       <Stack align='center'>
@@ -28,6 +29,7 @@ function Index({ step, data }: IRafflesAccordion) {
     ) : (
       <Group justify="space-between">{children}</Group>
     );
+
   const raffles = data.map((raffle, key: number) => (
     <>
       <Accordion.Item
@@ -35,16 +37,23 @@ function Index({ step, data }: IRafflesAccordion) {
         className={selected === String(key) ? classes.itemActive : classes.item}
         value={String(key)}
       >
-        <Accordion.Control
-          onClick={() => handleSelect(String(key))}
-        >
+        <Accordion.Control onClick={() => handleSelect(String(key))}>
           <ResponsiveSection>
             <Group>
               <TitlesRafflesAccordion id={raffle.id} numbers={raffle.numbers} />
-              <InfoRafflesAccordion title={raffle.title} init_date={raffle.init_date} seller={raffle.seller.name} />
+              <InfoRafflesAccordion
+                title={raffle.title}
+                init_date={typeof raffle.init_date === 'string' ? raffle.init_date : raffle.init_date.toISOString()}
+                seller={raffle.seller.name}
+              />
+
             </Group>
             <Group>
-              {step === 1 ? <AccordionStepOne raffle_id={raffle.id} /> : <AccordionStepTwo raffle_id={raffle.id} wildcard={raffle.security} />}
+              {step === 1 ? (
+                <AccordionStepOne raffle_id={raffle.id} refetchRaffles={refetchRaffles} />
+              ) : (
+                <AccordionStepTwo raffle_id={raffle.id} wildcard={raffle.security} />
+              )}
             </Group>
           </ResponsiveSection>
         </Accordion.Control>
@@ -58,13 +67,11 @@ function Index({ step, data }: IRafflesAccordion) {
     </>
   ));
 
-  return (
-    data.length > 0 ? (
-      <Accordion variant='filled' chevron={false}>
-        {raffles}
-      </Accordion>
-    ) : <RafflesEmpty />
-  );
+  return data.length > 0 ? (
+    <Accordion variant='filled' chevron={false}>
+      {raffles}
+    </Accordion>
+  ) : <RafflesEmpty />;
 }
 
 export default Index;

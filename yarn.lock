@@ -4952,7 +4952,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/send@npm:*":
+"@types/send@npm:*, @types/send@npm:^0":
   version: 0.17.4
   resolution: "@types/send@npm:0.17.4"
   dependencies:
@@ -12191,6 +12191,7 @@ __metadata:
     "@types/react-dom": "npm:types-react-dom@rc"
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/react-test-renderer": "npm:^18.3.0"
+    "@types/send": "npm:^0"
     "@types/uuid": "npm:^10.0.0"
     "@typescript-eslint/eslint-plugin": "npm:^7.15.0"
     "@typescript-eslint/parser": "npm:^7.15.0"
@@ -12228,6 +12229,7 @@ __metadata:
     react-test-renderer: "npm:19.0.0-rc-512b09b2-20240718"
     recharts: "npm:2"
     rxjs: "npm:^7.8.1"
+    send: "npm:0.19.0"
     storybook: "npm:^8.2.7"
     storybook-dark-mode: "npm:^4.0.2"
     ts-jest: "npm:^29.2.4"

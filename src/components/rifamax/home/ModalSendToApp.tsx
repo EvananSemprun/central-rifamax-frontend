@@ -8,25 +8,26 @@ import { Title, Button, Grid ,Text} from "@mantine/core";
 import { IconDeviceMobileMessage } from "@tabler/icons-react";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
-function ModalSendToApp({ raffle_id }: IAccordionSteps) {
-  const { token } = useAuth()
+function ModalSendToApp({ raffle_id, refetchRaffles }: IAccordionSteps & { refetchRaffles: () => void }) {
+  const { token } = useAuth();
 
   const mutation = useMutation({
     mutationFn: sendToApp,
-    onSuccess: () => (
-      SuccessNotification({ 
-        position: 'top', 
-        title: 'Rifa enviada con exito.', 
-        label: 'Su rifa ha sido enviada exitosamente, revise la App de Rifamax.' 
-      })
-    ),
-    onError: () => (
-      ErrorNotification({ 
-        position: 'top', 
-        title: 'Ha ocurrido un error.', 
-        label: 'Ha ocurrido un error a enviar la rifa a la app.' 
-      })
-    )
+    onSuccess: () => {
+      SuccessNotification({
+        position: 'top',
+        title: 'Rifa enviada con éxito.',
+        label: 'Su rifa ha sido enviada exitosamente, revise la App de Rifamax.'
+      });
+      refetchRaffles(); // Refrescar las rifas después de enviar a la app
+    },
+    onError: () => {
+      ErrorNotification({
+        position: 'top',
+        title: 'Ha ocurrido un error.',
+        label: 'Ha ocurrido un error al enviar la rifa a la app.'
+      });
+    }
   });
 
   const openSentToAppModal = () => modals.open({
@@ -63,7 +64,6 @@ function ModalSendToApp({ raffle_id }: IAccordionSteps) {
           </Grid.Col>
         </Grid>
         <Text mt={10} ta='center' c="dimmed">Esta acción es irreversible</Text>
-
       </>
     )
   });

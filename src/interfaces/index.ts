@@ -10,8 +10,7 @@ import { MantineColor, MantineSize, MantineSpacing } from '@mantine/core';
  * @type BetType
  * @description This type includes all existent types of Bets/Raffles.
  */
-export type BetType = 'Triple' | 'Terminal' | 'Infinito' | 'Raffle';
-
+export type BetType = 'Triple' | 'Terminal' | 'Infinito' | 'Raffle' | 'Sequency';
 /**
  * @type MantineVariantButtons
  * @description This type includes all existent types of variants of buttons in Mantine.

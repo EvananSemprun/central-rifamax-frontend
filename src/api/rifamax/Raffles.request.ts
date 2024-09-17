@@ -42,7 +42,7 @@ export const addRaffles = ({ token, data }: IAddRaffles) => {
 
 // POST /rifamax/raffles/send
 export const sendToApp = ({ token, raffle_id }: ISendToApp) => {
-  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/send`, {
+  return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/send_app`, {
     raffle_id: raffle_id
   }, {
     headers: {

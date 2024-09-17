@@ -24,9 +24,11 @@ export const toBet = ({ value, betType }: IToBet): string => {
     case 'Infinito':
       return padNumber(value === 1000 ? 0 : value, 3);
     case 'Terminal':
-      return padNumber(value === 100 ? 0 : value, 2);
+      return padNumber(value, 2);
     case 'Raffle':
       return padNumber(value > 999 ? 0 : value, 3);
+    case 'Sequency':
+      return padNumber(value, 5)
     default:
       return String(value);
   }
