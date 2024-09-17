@@ -4521,7 +4521,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/body-parser@npm:*, @types/body-parser@npm:^1":
+"@types/body-parser@npm:*":
   version: 1.19.5
   resolution: "@types/body-parser@npm:1.19.5"
   dependencies:
@@ -12255,7 +12255,6 @@ __metadata:
     "@types/actioncable": "npm:^5.2.11"
     "@types/babel__core": "npm:^7"
     "@types/babel__preset-env": "npm:^7"
-    "@types/body-parser": "npm:^1"
     "@types/express": "npm:^4"
     "@types/identity-obj-proxy": "npm:^3"
     "@types/jest": "npm:^29.5.12"
@@ -12272,7 +12271,6 @@ __metadata:
     actioncable: "npm:5.2.8-1"
     axios: "npm:^1.7.4"
     babel-jest: "npm:^29.7.0"
-    body-parser: "npm:1.20.3"
     chromatic: "npm:^11.7.0"
     commitizen: "npm:^4.3.0"
     dayjs: "npm:^1.11.12"
