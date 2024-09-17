@@ -11,8 +11,8 @@ export function TitlesRafflesAccordion({ id, numbers }: ITitlesRafflesAccordion)
         <Text size="sm">Numero</Text>
       </Group>
       <Group justify="space-between">
-        <RepeatRaffleModal />
-        <Chip checked={false} variant="outline" size='sm' color="gray">{id}</Chip>
+      <RepeatRaffleModal raffle_id={id} />
+      <Chip checked={false} variant="outline" size='sm' color="gray">{id}</Chip>
         <Chip checked={false} variant="outline" size='sm' color="gray">{numbers}</Chip>
       </Group>
     </div>
