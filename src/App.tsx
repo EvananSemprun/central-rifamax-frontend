@@ -7,6 +7,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 const Lobby = lazy(() => import('@pages/shared/Lobby'))
 const Login = lazy(() => import('@pages/shared/Login'))
 const Home = lazy(() => import('@pages/rifamax/Home'))
+const Emulator = lazy(() => import('@pages/x100/Emulator'))
 const Seller = lazy(() => import('@pages/rifamax/Seller'))
 const TriplesLobby = lazy(() => import('@pages/x100/Lobby'))
 const TriplesRaffle = lazy(() => import('@pages/x100/TripleRaffle'))
@@ -17,7 +18,8 @@ function App() {
   return (
     <Suspense fallback={<LoaderScreen label='Cargando aplicación...' />}>
       <Routes>
-        <Route path='login' element={<Login />} />
+        <Route path='login' element={<Login />} /> 
+        <Route path='Emulator' element={<Emulator />} />
         <Route path='rifamax' element={<AuthRoute roles={ALL} />}>
           <Route path='dashboard' element={<Home />} />
           <Route path='sellers' element={<Seller />} />
@@ -32,7 +34,8 @@ function App() {
           </Route>
         </Route>
         <Route path='dev' element={<AuthRoute roles={ADMIN} />}>
-          <Route path='featureFlags' element={<FeatureFlags />} />
+        <Route path='featureFlags' element={<FeatureFlags />} />
+       
         </Route>
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
