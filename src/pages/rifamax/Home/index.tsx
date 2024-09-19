@@ -1,5 +1,5 @@
 import useAuth from '@hooks/useAuth';
-import classes from './index.module.css';
+import classes from './Home.module.css';
 import Titles from '@components/shared/Titles';
 import LoaderBlur from '@components/shared/Loaders/LoaderBlur';
 import StacksRaffle from '@components/rifamax/home/StacksRaffle';
@@ -18,7 +18,7 @@ interface IWrapper {
   children?: React.ReactNode;
 }
 
-function Index() {
+function Home() {
   const items = 7;
   const isSmallScreen = useMediaQuery('(max-width: 940px)');
   const iconStyle = { width: rem(16), height: rem(16) };
@@ -146,4 +146,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default Home;

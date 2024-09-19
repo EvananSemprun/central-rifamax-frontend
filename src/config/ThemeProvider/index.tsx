@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { createContext, useContext, useState, useEffect } from 'react';
 import { MantineProvider, createTheme, MantineColorsTuple, MantineTheme } from '@mantine/core';
-// import { AnimatePresence, motion } from 'framer-motion';
 
 const ThemeContext = createContext<MantineTheme | null>(null);
 
@@ -40,13 +39,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   return (
 	<ThemeContext.Provider value={currentTheme as MantineTheme}>
 	  <MantineProvider theme={currentTheme} forceColorScheme="dark">
-			{/* <div style={{ width: '100%', height: '100vh' }}>
-				<motion.div>
-					<AnimatePresence initial={false}> */}
-					{children}
-					{/* </AnimatePresence>
-				</motion.div>
-			</div> */}
+			{children}
 	  </MantineProvider>
 	</ThemeContext.Provider>
   );

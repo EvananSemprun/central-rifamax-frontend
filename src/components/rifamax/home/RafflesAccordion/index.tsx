@@ -3,8 +3,8 @@ import CardRaffle from '../CardRaffle';
 import RafflesEmpty from './RafflesEmpty';
 import { useState } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
-import { IRafflesAccordion } from '@interfaces/index';
 import { Accordion, Divider, Group, Stack } from '@mantine/core';
+import { IRafflesAccordion, IRefetchRaffle } from '@interfaces/index';
 import { AccordionStepTwo } from '../RafflesAccordion/AccordionStepTwo';
 import { AccordionStepOne } from '../RafflesAccordion/AccordionStepOne';
 import { InfoRafflesAccordion } from '../RafflesAccordion/InfoRafflesAccordion';
@@ -14,7 +14,7 @@ interface IWrapper {
   children?: React.ReactNode;
 }
 
-function Index({ step, data, refetchRaffles }: IRafflesAccordion & { refetchRaffles: () => void }) {
+function Index({ step, data, refetchRaffles }: IRafflesAccordion & IRefetchRaffle) {
   const [selected, setSelected] = useState<string | null>(null);
   const isSmallScreen = useMediaQuery('(max-width: 940px)');
   const handleSelect = (key: string) => {

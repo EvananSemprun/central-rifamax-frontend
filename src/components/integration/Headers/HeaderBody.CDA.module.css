@@ -16,16 +16,16 @@
   gap: 1rem;
 }
 
-.nav-item {
+.navItem {
   font-weight: bold;
   cursor: pointer;
 }
 
-.nav-item:hover {
+.navItem:hover {
   color: #007bff;
 }
 
-.sub-header {
+.subHeader {
   display: flex;
   justify-content: space-between; 
   align-items: center;
@@ -34,22 +34,22 @@
   padding: 0 1rem;
 }
 
-.sub-nav-left {
+.subNavLeft {
   display: flex;
   gap: 1rem;
 }
 
-.sub-nav-right {
+.subNavRight {
   display: flex;
   align-items: center;
 }
 
-.sub-nav-item {
+.subNavItem {
   margin: 0 1rem;
   font-weight: bold;
   cursor: pointer;
 }
 
-.sub-nav-item:hover {
+.subNavItem:hover {
   color: #495057;
 }

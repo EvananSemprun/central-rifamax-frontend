@@ -11,11 +11,18 @@ import { MantineColor, MantineSize, MantineSpacing } from '@mantine/core';
  * @description This type includes all existent types of Bets/Raffles.
  */
 export type BetType = 'Triple' | 'Terminal' | 'Infinito' | 'Raffle' | 'Sequency';
+
 /**
  * @type MantineVariantButtons
  * @description This type includes all existent types of variants of buttons in Mantine.
  */
 export type MantineVariantButtons = 'subtle' | 'light' | 'default' | 'filled' | 'white'
+
+/**
+ * @type MantineVariantButtons
+ * @description This type includes all existent types of variants of buttons in Mantine.
+ */
+export type NavbarType = 'Rifamax' | 'CDA' | 'BetFm4' 
 
 /**
  * @type IComboData
@@ -135,7 +142,15 @@ export interface IAddRaffleForm {
  */
 export interface IAccordionSteps {
   raffle_id: number;
-  wildcard?: string
+  wildcard?: string;
+}
+
+/**
+ * @interface IRefetchRaffle
+ * @description interface dedicated to refetch raffles function
+ */
+export interface IRefetchRaffle {
+  refetchRaffles: () => void
 }
 
 /**
@@ -412,6 +427,14 @@ export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
  */
 export interface ConfettiState {
   isRunning: boolean;
+}
+
+/**
+ * @interface NavbarState
+ * @description This is the interface for the state of the NavbarState
+ */
+export interface NavbarState {
+  navbar: NavbarType
 }
 
 /**

@@ -1,4 +1,5 @@
 import useAuth from '@hooks/useAuth'
+import useNavbar from '@hooks/useNavbar'
 import useIntegrator from '@hooks/useIntegrator'
 import LoaderScreen from '../Loaders/LoaderScreen'
 import Header from '@components/shared/Header/Header'
@@ -15,7 +16,9 @@ function index({ integration = false, roles }: IAuthRoute) {
   const { logout, token } = useAuth()
   const { integrator } = useIntegrator()
 
-  const showWhenIntegrator = integrator.data.user.email ? false : true 
+  const { navbar } = useNavbar();
+
+  const showWhenIntegrator = integrator.data.user.email && navbar === 'Rifamax' ? false : true 
   
   const { data: request, isLoading, isError, isSuccess } = useQuery<AxiosResponse<IRenewTokenResponse, string>>({
     queryKey: ['auth', 'route'],

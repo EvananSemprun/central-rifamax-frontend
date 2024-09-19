@@ -1,0 +1,13 @@
+.navWrapper {
+  width: 100vw;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--mantine-color-dark-6);
+}
+
+.loader {
+  width: 35px;
+  height: 35px;
+}

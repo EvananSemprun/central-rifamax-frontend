@@ -3,9 +3,10 @@ import useConfetti from '@hooks/useConfetti';
 import { day } from '@utils/time';
 import { modals } from '@mantine/modals';
 import { IconPlus } from '@tabler/icons-react';
+import { IRefetchRaffle } from '@interfaces/index';
 import { Button, Text, Title } from '@mantine/core';
 
-function AddRaffleModal({ refetchRaffles }: { refetchRaffles: () => void }) {
+function AddRaffleModal({ refetchRaffles }: IRefetchRaffle) {
   const { stop } = useConfetti();
 
   const openAddRaffleModal = () => modals.open({

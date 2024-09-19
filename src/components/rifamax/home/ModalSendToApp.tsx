@@ -2,13 +2,13 @@ import useAuth from "@/hooks/useAuth";
 import WoodTitle from "@components/shared/WoodTitle";
 import { modals } from "@mantine/modals";
 import { useMutation } from '@tanstack/react-query';
-import { IAccordionSteps } from "@interfaces/index";
 import { sendToApp } from "@api/rifamax/Raffles.request";
 import { Title, Button, Grid ,Text} from "@mantine/core";
 import { IconDeviceMobileMessage } from "@tabler/icons-react";
+import { IAccordionSteps, IRefetchRaffle } from "@interfaces/index";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
-function ModalSendToApp({ raffle_id, refetchRaffles }: IAccordionSteps & { refetchRaffles: () => void }) {
+function ModalSendToApp({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetchRaffle) {
   const { token } = useAuth();
 
   const mutation = useMutation({

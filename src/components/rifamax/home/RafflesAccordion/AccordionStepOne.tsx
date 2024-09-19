@@ -1,12 +1,10 @@
 import ModalSendToApp from '../ModalSendToApp';
-import { IAccordionSteps } from '@interfaces/index';
-import ModalPrintTickets from '../ModalPrintTickets';
+import { IAccordionSteps, IRefetchRaffle } from '@interfaces/index';
 
-export function AccordionStepOne({ raffle_id, refetchRaffles }: IAccordionSteps & { refetchRaffles: () => void }) {
+export function AccordionStepOne({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetchRaffle) {
   return (
     <>
       <ModalSendToApp raffle_id={raffle_id} refetchRaffles={refetchRaffles} />
-      {/* <ModalPrintTickets /> */}
     </>
   );
 }
