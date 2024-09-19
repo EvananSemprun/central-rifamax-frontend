@@ -1,5 +1,5 @@
 import useAuth from '@hooks/useAuth';
-import classes from './Home.module.css';
+import classes from './index.module.css';
 import Titles from '@components/shared/Titles';
 import LoaderBlur from '@components/shared/Loaders/LoaderBlur';
 import StacksRaffle from '@components/rifamax/home/StacksRaffle';
