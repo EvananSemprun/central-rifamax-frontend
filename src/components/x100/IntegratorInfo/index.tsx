@@ -12,6 +12,7 @@ import { getCDAPlayer } from "@api/x100/Integrator.request"
 import { ICDAResponse } from '@interfaces/requests.interfaces';
 import { Avatar, Button, Card, CopyButton, Group, Text } from "@mantine/core"
 import { IconClipboard, IconClipboardCheck, IconTool } from "@tabler/icons-react"
+
 function index({ playerId, integrator, integratorToken }: IIntegratorInfo) {
   const [showedStatus, setShowedStatus] = useState<DevType>('Hidden')
 
