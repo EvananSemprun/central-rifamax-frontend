@@ -1,6 +1,7 @@
 import useAuth from "@hooks/useAuth";
+import classes from "./Lobby.module.css";
 import LobbyCard from "@components/x100/LobbyCard";
-import NavbarSelector from "@components/x100/Navchange";
+import NavbarSelector from "@/components/x100/NavbarSelector";
 import IntegratorInfo from "@components/x100/IntegratorInfo";
 import { AxiosResponse } from "axios";
 import { useQuery } from "@tanstack/react-query";
@@ -21,7 +22,7 @@ function Lobby() {
   });
 
   return (
-    <div>
+    <section className={classes.lobbySection}>
       <IntegratorInfo 
         currency={currency as MoneyType}
         integratorToken={integrator}
@@ -74,7 +75,7 @@ function Lobby() {
           )
         }
       </Grid>
-    </div>
+    </section>
   );
 }
 

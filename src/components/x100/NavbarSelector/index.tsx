@@ -1,17 +1,16 @@
 import classes from './index.module.css'
-import useNavbar from '@/hooks/useNavbar';
-import { motion } from 'framer-motion'
-import { DevType } from "@interfaces/models.interfaces"
+import useNavbar from '@hooks/useNavbar'
 import { useState } from "react"
+import { motion } from 'framer-motion'
+import { useHotkeys } from '@mantine/hooks'
+import { NavbarType } from "@interfaces/index"
 import { IconBrush } from "@tabler/icons-react"
-import { useHotkeys } from '@mantine/hooks';
-import { IIntegratorInfo, NavbarType } from "@interfaces/index"
-import { Avatar, Group, Text, Chip } from "@mantine/core"
+import { DevType } from "@interfaces/models.interfaces"
+import { Avatar, Group, Text, Card, SegmentedControl } from "@mantine/core"
 
-function index({ }: IIntegratorInfo) {
+function index() {
   const [showedStatus, setShowedStatus] = useState<DevType>('Hidden')
   const { setNav } = useNavbar()
-  const [activeChip, setActiveChip] = useState<NavbarType>('Rifamax');
 
   const handleShowedStatus = () => {
     setShowedStatus(showedStatus === 'Showed' ? 'Hidden' : 'Showed')
@@ -25,7 +24,7 @@ function index({ }: IIntegratorInfo) {
   const showedStatues = {
     'Hidden': '100vh',
     'Showed': 'calc(100vh - 70px)',
-    'Hover': '600px'
+    'Hover': '770px'
   }
 
   const showedDisplays = {
@@ -38,16 +37,6 @@ function index({ }: IIntegratorInfo) {
     ['ctrl+I', handleShowedStatus]
   ]);
 
-  const handleChipClick = (navValue: NavbarType) => {
-    if (activeChip === navValue) {
-      setActiveChip('Rifamax'); 
-      setNav('Rifamax');
-    } else {
-      setActiveChip(navValue);
-      setNav(navValue);
-    }
-  };
-
   return (
     <motion.div
       animate={{
@@ -58,7 +47,7 @@ function index({ }: IIntegratorInfo) {
       }}
       onHoverStart={hoverShowedStatus}
       onHoverEnd={unhoverShowedStatus}
-      {...(classes.integratorWrapper && { className: classes.integratorWrapper })}
+      {...(classes.navbarSelectorWrapper && { className: classes.navbarSelectorWrapper })}
     >
       <Group justify="space-between">
         <Avatar size="md" radius='md'>
@@ -68,37 +57,23 @@ function index({ }: IIntegratorInfo) {
           Developer Tool | Integrator Navbar
         </Text>
       </Group>
-      <Chip
-  checked={activeChip === 'Rifamax'}
-  onChange={() => handleChipClick('Rifamax')}
-  mt={35}
-  size='xl'
->
-  Rifamax
-</Chip>
-
-<Chip
-  checked={activeChip === 'CDA'}
-  onChange={() => handleChipClick('CDA')}
-  mt={15}
-  size='xl'
-  color="orange"
->
-  CDA
-</Chip>
-
-<Chip
-  checked={activeChip === 'BetFm4'}
-  onChange={() => handleChipClick('BetFm4')}
-  mt={15}
-  size='xl'
-  color="green"
->
-BetFm4
-</Chip>
-
-
-
+      <Card className={classes.navbarCard}>
+      <Text ta='center' fz={16} fw={300} c="white" mb={10}>
+        Select a navbar to show it
+      </Text>
+        <SegmentedControl 
+          fullWidth 
+          className={classes.navbarSelector}
+          color='#dee2e6'
+          transitionDuration={500}
+          autoContrast
+          transitionTimingFunction="linear"
+          data={['Rifamax', 'CDA', 'BetFm4']} 
+          onChange={(value: string) => {
+            setNav(value as NavbarType)
+          }}
+        />
+      </Card>
     </motion.div>
   )
 }

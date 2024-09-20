@@ -39,7 +39,7 @@ function index({ playerId, integrator, integratorToken }: IIntegratorInfo) {
   const showedStatues = {
     'Hidden': '100vh',
     'Showed': 'calc(100vh - 70px)',
-    'Hover': '400px'
+    'Hover': '465px'
   }
   
   const showedDisplays = {
