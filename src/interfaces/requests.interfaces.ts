@@ -127,7 +127,7 @@ export interface IPayRaffle {
   raffle_id: number;
   data: {
     price: number;
-    current: string;
+    currency: string;
   }
 }
 
