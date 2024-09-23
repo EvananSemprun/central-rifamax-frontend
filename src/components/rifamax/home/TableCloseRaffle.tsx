@@ -1,34 +1,48 @@
+import useAuth from '@hooks/useAuth';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { sellStatus, adminStatus } from '@utils/parse';
 import { Table, Badge, ScrollArea } from '@mantine/core';
+import { IUnclosedRaffle } from '@interfaces/requests.interfaces';
+import { getCloseDayRaffles } from '@api/rifamax/Raffles.request';
+import { ErrorNotification } from '@components/shared/Notifications';
 
 function TableCloseRaffle() {
-  const elements = [
-    {
-      id: 1,
-      title: "Moto Bera SBR",
-      sell_status: 'sold',
-      admin_status: 'pending',
-      price: 100.0,
-      security: "Beisbol",
-      seller: "Javier Diaz",
-      created_at: '19/08/2024 - 10:01 pm'
-    },
-  ];
+  const { token } = useAuth();
 
-  const rows = elements.map((element) => (
-    <Table.Tr ta='center' key={element.id}>
-      <Table.Td>{element.id}</Table.Td>
+  const { isSuccess, isError, data: request } = useMutation({
+		queryKey: ['closed', 'day', 'raffles']
+    queryFn: () => getCloseDayRaffles(token)
+  });
+
+  const [closedRaffles, setClosedRaffles] = useState<IUnclosedRaffle[]>([]);
+
+	if (isSuccess) {
+		setClosedRaffles(request.data.closed)
+	}
+
+	if (isError) {
+		ErrorNotification({
+      title: 'Ha ocurrido un error',
+      label: 'Al parecer ha ocurrido un error al cargar las rifas',
+      position: 'top-right'
+    })
+	}
+	
+  const rows = closedRaffles.map((raffle) => (
+    <Table.Tr ta='center' key={raffle.id}>
+      <Table.Td>{raffle.id}</Table.Td>
       <Table.Td>
-      <Badge variant="light" color="red" size="md">
-        {sellStatus(element.sell_status)}
-      </Badge>
-        </Table.Td>
-      <Table.Td>
-        <Badge variant="light" color="red" size="md">{adminStatus(element.admin_status)}</Badge>
+        <Badge variant="light" color="red" size="md">
+          {sellStatus(raffle.sell_status)}
+        </Badge>
       </Table.Td>
-      <Table.Td >{element.price} $</Table.Td>
-      <Table.Td>{element.seller}</Table.Td>
-      <Table.Td>{element.created_at}</Table.Td>
+      <Table.Td>
+        <Badge variant="light" color="red" size="md">{adminStatus(raffle.admin_status)}</Badge>
+      </Table.Td>
+      <Table.Td>{raffle.price} $</Table.Td>
+      <Table.Td>{raffle.title}</Table.Td>
+      <Table.Td>{raffle.created_at}</Table.Td>
     </Table.Tr>
   ));
 

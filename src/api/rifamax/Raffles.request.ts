@@ -8,7 +8,8 @@ import {
 	IRepeatToApp, 
 	IUnpayRaffle,
 	IRefundRaffle, 
-  IGetClosedRaffles
+  IGetCloseDayInfo,
+  IGetClosedRaffles,
 } from '@interfaces/requests.interfaces'
 
 // GET /rifamax/raffles/{queryType}?page={page}&items={items}
@@ -52,7 +53,7 @@ export const sendToApp = ({ token, raffle_id }: ISendToApp) => {
 }
 
 // POST /rifamax/raffles/repeat
-export const repeatToApp = ({ token, raffle_id, data}: IRepeatToApp) => {
+export const repeatToApp = ({ token, raffle_id, data }: IRepeatToApp) => {
   return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/repeat`, {
     raffle_id: raffle_id,
     data: data
@@ -100,6 +101,24 @@ export const refundRaffle = ({ token, raffle_id }: IRefundRaffle) => {
 // GET /rifamax/tickets/get_tickets?raffle_id={id}
 export const getTicketId = ({ token, raffleId }: IGetTicketId) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/tickets/get_tickets?raffle_id=${raffleId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+}
+
+// GET /rifamax/raffles/close_day
+export const getCloseDayRaffles = (token: string) => {
+  return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/close_day`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+// GET /rifamax/raffles/close_day_info
+export const getCloseDayInfo = ({ token }: IGetCloseDayInfo) => {
+  return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/close_day_info`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
