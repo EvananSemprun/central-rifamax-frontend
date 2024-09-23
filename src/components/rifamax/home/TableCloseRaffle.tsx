@@ -1,31 +1,34 @@
-import React from 'react';
 import useAuth from '@hooks/useAuth';
-import { useMutation } from '@tanstack/react-query';
-import { getCloseDayRaffles } from '@/api/rifamax/Raffles.request';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { sellStatus, adminStatus } from '@utils/parse';
 import { Table, Badge, ScrollArea } from '@mantine/core';
-import { IUnclosedRaffle } from '@/interfaces/requests.interfaces';
+import { IUnclosedRaffle } from '@interfaces/requests.interfaces';
+import { getCloseDayRaffles } from '@api/rifamax/Raffles.request';
+import { ErrorNotification } from '@components/shared/Notifications';
 
 function TableCloseRaffle() {
   const { token } = useAuth();
 
-  const mutation = useMutation({
-    mutationFn: () => getCloseDayRaffles(token), 
-    onSuccess: (response) => {
-      const closedRaffles = response.data.closed;
-      setClosedRaffles(closedRaffles);
-    },
-    onError: (error) => {
-      console.error("Error fetching closed raffles:", error);
-    }
+  const { isSuccess, isError, data: request } = useMutation({
+		queryKey: ['closed', 'day', 'raffles']
+    queryFn: () => getCloseDayRaffles(token)
   });
 
-  const [closedRaffles, setClosedRaffles] = React.useState<IUnclosedRaffle[]>([]);
+  const [closedRaffles, setClosedRaffles] = useState<IUnclosedRaffle[]>([]);
 
-  React.useEffect(() => {
-    mutation.mutate();
-  }, []);
+	if (isSuccess) {
+		setClosedRaffles(request.data.closed)
+	}
 
+	if (isError) {
+		ErrorNotification({
+      title: 'Ha ocurrido un error',
+      label: 'Al parecer ha ocurrido un error al cargar las rifas',
+      position: 'top-right'
+    })
+	}
+	
   const rows = closedRaffles.map((raffle) => (
     <Table.Tr ta='center' key={raffle.id}>
       <Table.Td>{raffle.id}</Table.Td>
