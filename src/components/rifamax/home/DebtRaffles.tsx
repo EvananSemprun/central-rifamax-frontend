@@ -1,41 +1,45 @@
-import { useEffect, useState } from 'react';
 import useAuth from '@hooks/useAuth';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Card, Group, Text } from '@mantine/core';
-import { useMutation } from '@tanstack/react-query';
-import { getCloseDayInfo} from '@/api/rifamax/Raffles.request';
-import { ICloseDayInfo } from '@/interfaces/requests.interfaces';
+import { getCloseDayInfo} from '@api/rifamax/Raffles.request';
+import { ICloseDayInfo } from '@interfaces/requests.interfaces';
+import { ErrorNotification } from '@components/shared/Notifications'
 
 function DebtRaffles() {
   const { token } = useAuth();
   const [currencyInfo, setCurrencyInfo] = useState<ICloseDayInfo | null>(null);
 
-  const mutation = useMutation({
-    mutationFn: () => getCloseDayInfo({ token }),
-    onSuccess: (data) => {
-      setCurrencyInfo(data.data); 
-    },
-    onError: (error) => {
-      console.error('Error fetching close day info:', error);
-    },
+  const { isSuccess, isError, data: request } = useQuery({
+		queryKey: ['close', 'day', 'info'],
+    queryFn: () => getCloseDayInfo({ token })
   });
 
-  useEffect(() => {
-    mutation.mutate();
-  }, []);
+	if (isSuccess) {
+		setCurrencyInfo(request.data); 
+	}
+
+	if (isError) {
+		ErrorNotification({
+      title: '¡Oops! Ha ocurrido un error',
+      label: 'Ha ocurrido un error al intentar cargar las estadisticas.',
+      position: 'top-right'
+    })
+	}
 
   return (
-    <Card>
-      <Group justify="space-between">
-        <Text>Bolívares</Text>
-        <Text ml={75}>Dólares</Text>
-        <Text>Pesos Colombianos</Text>
-      </Group>
-      <Group justify="space-between">
-        <Text>{currencyInfo ? `${currencyInfo.ves} Bs.D` : 'Loading...'}</Text>
-        <Text>{currencyInfo ? `${currencyInfo.usd} $` : 'Loading...'}</Text>
-        <Text>{currencyInfo ? `${currencyInfo.cop} COP` : 'Loading...'}</Text>
-      </Group>
-    </Card>
+		<Card>
+			<Group justify="space-between">
+				<Text>Bolívares</Text>
+				<Text ml={75}>Dolares</Text>
+				<Text>Pesos Colombianos</Text>
+			</Group>
+			<Group justify="space-between">
+				<Text>{currencyInfo ? `${currencyInfo.ves} Bs.D` : 'Loading...'}</Text>
+				<Text>{currencyInfo ? `${currencyInfo.usd} USD` : 'Loading...'}</Text>
+				<Text>{currencyInfo ? `${currencyInfo.cop} COP` : 'Loading...'}</Text>
+			</Group>
+		</Card>
   );
 }
 
