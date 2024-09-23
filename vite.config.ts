@@ -6,9 +6,6 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), Terminal()],
-  optimizeDeps: {
-    exclude: ['chunk-AECS3VF7']
-  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
