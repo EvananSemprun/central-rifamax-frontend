@@ -8,8 +8,8 @@ import {
 	IRepeatToApp, 
 	IUnpayRaffle,
 	IRefundRaffle, 
+  IGetCloseDayInfo,
   IGetClosedRaffles,
-  IGetCloseDayInfo
 } from '@interfaces/requests.interfaces'
 
 // GET /rifamax/raffles/{queryType}?page={page}&items={items}
@@ -53,7 +53,7 @@ export const sendToApp = ({ token, raffle_id }: ISendToApp) => {
 }
 
 // POST /rifamax/raffles/repeat
-export const repeatToApp = ({ token, raffle_id, data}: IRepeatToApp) => {
+export const repeatToApp = ({ token, raffle_id, data }: IRepeatToApp) => {
   return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/repeat`, {
     raffle_id: raffle_id,
     data: data
@@ -107,6 +107,7 @@ export const getTicketId = ({ token, raffleId }: IGetTicketId) => {
   });
 }
 
+// GET /rifamax/raffles/close_day
 export const getCloseDayRaffles = (token: string) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/close_day`, {
     headers: {
@@ -115,6 +116,7 @@ export const getCloseDayRaffles = (token: string) => {
   });
 };
 
+// GET /rifamax/raffles/close_day_info
 export const getCloseDayInfo = ({ token }: IGetCloseDayInfo) => {
   return axios.get(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/close_day_info`, {
     headers: {
