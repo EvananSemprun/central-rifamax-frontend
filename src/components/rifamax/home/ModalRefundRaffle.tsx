@@ -12,7 +12,7 @@ import { ErrorNotification, SuccessNotification } from "@components/shared/Notif
 function ModalRefundRaffle({ raffle_id, wildcard }: IAccordionSteps) {
   const { token } = useAuth();
 
-  const [inputValue] = useState('');
+  const [serialSign, setSerialSign] = useState<string>('');
 
   const mutation = useMutation({
     mutationFn: refundRaffle,
@@ -49,15 +49,11 @@ function ModalRefundRaffle({ raffle_id, wildcard }: IAccordionSteps) {
 
         <Group>
           <TextInput
-            value={inputValue}
-            
             w='100%'
+            value={inputValue}
             placeholder="Verificar serial"
+						onChange={(e) => setSerialSign(e.currentTarget.value)}
           />
-
-          {/* <ActionIcon ml={-55} variant="subtle" aria-label="Reset">
-            <IconReload stroke={3} />
-          </ActionIcon> */}
         </Group>
 
         <Button
