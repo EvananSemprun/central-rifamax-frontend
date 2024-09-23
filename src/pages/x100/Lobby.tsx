@@ -1,12 +1,13 @@
 import useAuth from "@hooks/useAuth";
+import classes from "./Lobby.module.css";
 import LobbyCard from "@components/x100/LobbyCard";
+import NavbarSelector from "@/components/x100/NavbarSelector";
 import IntegratorInfo from "@components/x100/IntegratorInfo";
-import Integradornavbar from "@components/x100/Navchange";
 import { AxiosResponse } from "axios";
-import { useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { IconReload } from "@tabler/icons-react";
 import { getTriples } from "@api/x100/Raffles.request";
+import { useLocation, useParams } from "react-router-dom";
 import { ITripleRaffle, MoneyType } from "@interfaces/models.interfaces";
 import { Avatar, Button, Card, Center, Grid, Loader, Text, Title } from "@mantine/core";
 
@@ -21,13 +22,13 @@ function Lobby() {
   });
 
   return (
-    <div>
+    <section className={classes.lobbySection}>
       <IntegratorInfo 
         currency={currency as MoneyType}
         integratorToken={integrator}
         playerId={playerId}
       />
-      <Integradornavbar />
+      <NavbarSelector />
       <Title mt={15} fw={350} order={2} ta='center'>
         Seleccione una rifa para ver los tickets
       </Title>
@@ -74,7 +75,7 @@ function Lobby() {
           )
         }
       </Grid>
-    </div>
+    </section>
   );
 }
 

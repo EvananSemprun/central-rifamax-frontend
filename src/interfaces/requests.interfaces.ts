@@ -127,7 +127,7 @@ export interface IPayRaffle {
   raffle_id: number;
   data: {
     price: number;
-    current: string;
+    currency: string;
   }
 }
 
@@ -237,4 +237,97 @@ export interface ICDAResponse {
   balance: string;
   currency: MoneyType;
   data: IntegratorUserState;
+}
+
+
+/**
+ * @interface IPrize
+ * @description Interface que define los detalles de un premio en un sorteo
+ */
+export interface IPrize {
+  year: number | null;  
+  award: string;        
+  plate: string | null; 
+  is_money: boolean;    
+  wildcard: boolean;   
+}
+
+/**
+ * @interface ISecurity
+ * @description Interface que representa la seguridad relacionada a un sorteo o premio
+ */
+export interface ISecurity {
+  position: number;    
+  wildcard: string;
+}
+
+/**
+ * @interface ISeller
+ * @description Interface que define los detalles de un vendedor asociado a un sorteo
+ */
+export interface ISeller {
+  id: number;                
+  avatar: string | null;     
+  name: string;              
+  email: string;              
+  dni: string;                
+  is_active: boolean;         
+  phone: string;              
+  influencer_id: number | null;  
+  content_code: string | null;   
+  role: string;               
+  is_first_entry: boolean;  
+}
+
+/**
+ * @interface IUnclosedRaffle
+ * @description Interface que define los detalles de un sorteo no cerrado
+ */
+export interface IUnclosedRaffle {
+  id: number;                     
+  title: string;                  
+  init_date: string;              
+  expired_date: string;           
+  prizes: IPrize[];               
+  price: number;                  
+  numbers: number;               
+  currency: string;               
+  lotery: string;                 
+  sell_status: string;            
+  admin_status: string;           
+  uniq_identifier_serial: string; 
+  user_id: number;                
+  seller_id: number;              
+  seller: ISeller;               
+  created_at: string;             
+  updated_at: string;           
+  security: ISecurity;            
+}
+
+/**
+ * @interface ICloseDayResponse
+ * @description Interface para la respuesta de cierre del día
+ */
+export interface ICloseDayResponse {
+  unclosed: any;
+  message: string;  
+  closed: any[];   
+}
+
+/**
+ * @interface IGetCloseDayInfo
+ * @description Interface for the request function to get close day info
+ */
+export interface IGetCloseDayInfo {
+  token: string;
+}
+
+/**
+ * @interface ICloseDayInfo
+ * @description Interface for the response data from close day info
+ */
+export interface ICloseDayInfo {
+  usd: number;
+  ves: number;
+  cop: number;
 }

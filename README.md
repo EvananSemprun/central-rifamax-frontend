@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/1b8eb2fd-6aae-4cff-beb4-da09d8a0df79)
+
 # Central Rifamax
 
 Welcome to the Central Rifamax repository! This unified Software as a Service (SaaS) system is designed to integrate all products of Rifamax, including Rifamax Zodiacal, Rifamax Triples, Rifamax Admin, and Rifamax Influencer. Our goal is to provide a seamless experience across various Rifamax services by leveraging the power of modern web technologies.

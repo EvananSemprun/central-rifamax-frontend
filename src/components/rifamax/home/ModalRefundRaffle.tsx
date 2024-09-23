@@ -5,14 +5,14 @@ import { modals } from "@mantine/modals";
 import { useMutation } from "@tanstack/react-query";
 import { refundRaffle } from "@/api/rifamax/Raffles.request";
 import { IAccordionSteps } from "@interfaces/index";
-import { IconMailForward, /*IconReload*/ } from "@tabler/icons-react";
-import { TextInput, Text, Title, Button, /*ActionIcon,*/ Group } from "@mantine/core";
+import { IconMailForward } from "@tabler/icons-react";
+import { TextInput, Text, Title, Button, Group } from "@mantine/core";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
 function ModalRefundRaffle({ raffle_id, wildcard }: IAccordionSteps) {
   const { token } = useAuth();
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue] = useState('');
 
   const mutation = useMutation({
     mutationFn: refundRaffle,

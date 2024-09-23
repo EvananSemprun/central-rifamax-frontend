@@ -40,7 +40,7 @@ function index({ }: IIntegratorInfo) {
 
   const handleChipClick = (navValue: NavbarType) => {
     if (activeChip === navValue) {
-      setActiveChip('Rifamax'); 
+      setActiveChip('Rifamax');
       setNav('Rifamax');
     } else {
       setActiveChip(navValue);
@@ -69,33 +69,36 @@ function index({ }: IIntegratorInfo) {
         </Text>
       </Group>
       <Chip
-  checked={activeChip === 'Rifamax'}
-  onChange={() => handleChipClick('Rifamax')}
-  mt={35}
-  size='xl'
->
-  Rifamax
-</Chip>
+        checked={activeChip === 'Rifamax'}
+        onChange={() => handleChipClick('Rifamax')}
+        mt={35}
+        size='xl'
+        variant='outline'
+      >
+        Rifamax
+      </Chip>
 
-<Chip
-  checked={activeChip === 'CDA'}
-  onChange={() => handleChipClick('CDA')}
-  mt={15}
-  size='xl'
-  color="orange"
->
-  CDA
-</Chip>
+      <Chip
+        checked={activeChip === 'CDA'}
+        variant='outline'
+        onChange={() => handleChipClick('CDA')}
+        mt={15}
+        size='xl'
+        color="orange"
+      >
+        CDA
+      </Chip>
 
-<Chip
-  checked={activeChip === 'BetFm4'}
-  onChange={() => handleChipClick('BetFm4')}
-  mt={15}
-  size='xl'
-  color="green"
->
-BetFm4
-</Chip>
+      <Chip
+        checked={activeChip === 'BetFm4'}
+        onChange={() => handleChipClick('BetFm4')}
+        mt={15}
+        size='xl'
+        color="green"
+        variant='outline'
+      >
+        BetFm4
+      </Chip>
 
 
 

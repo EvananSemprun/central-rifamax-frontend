@@ -23,23 +23,13 @@ function CloseDayModal() {
       <>
         <Divider label="Cuadre de hoy" variant='dashed' size="md" labelPosition="center" />
         <TableRaffle />
-        <Divider label="Rifas Cerradas" variant='dashed' size="md" labelPosition="center" />
-        <TableCloseRaffle/>
-        <Divider label="Total" variant='dashed' size="md" labelPosition="center" />
-        <DebtRaffles/>
-
-        <Grid mt={15}>
-          <Grid.Col span={6}>
-            <Button fullWidth variant="light"size="md" radius="md">
-              Descargar
-            </Button>
-          </Grid.Col>
-          <Grid.Col span={6}>
-            <Button fullWidth variant="light" color="teal" size="md" radius="md">
-            	Imprimir
-            </Button>
-          </Grid.Col>
-        </Grid>
+        <Divider mt={10} label="Rifas Cerradas" variant='dashed' size="md" labelPosition="center" />
+        <TableCloseRaffle />
+        <Divider mb={10} label="Total" variant='dashed' size="md" labelPosition="center" />
+        <DebtRaffles />
+        <Button mt={10} fullWidth variant="light" size="md" >
+          Imprimir
+        </Button>
       </>
     ),
   });

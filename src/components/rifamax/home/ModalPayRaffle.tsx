@@ -1,6 +1,5 @@
-import React from 'react';
+import useAuth from "@hooks/useAuth";
 import WoodTitle from "@components/shared/WoodTitle";
-import useAuth from "@/hooks/useAuth";
 import { useForm } from '@mantine/form';
 import { modals } from "@mantine/modals";
 import { IAccordionSteps } from "@interfaces/index";
