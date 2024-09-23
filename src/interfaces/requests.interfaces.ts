@@ -306,12 +306,12 @@ export interface IUnclosedRaffle {
 
 /**
  * @interface ICloseDayResponse
- * @description Interface para la respuesta de cierre del día
+ * @description Interface to get request function for close day table
  */
 export interface ICloseDayResponse {
-  unclosed: any;
   message: string;  
-  closed: any[];   
+  closed: IUnclosedRaffle[];   
+  unclosed: IUnclosedRaffle[];
 }
 
 /**
