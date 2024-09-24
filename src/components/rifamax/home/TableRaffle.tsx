@@ -16,7 +16,7 @@ function TableRaffle() {
     queryFn: () => getCloseDayRaffles(token)
   });
 
-  const rows = request?.data.unclosed.map((raffle) => (
+  const rows = request?.data.raffles.map((raffle) => (
     <Table.Tr ta="center" key={raffle.id}>
       <Table.Td>{raffle.id}</Table.Td>
       <Table.Td>{capitalize(sellStatus(raffle.sell_status))}</Table.Td>

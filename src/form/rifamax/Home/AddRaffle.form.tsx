@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { getDate } from '@utils/time';
 import { useForm } from '@mantine/form';
 import { useViewportSize } from '@mantine/hooks';
@@ -7,6 +8,9 @@ import { Button, Divider, Group, NumberInput, Select, Switch, TextInput, Grid } 
 import { Icon123, IconAward, IconCalendar, IconCar, IconClock, IconCoin, IconPlus, IconTrash } from '@tabler/icons-react';
 
 function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
+  const currentYear = Number(moment(new Date()).format('YYYY'))
+  const minYear = 1995
+
   const { width } = useViewportSize();
 
   const form = useForm<IRaffleForm>({
@@ -62,12 +66,15 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
         },
         year: (value: number | null, values) => {
           const prize = values.prizes.find(p => p.year === value);
-          return (prize?.is_money || value) ? null : 'Debe ingresar un año';
+          return (prize?.is_money || value) 
+            ? Number(value) > currentYear || Number(value) < minYear 
+              ? `Debe ser mayor a ${minYear} y menor a ${currentYear}` 
+                : null 
+                  : 'Debe ingresar un año';
         }
       }
     }
   });
-
 
   const CURRENCIES = [
     { value: 'USD', label: 'Dólares Américanos' },

@@ -1,13 +1,13 @@
 import useAuth from '@hooks/useAuth';
 import TicketRaffle from './TicketRaffle';
+import useConfetti from '@hooks/useConfetti';
 import AddRaffleForm from '@form/rifamax/Home/AddRaffle.form';
 import { useState } from 'react';
 import { ITicketRaffle } from '@interfaces/index';
 import { useMutation } from '@tanstack/react-query';
 import { addRaffles } from '@api/rifamax/Raffles.request';
 import { ErrorNotification } from '@/components/shared/Notifications';
-import { Center, Stepper, Button, Group, Title } from '@mantine/core';
-import useConfetti from '@hooks/useConfetti';
+import { Center, Stepper, Button, Group, Text, Image } from '@mantine/core';
 
 function StepperRaffle() {
   const [active, setActive] = useState(0);
@@ -40,7 +40,7 @@ function StepperRaffle() {
 
   return (
     <Stepper active={active} onStepClick={setActive} allowNextStepsSelect={false} color="teal">
-      <Stepper.Step label="Datos de la rifa" description="Llena los datos de la rifa para proceder">
+      <Stepper.Step allowStepClick={false} label="Datos de la rifa" description="Llena los datos de la rifa para proceder">
         <AddRaffleForm
           onNext={(form) => {
             console.log(form);
@@ -50,7 +50,7 @@ function StepperRaffle() {
           onBack={prevStep}
         />
       </Stepper.Step>
-      <Stepper.Step label="Verificación" description="Verificación que los datos de la rifa sean correctos">
+      <Stepper.Step allowStepClick={false} label="Verificación" description="Verificación que los datos de la rifa sean correctos">
         <Center mt={10}>
           <TicketRaffle raffle={raffleForm} />
         </Center>
@@ -60,11 +60,15 @@ function StepperRaffle() {
         </Group>
       </Stepper.Step>
       <Stepper.Completed>
-        <Center mt={20}>
-          <Title>
-            Rifa Creada
-          </Title>
+        <Text ta="center" fz={22} fw={700}>
+          Rifa Creada
+        </Text>
+        <Center my={20}>
+          <Image src='/images/emoji-success.png' w={150} h={150} />
         </Center>
+        <Text ta="center" fz={16} fw={300}>
+          Tu rifa ha sido creada exitosamente, gracias por confiar en nosotros.
+        </Text>
       </Stepper.Completed>
     </Stepper>
   );

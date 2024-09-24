@@ -263,8 +263,7 @@ export interface ISeller {
  */
 export interface ICloseDayResponse {
   message: string;  
-  closed: IRaffle[];   
-  unclosed: IRaffle[];
+  raffles: IRaffle[];
 }
 
 /**

@@ -1,6 +1,7 @@
 import useAuth from "@/hooks/useAuth";
 import WoodTitle from "@components/shared/WoodTitle";
 import { modals } from "@mantine/modals";
+import { useMediaQuery } from "@mantine/hooks";
 import { useMutation } from '@tanstack/react-query';
 import { sendToApp } from "@api/rifamax/Raffles.request";
 import { Title, Button, Grid ,Text} from "@mantine/core";
@@ -10,6 +11,8 @@ import { ErrorNotification, SuccessNotification } from "@components/shared/Notif
 
 function ModalSendToApp({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetchRaffle) {
   const { token } = useAuth();
+
+  const isSmallScreen = useMediaQuery('(max-width: 940px)');
 
   const mutation = useMutation({
     mutationFn: sendToApp,
@@ -76,6 +79,7 @@ function ModalSendToApp({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetc
       size="xs"
       leftSection={<IconDeviceMobileMessage size="1.2rem" />}
       onClick={openSentToAppModal}
+      w={isSmallScreen ? '300px' : undefined}
     >
       Enviar a APP
     </Button>

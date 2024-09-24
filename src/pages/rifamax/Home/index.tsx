@@ -61,7 +61,7 @@ function Home() {
         {children}
         <Pagination
           total={rafflesData?.data.metadata.pages || 0}
-          mt={0}
+          mb={10}
           siblings={0}
           onChange={setPage}
         />
@@ -94,14 +94,14 @@ function Home() {
           defaultValue='newest'
           pt={10}
         >
-          <Tabs.List>
-            <Tabs.Tab value='newest' leftSection={<IconApps style={iconStyle} />}>
+          <Tabs.List grow={isSmallScreen}>
+            <Tabs.Tab size={isSmallScreen ? 'xs' : 'sm'} value='newest' leftSection={<IconApps style={iconStyle} />}>
               Iniciadas
             </Tabs.Tab>
-            <Tabs.Tab value='initialized' leftSection={<IconShare style={iconStyle} />}>
+            <Tabs.Tab size={isSmallScreen ? 'xs' : 'sm'} value='initialized' leftSection={<IconShare style={iconStyle} />}>
               Enviadas
             </Tabs.Tab>
-            <Tabs.Tab value='to_close' leftSection={<IconClock style={iconStyle} />}>
+            <Tabs.Tab size={isSmallScreen ? 'xs' : 'sm'} value='to_close' leftSection={<IconClock style={iconStyle} />}>
               Sin cerrar
             </Tabs.Tab>
           </Tabs.List>
@@ -118,7 +118,7 @@ function Home() {
         {!isSmallScreen && (
           <Pagination
             total={rafflesData?.data.metadata.pages || 0}
-            mb={10}
+            my={10}
             siblings={0}
             value={page}
             onChange={handlePage}
