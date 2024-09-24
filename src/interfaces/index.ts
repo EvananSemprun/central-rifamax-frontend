@@ -381,14 +381,6 @@ export interface IErrorPage {
 }
 
 /**
- * @interface IIntegratorPicker
- * @description IntegratorPicker component props interface
- */
-export interface IIntegratorPicker {
-  onSelect?: (select: IntegratorType) => void
-}
-
-/**
  * @interface IAddSeller
  * @description AddSeller component props interface
  */

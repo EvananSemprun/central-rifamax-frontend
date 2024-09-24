@@ -1,4 +1,4 @@
-import SellerTable from './Sellertable';
+import SellerTable from './SellerTable';
 import { Center } from '@mantine/core';
 import { Meta, StoryFn } from '@storybook/react';
 

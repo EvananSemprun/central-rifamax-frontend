@@ -42,8 +42,8 @@ function CardRaffle({ raffle }: ICardRaffle) {
 
       <CardTitle title='SERIE NUMERO:' content={raffle.id} />
       <CardTitle title='LOTERIA:' content={raffle.lotery} />
-      <CardTitle title='FECHA:' content={raffle.init_date} />
-      <CardTitle title='CADUCA:' content={raffle.expired_date} />
+      <CardTitle title='FECHA:' content={String(raffle.init_date)} />
+      <CardTitle title='CADUCA:' content={String(raffle.expired_date)} />
       <CardTitle title='RIFERO:' content={raffle.seller.name} />
       <CardTitle title='TELEFONO:' content={raffle.seller.phone} />
 

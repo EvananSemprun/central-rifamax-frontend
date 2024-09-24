@@ -1,5 +1,4 @@
 import LoaderBlur from '@components/shared/Loaders/LoaderBlur';
-import { useState } from 'react';
 import { Table, Badge, ScrollArea } from '@mantine/core';
 
 const elements = [
@@ -11,8 +10,8 @@ const elements = [
 ];
 
 const SellerTable = () => {
-  const [rafflers, setRafflers] = useState(elements); 
-  const [loading, setLoading] = useState(false); 
+  const rafflers = elements; 
+  const loading = false;
 
   if (loading) return <LoaderBlur />;
 

@@ -14,7 +14,7 @@ export function TitlesRafflesAccordion({ id, numbers }: ITitlesRafflesAccordion)
         <Text size="sm">Numero</Text>
       </Group>
       <Group justify="space-between">
-        <RepeatRaffleModal raffle_id={id} />
+        <RepeatRaffleModal raffle_id={id} refetchRaffles={() => {}}/>
         <Chip checked={false} variant="outline" size='sm' color="gray">{id}</Chip>
         <Chip checked={false} variant="outline" size='sm' color="gray">{toBet({ value: numbers, betType })}</Chip>
       </Group>

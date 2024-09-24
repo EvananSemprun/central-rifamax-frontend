@@ -11,7 +11,7 @@ export default meta;
 
 const Template: StoryFn = (args) => (
   <Center>
-    <ModalSendToApp raffle_id={0} {...args} />
+    <ModalSendToApp raffle_id={0} {...args} refetchRaffles={() => {}} />
   </Center>
 )
 

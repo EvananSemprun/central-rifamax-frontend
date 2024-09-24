@@ -8,7 +8,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn = (args) => <ActionButtons {...args} />;
+const Template: StoryFn = (args) => <ActionButtons {...args} refetchRaffles={() => {}} />;
 
 export const Default = Template.bind({});
 Default.args = {};
