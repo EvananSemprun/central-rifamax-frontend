@@ -14,12 +14,13 @@ function ModalSendToApp({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetc
   const mutation = useMutation({
     mutationFn: sendToApp,
     onSuccess: () => {
+      modals.closeAll()
       SuccessNotification({
         position: 'top',
         title: 'Rifa enviada con éxito.',
         label: 'Su rifa ha sido enviada exitosamente, revise la App de Rifamax.'
       });
-      refetchRaffles(); // Refrescar las rifas después de enviar a la app
+      return refetchRaffles();
     },
     onError: () => {
       ErrorNotification({

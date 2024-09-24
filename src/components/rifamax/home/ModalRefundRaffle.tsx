@@ -3,13 +3,13 @@ import WoodTitle from "@components/shared/WoodTitle";
 import { useState } from 'react';
 import { modals } from "@mantine/modals";
 import { useMutation } from "@tanstack/react-query";
-import { refundRaffle } from "@/api/rifamax/Raffles.request";
-import { IAccordionSteps } from "@interfaces/index";
 import { IconMailForward } from "@tabler/icons-react";
+import { refundRaffle } from "@/api/rifamax/Raffles.request";
+import { IAccordionSteps, IRefetchRaffle } from "@interfaces/index";
 import { TextInput, Text, Title, Button, Group } from "@mantine/core";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
-function ModalRefundRaffle({ raffle_id, wildcard }: IAccordionSteps) {
+function ModalRefundRaffle({ raffle_id, wildcard, refetchRaffles }: IAccordionSteps & IRefetchRaffle) {
   const { token } = useAuth();
 
   const [serialSign, setSerialSign] = useState<string>('');
@@ -18,11 +18,12 @@ function ModalRefundRaffle({ raffle_id, wildcard }: IAccordionSteps) {
     mutationFn: refundRaffle,
     onSuccess: () => {
       modals.closeAll()
-      return SuccessNotification({
+      SuccessNotification({
         position: 'top',
-        title: 'Rifa enviada con exito.',
-        label: 'Su rifa ha sido enviada exitosamente, revise la App de Rifamax.'
+        title: 'Rifa devuelta con exito.',
+        label: 'Su rifa ha sido devuelta exitosamente, revise la App de Rifamax.'
       })
+      return refetchRaffles()
     },
     onError: () => (
       ErrorNotification({
@@ -50,7 +51,7 @@ function ModalRefundRaffle({ raffle_id, wildcard }: IAccordionSteps) {
         <Group>
           <TextInput
             w='100%'
-            value={inputValue}
+            value={serialSign}
             placeholder="Verificar serial"
 						onChange={(e) => setSerialSign(e.currentTarget.value)}
           />

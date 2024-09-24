@@ -6,22 +6,24 @@ import { DatePickerInput } from "@mantine/dates";
 import { useMutation } from '@tanstack/react-query';
 import { repeatToApp } from "@api/rifamax/Raffles.request";
 import { IconCash, IconNumber, IconReload } from "@tabler/icons-react";
-import { IAccordionSteps, IRepeatRaffleForm } from "@interfaces/index";
+import { IAccordionSteps, IRefetchRaffle, IRepeatRaffleForm } from "@interfaces/index";
 import { Center, Chip, Group, NumberInput, Title, Button, Select } from "@mantine/core";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
-function ModalRepeatRaffle({ raffle_id }: IAccordionSteps) {
+function ModalRepeatRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetchRaffle) {
   const { token } = useAuth();
 
   const mutation = useMutation({
     mutationFn: repeatToApp,
-    onSuccess: () => (
+    onSuccess: () => {
+      modals.closeAll()
       SuccessNotification({
         position: 'top',
         title: 'Rifa repetida con éxito.',
         label: 'Su rifa ha sido repetida exitosamente, revise la App de Rifamax.',
       })
-    ),
+      return refetchRaffles()
+    },
     onError: () => (
       ErrorNotification({
         position: 'top',

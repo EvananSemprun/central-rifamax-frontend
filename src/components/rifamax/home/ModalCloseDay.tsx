@@ -4,7 +4,7 @@ import TableCloseRaffle from './TableCloseRaffle';
 import { day } from '@utils/time';
 import { modals } from '@mantine/modals';
 import { IconX } from '@tabler/icons-react';
-import { Button, Divider, Text, Title, Grid } from '@mantine/core';
+import { Button, Divider, Text, Title } from '@mantine/core';
 
 function CloseDayModal() {
   const openCloseDayModal = () => modals.open({

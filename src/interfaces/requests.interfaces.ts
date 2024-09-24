@@ -239,28 +239,6 @@ export interface ICDAResponse {
   data: IntegratorUserState;
 }
 
-
-/**
- * @interface IPrize
- * @description Interface que define los detalles de un premio en un sorteo
- */
-export interface IPrize {
-  year: number | null;  
-  award: string;        
-  plate: string | null; 
-  is_money: boolean;    
-  wildcard: boolean;   
-}
-
-/**
- * @interface ISecurity
- * @description Interface que representa la seguridad relacionada a un sorteo o premio
- */
-export interface ISecurity {
-  position: number;    
-  wildcard: string;
-}
-
 /**
  * @interface ISeller
  * @description Interface que define los detalles de un vendedor asociado a un sorteo
@@ -280,38 +258,13 @@ export interface ISeller {
 }
 
 /**
- * @interface IUnclosedRaffle
- * @description Interface que define los detalles de un sorteo no cerrado
- */
-export interface IUnclosedRaffle {
-  id: number;                     
-  title: string;                  
-  init_date: string;              
-  expired_date: string;           
-  prizes: IPrize[];               
-  price: number;                  
-  numbers: number;               
-  currency: string;               
-  lotery: string;                 
-  sell_status: string;            
-  admin_status: string;           
-  uniq_identifier_serial: string; 
-  user_id: number;                
-  seller_id: number;              
-  seller: ISeller;               
-  created_at: string;             
-  updated_at: string;           
-  security: ISecurity;            
-}
-
-/**
  * @interface ICloseDayResponse
  * @description Interface to get request function for close day table
  */
 export interface ICloseDayResponse {
   message: string;  
-  closed: IUnclosedRaffle[];   
-  unclosed: IUnclosedRaffle[];
+  closed: IRaffle[];   
+  unclosed: IRaffle[];
 }
 
 /**

@@ -1,30 +1,29 @@
 import useAuth from '@hooks/useAuth';
-import { useState } from 'react';
+import LoaderBlur from '@components/shared/Loaders/LoaderBlur';
 import { AxiosResponse } from 'axios';
 import { capitalize } from '@utils/string';
 import { useQuery } from '@tanstack/react-query';
 import { adminStatus, sellStatus } from '@utils/parse';
 import { Table, Badge, ScrollArea } from '@mantine/core';
 import { getCloseDayRaffles } from '@api/rifamax/Raffles.request';
-import { LoaderBlur } from '@components/shared/Loaders/LoaderBlur';
-import { ICloseDayResponse, IUnclosedRaffle } from '@interfaces/requests.interfaces';
+import { ICloseDayResponse } from '@interfaces/requests.interfaces';
 
 function TableRaffle() {
   const { token } = useAuth();
 
-  const { isSuccess, isError, isLoading, data: request } = useQuery<AxiosResponse<ICloseDayResponse>>({
+  const { isLoading, data: request } = useQuery<AxiosResponse<ICloseDayResponse>>({
 		queryKey: ['get', 'unclosed'],
     queryFn: () => getCloseDayRaffles(token)
   });
 
-  const rows = request.data.unclosed.map((raffle) => (
+  const rows = request?.data.unclosed.map((raffle) => (
     <Table.Tr ta="center" key={raffle.id}>
       <Table.Td>{raffle.id}</Table.Td>
       <Table.Td>{capitalize(sellStatus(raffle.sell_status))}</Table.Td>
       <Table.Td>
         <Badge variant="light" color="blue" size="md">{adminStatus(raffle.admin_status)}</Badge>
       </Table.Td>
-      <Table.Td>{raffle.price} $</Table.Td>
+      <Table.Td>{raffle.price} {raffle.currency}</Table.Td>
       <Table.Td>{raffle.seller?.name || 'Sin rifero asignado'}</Table.Td>
       <Table.Td>{new Date(raffle.created_at).toLocaleDateString('es-ES')}</Table.Td>
     </Table.Tr>

@@ -24,21 +24,33 @@ export type RaffleType = "Infinito" | "Terminal" | "Triple" | "Signo";
 
 /**
  * @type StatusType
- * @description This is a general type for the differents status type
+ * @description This is a general type for the differents statues type
  */
-export type StatusType = "En venta" | "Finalizando" | "Cerrado"
+export type StatusType = "En venta" | "Finalizando" | "Cerrado";
+
+/**
+ * @type AdminStatusType
+ * @description This is a general type for the differents admin statues type
+ */
+export type AdminStatusType = "pending" | "payed" | "unpayed" | "refunded";
+
+/**
+ * @type SellStatusType
+ * @description This is a general type for the differents sell statues type
+ */
+export type SellStatusType = "active" | "sent" | "sold";
 
 /**
  * @type MoneyType
  * @description This is a general type for the differents money type
  */
-export type MoneyType = "USD" | "VES" | "COP"
+export type MoneyType = "USD" | "VES" | "COP";
 
 /**
  * @type IntegratorType
  * @description This is a general type for the differents integrators type
  */
-export type IntegratorType = "CDA" | "BetFM4"
+export type IntegratorType = "CDA" | "BetFM4";
 
 /**
  * @interface IUser
@@ -120,20 +132,21 @@ export interface ICombo {
  */
 export interface IRaffle {
   id: number;
-  admin_status: string;
-  currency: string;
-  expired_date: string;
+  admin_status: AdminStatusType;
+  currency: MoneyType;
+  expired_date: string | null;
   init_date: Date | string;
   lotery: string;
   numbers: number;
   price: number;
   prizes: IPrize[];
   security: string;
-  sell_status: 'active' | 'sent' | 'sold';
+  sell_status: SellStatusType;
   title: string;
   uniq_identifier_serial: string;
   user: IUser["user"];
   seller: IUser["user"];
+  created_at: string;
 }
 
 /**

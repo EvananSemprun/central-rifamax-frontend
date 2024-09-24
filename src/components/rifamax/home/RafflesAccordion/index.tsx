@@ -52,7 +52,7 @@ function Index({ step, data, refetchRaffles }: IRafflesAccordion & IRefetchRaffl
               {step === 1 ? (
                 <AccordionStepOne raffle_id={raffle.id} refetchRaffles={refetchRaffles} />
               ) : (
-                <AccordionStepTwo raffle_id={raffle.id} wildcard={raffle.security} />
+                <AccordionStepTwo raffle_id={raffle.id} wildcard={raffle.security} refetchRaffles={refetchRaffles} />
               )}
             </Group>
           </ResponsiveSection>

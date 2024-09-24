@@ -2,20 +2,20 @@ import useAuth from "@hooks/useAuth";
 import WoodTitle from "@components/shared/WoodTitle";
 import { useForm } from '@mantine/form';
 import { modals } from "@mantine/modals";
-import { IAccordionSteps } from "@interfaces/index";
+import { IAccordionSteps, IRefetchRaffle } from "@interfaces/index";
 import { useMutation } from '@tanstack/react-query';
 import { IconMailDollar } from "@tabler/icons-react";
 import { payRaffle } from "@api/rifamax/Raffles.request";
 import { Text, Group, NumberInput, Title, Button, Select } from "@mantine/core";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
-function ModalPayRaffle({ raffle_id }: IAccordionSteps) {
+function ModalPayRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetchRaffle) {
   const { token } = useAuth();
 
   const form = useForm({
     initialValues: {
       price: 0,
-      currency: '$',
+      currency: 'USD',
     },
     validate: {
       price: (value) => (value > 0 ? null : 'El monto debe ser mayor que cero'),
@@ -25,13 +25,15 @@ function ModalPayRaffle({ raffle_id }: IAccordionSteps) {
 
   const mutation = useMutation({
     mutationFn: payRaffle,
-    onSuccess: () => (
+    onSuccess: () => {
+      modals.closeAll()
       SuccessNotification({
         position: 'top',
         title: 'Rifa Pagada con éxito.',
-        label: 'Su rifa ha sido Pagada exitosamente, revise la App de Rifamax.'
+        label: 'Su rifa ha sido pagada exitosamente, revise la App de Rifamax.'
       })
-    ),
+      return refetchRaffles()
+    },
     onError: () => (
       ErrorNotification({
         position: 'top',
@@ -81,10 +83,11 @@ function ModalPayRaffle({ raffle_id }: IAccordionSteps) {
               ml={-12}
               radius='sm'
               w='calc(25% - 5px)'
+              withAsterisk
               data={[
-                { value: '$', label: '$' },
-                { value: 'Bs', label: 'Bs' },
-                { value: 'Cop', label: 'Cop' }
+                { value: 'USD', label: 'USD' },
+                { value: 'VES', label: 'Bs.D' },
+                { value: 'COP', label: 'COP' }
               ]}
               label="Moneda"
               {...form.getInputProps('currency')}

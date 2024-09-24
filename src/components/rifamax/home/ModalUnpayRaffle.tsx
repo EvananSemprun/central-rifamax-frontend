@@ -1,30 +1,32 @@
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@hooks/useAuth";
 import WoodTitle from "@components/shared/WoodTitle";
 import { modals } from "@mantine/modals";
-import { IAccordionSteps } from "@interfaces/index";
-import { Text, Title, Button } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
+import { Text, Title, Button } from "@mantine/core";
 import { unpayRaffle } from "@api/rifamax/Raffles.request";
 import { IconMailX, IconSkull } from "@tabler/icons-react";
+import { IAccordionSteps, IRefetchRaffle } from "@interfaces/index";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
-function ModalUnpayRaffle({ raffle_id }: IAccordionSteps) {
+function ModalUnpayRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetchRaffle) {
   const { token } = useAuth()
 
   const mutation = useMutation({
     mutationFn: unpayRaffle,
-    onSuccess: () => (
+    onSuccess: () => {
+      modals.closeAll()
       SuccessNotification({
         position: 'top',
-        title: 'Rifa enviada con exito.',
-        label: 'Su rifa ha sido Rechazar exitosamente, revise la App de Rifamax.'
-      })
-    ),
+        title: 'Rifa rechazada con éxito.',
+        label: 'Su rifa ha sido rechazada exitosamente, revise la App de Rifamax.'
+      });
+      return refetchRaffles();
+    },
     onError: () => (
       ErrorNotification({
         position: 'top',
         title: 'Ha ocurrido un error.',
-        label: 'Ha ocurrido un error a Rechazar la rifa a la app.'
+        label: 'Ha ocurrido un error al rechazada la rifa de la app.'
       })
     )
   });
