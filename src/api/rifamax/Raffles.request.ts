@@ -67,8 +67,13 @@ export const repeatToApp = ({ token, raffle_id, data }: IRepeatToApp) => {
 // POST /rifamax/raffles/pay
 export const payRaffle = ({ token, raffle_id, data }: IPayRaffle) => {
   return axios.post(`${import.meta.env.VITE_X100_URL_BASE}/rifamax/raffles/pay`, {
-    raffle_id: raffle_id,
-    data: data
+    rifamax_raffle: {
+      id: raffle_id, 
+      payment_info: {
+        price: data.price,
+        currency: data.currency,
+      }
+    }
   }, {
     headers: {
       Authorization: `Bearer ${token}`

@@ -1,11 +1,11 @@
 import useAuth from "@hooks/useAuth";
 import WoodTitle from "@components/shared/WoodTitle";
-import { useForm } from '@mantine/form';
 import { modals } from "@mantine/modals";
-import { IAccordionSteps, IRefetchRaffle } from "@interfaces/index";
+import { useForm } from '@mantine/form';
+import { payRaffle } from "@api/rifamax/Raffles.request";
 import { useMutation } from '@tanstack/react-query';
 import { IconMailDollar } from "@tabler/icons-react";
-import { payRaffle } from "@api/rifamax/Raffles.request";
+import { IAccordionSteps, IRefetchRaffle } from "@interfaces/index";
 import { Text, Group, NumberInput, Title, Button, Select } from "@mantine/core";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
 
@@ -14,11 +14,11 @@ function ModalPayRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetc
 
   const form = useForm({
     initialValues: {
-      price: 0,
-      currency: 'USD',
+      price: undefined,
+      currency: '',
     },
     validate: {
-      price: (value) => (value > 0 ? null : 'El monto debe ser mayor que cero'),
+      price: (value) => (value && value > 0 ? null : 'El monto debe ser mayor que cero'),
       currency: (value) => (value ? null : 'Seleccione una moneda'),
     },
   });
@@ -26,21 +26,21 @@ function ModalPayRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetc
   const mutation = useMutation({
     mutationFn: payRaffle,
     onSuccess: () => {
-      modals.closeAll()
+      modals.closeAll();
       SuccessNotification({
         position: 'top',
         title: 'Rifa Pagada con éxito.',
         label: 'Su rifa ha sido pagada exitosamente, revise la App de Rifamax.'
-      })
-      return refetchRaffles()
+      });
+      refetchRaffles();
     },
-    onError: () => (
+    onError: () => {
       ErrorNotification({
         position: 'top',
         title: 'Ha ocurrido un error.',
         label: 'Ha ocurrido un error al Pagar la rifa a la app.'
-      })
-    )
+      });
+    }
   });
 
   const openPayRaffleModal = () => modals.open({
@@ -54,18 +54,15 @@ function ModalPayRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetc
         </Text>
         <form
           onSubmit={form.onSubmit((values) => {
-            console.log({
-              token,
-              raffle_id,
-              data: values
-            });
-
+            const price = values.price || 0;
             mutation.mutate({
               token,
               raffle_id,
-              data: values
+              data: {
+                price,
+                currency: values.currency,
+              }
             });
-            modals.closeAll();
           })}
         >
           <Group mt={15} mb={15} gap={10} justify="space-between">
@@ -124,4 +121,3 @@ function ModalPayRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetc
 }
 
 export default ModalPayRaffle;
-
