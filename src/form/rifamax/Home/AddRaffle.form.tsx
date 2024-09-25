@@ -1,6 +1,8 @@
 import moment from 'moment';
 import { getDate } from '@utils/time';
 import { useForm } from '@mantine/form';
+import { LOTERIES } from '@assets/loteries';
+import { CURRENCIES } from '@assets/currencies';
 import { useViewportSize } from '@mantine/hooks';
 import { DatePickerInput } from '@mantine/dates';
 import { IAddRaffleForm, IRaffleForm } from '@interfaces/index';
@@ -76,21 +78,9 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
     }
   });
 
-  const CURRENCIES = [
-    { value: 'USD', label: 'Dólares Américanos' },
-    { value: 'VES', label: 'Bolívares Digitales' },
-    { value: 'COP', label: 'Pesos Colombianos' }
-  ]
-
   const SELLERS = [
     { value: '1', label: 'Javier Diaz' },
     { value: '2', label: 'Evanan Semprun' }
-  ]
-
-  const LOTERIES = [
-    { value: 'Zulia 7A', label: 'Zulia 7A' },
-    { value: 'Zulia 7B', label: 'Zulia 7B' },
-    { value: 'Triple Pelotica', label: 'Triple Pelotica' }
   ]
 
   const PRIZES_JUSTIFY = form.getValues().prizes.length == 1 ? 'center' : 'space-between'
@@ -172,7 +162,6 @@ function AddRaffleForm({ onNext, onBack }: IAddRaffleForm) {
 
   const handleSubmit = (values: IRaffleForm) => {
     onNext && onNext(values)
-    console.log(values)
   };
 
   return (

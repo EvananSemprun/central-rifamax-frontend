@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { Style } from '@react-pdf/types/style'; 
-import { IGetProgressResponse, IRafflesResponse } from "./requests.interfaces";
-import { IRaffle, ISeller, IUser, Role, ITripleRaffle, IUserIntegrator, MoneyType, IntegratorType } from "./models.interfaces";
 import { MantineColor, MantineSize, MantineSpacing } from '@mantine/core';
+import { IGetProgressResponse, IRafflesResponse } from "./requests.interfaces";
+import { IRaffle, ISeller, IUser, Role, ITripleRaffle, IUserIntegrator, MoneyType, IntegratorType, LoteryType } from "./models.interfaces";
 
 // General interfaces
 
@@ -176,7 +176,7 @@ extends Pick<
  * @description interface of RepeatRaffleForm data of form
  */
 export interface IRepeatRaffleForm {
-  lotery: string;
+  lotery: LoteryType;
   init_date: Date | string | null;
   numbers: number;
 }

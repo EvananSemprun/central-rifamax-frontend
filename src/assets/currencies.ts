@@ -1,6 +1,6 @@
-export const currencies = [
+export const CURRENCIES = [
   {
-    label: 'Dólares Americanos',
+    label: 'Dolares Americanos',
     value: 'USD',
   },
   {

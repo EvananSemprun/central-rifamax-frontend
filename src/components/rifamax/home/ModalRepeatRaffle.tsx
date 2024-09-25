@@ -1,14 +1,15 @@
 import useAuth from "@/hooks/useAuth";
 import WoodTitle from "@components/shared/WoodTitle";
-import { useForm } from '@mantine/form';
 import { modals } from "@mantine/modals";
-import { DatePickerInput } from "@mantine/dates";
+import { useForm } from '@mantine/form';
 import { useMutation } from '@tanstack/react-query';
 import { repeatToApp } from "@api/rifamax/Raffles.request";
+import { DatePickerInput } from "@mantine/dates";
 import { IconCash, IconNumber, IconReload } from "@tabler/icons-react";
-import { IAccordionSteps, IRefetchRaffle, IRepeatRaffleForm } from "@interfaces/index";
-import { Center, Chip, Group, NumberInput, Title, Button, Select } from "@mantine/core";
 import { ErrorNotification, SuccessNotification } from "@components/shared/Notifications";
+import { IAccordionSteps, IRefetchRaffle, IRepeatRaffleForm } from "@interfaces/index";
+import { Group, NumberInput, Title, Button, Select, ActionIcon } from "@mantine/core";
+import { LOTERIES } from "@assets/loteries";
 
 function ModalRepeatRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRefetchRaffle) {
   const { token } = useAuth();
@@ -36,7 +37,7 @@ function ModalRepeatRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRef
   const form = useForm<IRepeatRaffleForm>({
     initialValues: {
       numbers: 1,
-      lotery: 'zulia 7a',
+      lotery: 'Zulia 7A',
       init_date: null,
     },
     validate: {
@@ -82,7 +83,7 @@ function ModalRepeatRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRef
             radius="sm"
             w="49%"
             rightSection={<IconCash />}
-            data={['zulia 7a']}
+            data={LOTERIES}
             withAsterisk
             {...form.getInputProps('lotery')}
           />
@@ -95,11 +96,17 @@ function ModalRepeatRaffle({ raffle_id, refetchRaffles }: IAccordionSteps & IRef
   });
 
   return (
-    <Chip variant="outline" size="sm" checked={false} color="gray" onClick={openRepeatRaffleModal}>
-      <Center>
-        <IconReload stroke={1.5} size="1rem" />
-      </Center>
-    </Chip>
+    <ActionIcon
+      variant="outline"
+      color="#4C4C63"
+      size="xs"
+      p={15}
+      radius="lg"
+      w={60}
+      onClick={openRepeatRaffleModal}
+    >
+      <IconReload color="white" stroke={1.5} size="1rem" />
+    </ActionIcon>
   );
 }
 

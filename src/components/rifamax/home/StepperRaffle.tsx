@@ -43,7 +43,6 @@ function StepperRaffle() {
       <Stepper.Step allowStepClick={false} label="Datos de la rifa" description="Llena los datos de la rifa para proceder">
         <AddRaffleForm
           onNext={(form) => {
-            console.log(form);
             setRaffleForm(form);
             nextStep();
           }}

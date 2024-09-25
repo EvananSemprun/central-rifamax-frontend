@@ -41,6 +41,12 @@ export type AdminStatusType = "pending" | "payed" | "unpayed" | "refunded";
 export type SellStatusType = "active" | "sent" | "sold";
 
 /**
+ * @type LoteryType
+ * @description This is a general type for the differents loteries type
+ */
+export type LoteryType = "Zulia 7A" | "Zulia 7B" | "Triple Pelotica";
+
+/**
  * @type MoneyType
  * @description This is a general type for the differents money type
  */
@@ -136,7 +142,7 @@ export interface IRaffle {
   currency: MoneyType;
   expired_date: string | null;
   init_date: Date | string;
-  lotery: string;
+  lotery: LoteryType;
   numbers: number;
   price: number;
   prizes: IPrize[];
@@ -175,7 +181,7 @@ export interface ITripleRaffle {
   limit: number | null;
   money: MoneyType;
   price_unit: number;
-  lotery: string;
+  lotery: LoteryType;
   prizes: ITriplePrize[];
   winners: null;
   has_winners: boolean;
