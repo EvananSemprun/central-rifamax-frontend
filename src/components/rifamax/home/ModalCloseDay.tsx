@@ -20,9 +20,9 @@ function CloseDayModal() {
     closeOnClickOutside: false,
     children: (
       <>
-        <Divider mb={-10} label="Cuadre de hoy" variant='dashed' size="xs" labelPosition="center" />
+        <Divider label="Cuadre de hoy" variant='dashed' size="xs" labelPosition="center" />
         <TableRaffle />
-        <Divider mt={-20} mb={10} label="Total" variant='dashed' size="xs" labelPosition="center" />
+        <Divider mb={10} label="Total" variant='dashed' size="xs" labelPosition="center" />
         <DebtRaffles />
         <Button mt={10} fullWidth variant="light" size="md" >
           Imprimir
